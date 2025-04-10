@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Listing - campusKART</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': {
+                            400: '#2c5282',
+                            500: '#1e3a8a',
+                            600: '#1e40af',
+                            700: '#1e3a78',
+                            800: '#172554',
+                            900: '#0c1b44'
+                        },
+                        'royal-blue': {
+                            400: '#3b82f6',
+                            500: '#4169e1',
+                            600: '#2563eb'
+                        },
+                        'indigo': {
+                            50: '#eef2ff',
+                            100: '#e0e7ff'
+                        }
+                    },
+                    animation: {
+                        'pulse-border': 'pulseBorder 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                        'bounce-slow': 'bounce 3s infinite'
+                    },
+                    keyframes: {
+                        pulseBorder: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(65, 105, 225, 0.6)' },
+                            '50%': { boxShadow: '0 0 0 5px rgba(65, 105, 225, 0.4)' }
+                        },
+                        gradient: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' }
+                        }
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 30%);
+            background-color: #0c1b44;
+        }
+        
+        .logo-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 8s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+        
+        .image-preview {
+            transition: all 0.3s ease;
+        }
+        
+        /* Custom file input styling */
+        .file-input-label {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-label:hover {
+            transform: translateY(-2px);
+        }
+        
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(30, 58, 138, 0.1);
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.5);
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(59, 130, 246, 0.7);
+        }
+        
+        .tag-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 0.75rem;
+            border: 1px solid #1e3a78;
+            padding: 0.25rem;
+            min-height: 3rem;
+            background-color: rgba(23, 37, 84, 0.5);
+        }
+        
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            margin: 0.25rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            max-width: 100%;
+        }
+        
+        .tag-close {
+            display: inline-block;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .tag-input {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            flex-grow: 1;
+            min-width: 50px;
+        }
+        
+        .tag-input:focus {
+            outline: none;
+        }
+        
+        .condition-selector {
+            display: flex;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background-color: #172554;
+        }
+        
+        .condition-option {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-right: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .condition-option:last-child {
+            border-right: none;
+        }
+        
+        .condition-option.selected {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+        
+        .image-upload-container {
+            border: 2px dashed rgba(59, 130, 246, 0.5);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .image-upload-container.dragging,
+        .image-upload-container:hover {
+            border-color: #3b82f6;
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="sticky top-0 z-50 bg-navy-900/90 backdrop-blur-md border-b border-navy-700 shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <a href="/home" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <h1 class="text-2xl font-bold font-montserrat logo-text">
+                            campusKART
+                        </h1>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="flex items-center space-x-6">
+                    <a href="/home" class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="fas fa-home mr-1"></i> Home
+                    </a>
+                    <a href="#" class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="far fa-bell mr-1"></i> Notifications
+                    </a>
+                    
+                    <!-- User Profile -->
+                    <div class="relative">
+                        <a href="/profile" class="flex items-center space-x-2 focus:outline-none">
+                            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow">
+                                <span class="text-sm font-medium">RS</span>
+                            </div>
+                            <span class="hidden md:inline-block text-indigo-100">Rahul Singh</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <!-- Page Title and Description -->
+            <div class="mb-8 text-center">
+                <h1 class="text-3xl font-bold mb-4">Create New Listing</h1>
+                <p class="text-indigo-100 max-w-xl mx-auto">Fill out the details below to create your listing. Be descriptive to help potential buyers find your item.</p>
+            </div>
+            
+            <!-- Progress Steps -->
+            <div class="mb-10 px-4">
+                <div class="relative">
+                    <!-- Progress Bar -->
+                    <div class="overflow-hidden h-2 mb-6 flex rounded-full bg-navy-700">
+                        <div id="progress-bar" class="progress-bar transition-all duration-500 ease-out" style="width: 0%"></div>
+                    </div>
+                    
+                    <!-- Progress Steps -->
+                    <div class="flex justify-between">
+                        <div class="text-center relative" data-step="1">
+                            <div class="w-8 h-8 mx-auto rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow-lg mb-2 border-2 border-navy-900">
+                                <span class="text-sm font-bold">1</span>
+                            </div>
+                            <div class="text-xs text-indigo-100">Basic Info</div>
+                        </div>
+                        <div class="text-center relative" data-step="2">
+                            <div class="w-8 h-8 mx-auto rounded-full bg-navy-700 flex items-center justify-center mb-2 border-2 border-navy-900">
+                                <span class="text-sm font-bold">2</span>
+                            </div>
+                            <div class="text-xs text-indigo-100">Details</div>
+                        </div>
+                        <div class="text-center relative" data-step="3">
+                            <div class="w-8 h-8 mx-auto rounded-full bg-navy-700 flex items-center justify-center mb-2 border-2 border-navy-900">
+                                <span class="text-sm font-bold">3</span>
+                            </div>
+                            <div class="text-xs text-indigo-100">Photos</div>
+                        </div>
+                        <div class="text-center relative" data-step="4">
+                            <div class="w-8 h-8 mx-auto rounded-full bg-navy-700 flex items-center justify-center mb-2 border-2 border-navy-900">
+                                <span class="text-sm font-bold">4</span>
+                            </div>
+                            <div class="text-xs text-indigo-100">Preview</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Listing Form -->
+            <form id="listing-form" class="bg-navy-800 rounded-2xl shadow-xl border border-navy-700 overflow-hidden">
+                <!-- Step 1: Basic Information -->
+                <div id="step-1" class="step-content p-6 md:p-8">
+                    <h2 class="text-xl font-bold mb-6">Basic Information</h2>
+                    
+                    <!-- Product Title -->
+                    <div class="mb-6">
+                        <label for="product-title" class="block text-sm font-medium mb-2 text-indigo-100">Product Title <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-tag text-indigo-100"></i>
+                            </div>
+                            <input 
+                                type="text" 
+                                id="product-title"
+                                name="product-title"
+                                class="form-input w-full pl-10 pr-4 py-3 bg-navy-800/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white placeholder-indigo-100/70 shadow-inner"
+                                placeholder="Enter a descriptive title (e.g. 'Calculus Textbook 9th Edition')"
+                                required
+                            />
+                        </div>
+                        <div class="text-xs text-indigo-100/70 mt-1">Keep it concise but descriptive (max 100 characters)</div>
+                    </div>
+                    
+                    <!-- Category Selection -->
+                    <div class="mb-6">
+                        <label for="category" class="block text-sm font-medium mb-2 text-indigo-100">Category <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-folder text-indigo-100"></i>
+                            </div>
+                            <select 
+                                id="category"
+                                name="category"
+                                class="form-input w-full pl-10 pr-10 py-3 bg-navy-800/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white shadow-inner appearance-none"
+                                required
+                            >
+                                <option value="" disabled selected>Select a category</option>
+                                <option value="textbooks">Textbooks</option>
+                                <option value="course_notes">Course Notes</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="lab_equipment">Lab Equipment</option>
+                                <option value="stationery">Stationery</option>
+                                <option value="calculators">Calculators</option>
+                                <option value="furniture">Furniture</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="sports_equipment">Sports Equipment</option>
+                                <option value="musical_instruments">Musical Instruments</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <i class="fas fa-chevron-down text-indigo-100"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Price -->
+                    <div class="mb-6">
+                        <label for="price" class="block text-sm font-medium mb-2 text-indigo-100">Price (₹) <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-rupee-sign text-indigo-100"></i>
+                            </div>
+                            <input 
+                                type="number" 
+                                id="price"
+                                name="price"
+                                min="0"
+                                step="1"
+                                class="form-input w-full pl-10 pr-4 py-3 bg-navy-800/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white shadow-inner"
+                                placeholder="Enter price"
+                                required
+                            />
+                        </div>
+                        <div class="flex justify-between text-xs text-indigo-100/70 mt-1">
+                            <span>Enter '0' if you're giving it away for free</span>
+                            <div>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" id="negotiable" name="negotiable" class="form-checkbox h-4 w-4 text-royal-blue-500 rounded border-navy-600 focus:ring-royal-blue-400">
+                                    <span class="ml-2">Price negotiable</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-end mt-8">
+                        <button type="button" class="btn-primary px-6 py-2 rounded-lg text-white font-medium shadow-md" onclick="nextStep(1)">
+                            Next <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Product Details -->
+                <div id="step-2" class="step-content p-6 md:p-8 hidden">
+                    <h2 class="text-xl font-bold mb-6">Product Details</h2>
+                    
+                    <!-- Description -->
+                    <div class="mb-6">
+                        <label for="description" class="block text-sm font-medium mb-2 text-indigo-100">Description <span class="text-red-500">*</span></label>
+                        <textarea 
+                            id="description"
+                            name="description"
+                            rows="4"
+                            class="form-input w-full px-4 py-3 bg-navy-800/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white shadow-inner custom-scrollbar"
+                            placeholder="Describe your item in detail. Include important information like brand, model, features, and any defects or wear."
+                            required
+                        ></textarea>
+                        <div class="text-xs text-indigo-100/70 mt-1">Minimum 30 characters</div>
+                    </div>
+                    
+                    <!-- Condition -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2 text-indigo-100">Condition <span class="text-red-500">*</span></label>
+                        <div class="condition-selector">
+                            <div class="condition-option" data-value="new" onclick="selectCondition(this)">
+                                <div class="text-xs mb-1">New</div>
+                                <div class="text-xxs text-indigo-100">Brand new, unused</div>
+                            </div>
+                            <div class="condition-option" data-value="like_new" onclick="selectCondition(this)">
+                                <div class="text-xs mb-1">Like New</div>
+                                <div class="text-xxs text-indigo-100">Used few times</div>
+                            </div>
+                            <div class="condition-option" data-value="good" onclick="selectCondition(this)">
+                                <div class="text-xs mb-1">Good</div>
+                                <div class="text-xxs text-indigo-100">Some signs of use</div>
+                            </div>
+                            <div class="condition-option" data-value="fair" onclick="selectCondition(this)">
+                                <div class="text-xs mb-1">Fair</div>
+                                <div class="text-xxs text-indigo-100">Visible wear</div>
+                            </div>
+                            <div class="condition-option" data-value="poor" onclick="selectCondition(this)">
+                                <div class="text-xs mb-1">Poor</div>
+                                <div class="text-xxs text-indigo-100">Heavily used</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="condition" name="condition" required>
+                    </div>
+                    
+                    <!-- Age/Year -->
+                    <div class="mb-6">
+                        <label for="age" class="block text-sm font-medium mb-2 text-indigo-100">Age (Years Old)</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-calendar-alt text-indigo-100"></i>
+                            </div>
+                            <input 
+                                type="number" 
+                                id="age"
+                                name="age"
+                                min="0"
+                                step="0.5"
+                                class="form-input w-full pl-10 pr-4 py-3 bg-navy-800/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white shadow-inner"
+                                placeholder="How old is this item? (e.g. 1.5)"
+                            />
+                        </div>
+                        <div class="text-xs text-indigo-100/70 mt-1">Leave empty if not applicable or unknown</div>
+                    </div>
+                    
+                    <!-- Keywords/Tags -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2 text-indigo-100">Keywords (for better search results)</label>
+                        <div class="tag-input-container">
+                            <div id="tags-container"></div>
+                            <input 
+                                type="text" 
+                                id="tag-input"
+                                class="tag-input"
+                                placeholder="Type and press Enter to add tags"
+                            />
+                        </div>
+                        <input type="hidden" id="keywords" name="keywords">
+                        <div class="text-xs text-indigo-100/70 mt-1">Add relevant keywords to make your listing easier to find (e.g. 'calculus', 'engineering', 'textbook')</div>
+                    </div>
+                    
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between mt-8">
+                        <button type="button" class="px-6 py-2 rounded-lg border border-navy-600 text-indigo-100 font-medium hover:bg-navy-700 transition-colors duration-300" onclick="prevStep(2)">
+                            <i class="fas fa-arrow-left mr-2"></i> Back
+                        </button>
+                        <button type="button" class="btn-primary px-6 py-2 rounded-lg text-white font-medium shadow-md" onclick="nextStep(2)">
+                            Next <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Images -->
+                <div id="step-3" class="step-content p-6 md:p-8 hidden">
+                    <h2 class="text-xl font-bold mb-6">Upload Images</h2>
+                    
+                    <div class="mb-6">
+                        <div id="image-upload-container" class="image-upload-container p-8 text-center">
+                            <div id="upload-prompt" class="flex flex-col items-center">
+                                <div class="w-16 h-16 mb-4 rounded-full bg-navy-700 flex items-center justify-center">
+                                    <i class="fas fa-cloud-upload-alt text-2xl text-royal-blue-400"></i>
+                                </div>
+                                <h3 class="text-lg font-medium mb-2">Drag & Drop Images Here</h3>
+                                <p class="text-indigo-100 mb-6 max-w-md mx-auto">Or click to browse your files. You can upload up to 5 images (JPG, PNG or WebP)</p>
+                                <label class="btn-primary px-6 py-2 rounded-lg text-white font-medium shadow-md file-input-label">
+                                    <span>Browse Files</span>
+                                    <input 
+                                        type="file"
+                                        id="image-upload"
+                                        name="images[]"
+                                        class="file-input"
+                                        accept="image/jpeg, image/png, image/webp"
+                                        multiple
+                                    />
+                                </label>
+                            </div>
+                            
+                            <!-- Preview Container -->
+                            <div id="image-preview-container" class="hidden mt-6 grid grid-cols-2 md:grid-cols-3 gap-4">
+                                <!-- Image previews will be inserted here -->
+                            </div>
+                        </div>
+                        
+                        <div class="text-xs text-indigo-100/70 mt-2">
+                            <p><i class="fas fa-info-circle mr-1"></i> Tips for good photos:</p>
+                            <ul class="list-disc pl-5 mt-1 space-y-1">
+                                <li>Use good lighting to show details clearly</li>
+                                <li>Take photos from multiple angles</li>
+                                <li>Include any defects or wear in your photos</li>
+                                <li>For books, include the cover and any important pages</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between mt-8">
+                        <button type="button" class="px-6 py-2 rounded-lg border border-navy-600 text-indigo-100 font-medium hover:bg-navy-700 transition-colors duration-300" onclick="prevStep(3)">
+                            <i class="fas fa-arrow-left mr-2"></i> Back
+                        </button>
+                        <button type="button" class="btn-primary px-6 py-2 rounded-lg text-white font-medium shadow-md" onclick="nextStep(3)">
+                            Preview <i class="fas fa-eye ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Preview -->
+                <div id="step-4" class="step-content p-6 md:p-8 hidden">
+                    <h2 class="text-xl font-bold mb-6">Preview Your Listing</h2>
+                    
+                    <div class="bg-navy-700/50 rounded-xl overflow-hidden border border-navy-600 mb-8">
+                        <!-- Preview Slider -->
+                        <div id="preview-image-slider" class="relative h-64 bg-navy-900 flex items-center justify-center">
+                            <div id="preview-images-container" class="w-full h-full">
+                                <!-- Image preview will be dynamically inserted here -->
+                                <div class="w-full h-full flex items-center justify-center text-indigo-100">
+                                    <i class="fas fa-image text-4xl"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Navigation Arrows -->
+                            <button type="button" id="prev-image" class="absolute left-2 p-2 bg-navy-900/70 backdrop-blur-sm rounded-full text-white hidden">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button type="button" id="next-image" class="absolute right-2 p-2 bg-navy-900/70 backdrop-blur-sm rounded-full text-white hidden">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Preview Content -->
+                        <div class="p-4">
+                            <h3 id="preview-title" class="text-lg font-bold mb-1"></h3>
+                            <div class="flex flex-wrap items-center gap-2 mb-3">
+                                <span id="preview-price" class="px-3 py-1 bg-navy-600 rounded-lg text-sm font-medium"></span>
+                                <span id="preview-category" class="px-3 py-1 bg-navy-600 rounded-lg text-sm"></span>
+                                <span id="preview-condition" class="px-3 py-1 bg-navy-600 rounded-lg text-sm"></span>
+                            </div>
+                            <p id="preview-description" class="text-indigo-100 text-sm mb-4"></p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4" id="preview-tags-container">
+                                <!-- Tags will be inserted here -->
+                            </div>
+                            
+                            <div class="flex items-center text-xs text-indigo-100">
+                                <div class="flex items-center mr-4">
+                                    <i class="fas fa-calendar-alt mr-1"></i>
+                                    <span id="preview-age"></span>
+                                </div>
+                                <div>
+                                    <i class="fas fa-map-marker-alt mr-1"></i>
+                                    <span>Delhi Institute of Technology</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between mt-8">
+                        <button type="button" class="px-6 py-2 rounded-lg border border-navy-600 text-indigo-100 font-medium hover:bg-navy-700 transition-colors duration-300" onclick="prevStep(4)">
+                            <i class="fas fa-arrow-left mr-2"></i> Edit Listing
+                        </button>
+                        <button type="submit" class="btn-primary px-6 py-2 rounded-lg text-white font-medium shadow-md">
+                            Publish Listing <i class="fas fa-check ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-800 border-t border-navy-700">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <div class="w-6 h-6 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                    </div>
+                    <h1 class="text-lg font-bold font-montserrat logo-text">
+                        campusKART
+                    </h1>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Privacy Policy</a>
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Terms of Service</a>
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Contact Us</a>
+                </div>
+            </div>
+            
+            <div class="mt-4 text-center md:text-left">
+                <p class="text-indigo-100 text-xs">&copy; <%= new Date().getFullYear() %> campusKART. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Current step tracking
+        let currentStep = 1;
+        const totalSteps = 4;
+        
+        // Form data
+        const formData = {
+            images: []
+        };
+        
+        // Keywords/tags tracking
+        const tags = [];
+        
+        // Image preview index tracking
+        let currentImageIndex = 0;
+        let totalImages = 0;
+        
+        // DOM elements
+        const progressBar = document.getElementById('progress-bar');
+        const tagInput = document.getElementById('tag-input');
+        const tagsContainer = document.getElementById('tags-container');
+        const keywordsInput = document.getElementById('keywords');
+        const imageUpload = document.getElementById('image-upload');
+        const imageUploadContainer = document.getElementById('image-upload-container');
+        const imagePreviewContainer = document.getElementById('image-preview-container');
+        
+        // Initialize the form
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up the progress bar
+            updateProgressBar();
+            
+            // Set up the tags input
+            setupTagsInput();
+            
+            // Set up the image upload
+            setupImageUpload();
+            
+            // Set up the form submission
+            document.getElementById('listing-form').addEventListener('submit', handleFormSubmit);
+        });
+        
+        // Handle form submission
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            // In a real application, you would send the form data to the server
+            // For demonstration purposes, we'll show a success message
+            alert('Your listing has been submitted successfully!');
+            
+            // Redirect to the home page
+            window.location.href = '/home';
+        }
+        
+        // Update the progress bar
+        function updateProgressBar() {
+            const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // Update the step indicators
+            document.querySelectorAll('[data-step]').forEach(step => {
+                const stepNumber = parseInt(step.dataset.step);
+                const stepIndicator = step.querySelector('div:first-child');
+                
+                if (stepNumber < currentStep) {
+                    // Completed step
+                    stepIndicator.classList.remove('bg-navy-700');
+                    stepIndicator.classList.add('bg-gradient-to-br', 'from-royal-blue-400', 'to-royal-blue-600');
+                } else if (stepNumber === currentStep) {
+                    // Current step
+                    stepIndicator.classList.remove('bg-navy-700');
+                    stepIndicator.classList.add('bg-gradient-to-br', 'from-royal-blue-400', 'to-royal-blue-600');
+                } else {
+                    // Future step
+                    stepIndicator.classList.remove('bg-gradient-to-br', 'from-royal-blue-400', 'to-royal-blue-600');
+                    stepIndicator.classList.add('bg-navy-700');
+                }
+            });
+        }
+        
+        // Move to the next step
+        function nextStep(step) {
+            if (step === currentStep && step < totalSteps) {
+                // Validate the current step
+                if (!validateStep(step)) {
+                    return;
+                }
+                
+                // Hide the current step
+                document.getElementById(`step-${currentStep}`).classList.add('hidden');
+                
+                // Show the next step
+                currentStep++;
+                document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+                
+                // Update the progress bar
+                updateProgressBar();
+                
+                // If this is the preview step, populate it
+                if (currentStep === 4) {
+                    populatePreview();
+                }
+                
+                // Scroll to the top
+                window.scrollTo(0, 0);
+            }
+        }
+        
+        // Move to the previous step
+        function prevStep(step) {
+            if (step === currentStep && step > 1) {
+                // Hide the current step
+                document.getElementById(`step-${currentStep}`).classList.add('hidden');
+                
+                // Show the previous step
+                currentStep--;
+                document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+                
+                // Update the progress bar
+                updateProgressBar();
+                
+                // Scroll to the top
+                window.scrollTo(0, 0);
+            }
+        }
+        
+        // Validate the current step
+        function validateStep(step) {
+            if (step === 1) {
+                const title = document.getElementById('product-title').value;
+                const category = document.getElementById('category').value;
+                const price = document.getElementById('price').value;
+                
+                if (!title) {
+                    alert('Please enter a product title');
+                    return false;
+                }
+                
+                if (!category) {
+                    alert('Please select a category');
+                    return false;
+                }
+                
+                if (!price) {
+                    alert('Please enter a price');
+                    return false;
+                }
+                
+                return true;
+            } else if (step === 2) {
+                const description = document.getElementById('description').value;
+                const condition = document.getElementById('condition').value;
+                
+                if (!description) {
+                    alert('Please enter a description');
+                    return false;
+                }
+                
+                if (description.length < 30) {
+                    alert('Description must be at least 30 characters');
+                    return false;
+                }
+                
+                if (!condition) {
+                    alert('Please select a condition');
+                    return false;
+                }
+                
+                return true;
+            } else if (step === 3) {
+                // Images are optional but recommended
+                return true;
+            }
+            
+            return true;
+        }
+        
+        // Set up the tags input
+        function setupTagsInput() {
+            tagInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ',') {
+                    e.preventDefault();
+                    
+                    const tagText = this.value.trim();
+                    if (tagText && !tags.includes(tagText) && tags.length < 10) {
+                        addTag(tagText);
+                        this.value = '';
+                    }
+                }
+            });
+        }
+        
+        // Add a tag
+        function addTag(tagText) {
+            tags.push(tagText);
+            updateTagsDisplay();
+        }
+        
+        // Remove a tag
+        function removeTag(tagText) {
+            const index = tags.indexOf(tagText);
+            if (index !== -1) {
+                tags.splice(index, 1);
+                updateTagsDisplay();
+            }
+        }
+        
+        // Update the tags display
+        function updateTagsDisplay() {
+            // Clear the container
+            tagsContainer.innerHTML = '';
+            
+            // Add each tag
+            tags.forEach(tag => {
+                const tagElement = document.createElement('div');
+                tagElement.className = 'tag';
+                tagElement.innerHTML = `
+                    ${tag}
+                    <span class="tag-close" onclick="removeTag('${tag}')">&times;</span>
+                `;
+                tagsContainer.appendChild(tagElement);
+            });
+            
+            // Update the hidden input
+            keywordsInput.value = tags.join(',');
+        }
+        
+        // Select a condition
+        function selectCondition(element) {
+            // Remove the selected class from all options
+            document.querySelectorAll('.condition-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add the selected class to the clicked option
+            element.classList.add('selected');
+            
+            // Update the hidden input
+            document.getElementById('condition').value = element.dataset.value;
+        }
+        
+        // Set up the image upload
+        function setupImageUpload() {
+            // Handle drag and drop
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                imageUploadContainer.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                imageUploadContainer.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                imageUploadContainer.addEventListener(eventName, unhighlight, false);
+            });
+            
+            imageUploadContainer.addEventListener('drop', handleDrop, false);
+            
+            // Handle file input change
+            imageUpload.addEventListener('change', handleFiles, false);
+        }
+        
+        // Prevent default drag behaviors
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        // Highlight drop area
+        function highlight() {
+            imageUploadContainer.classList.add('dragging');
+        }
+        
+        // Unhighlight drop area
+        function unhighlight() {
+            imageUploadContainer.classList.remove('dragging');
+        }
+        
+        // Handle dropped files
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles({ target: { files } });
+        }
+        
+        // Handle selected files
+        function handleFiles(e) {
+            const files = e.target.files;
+            
+            if (files.length === 0) {
+                return;
+            }
+            
+            // Check if we already have 5 images
+            if (formData.images.length + files.length > 5) {
+                alert('You can only upload up to 5 images');
+                return;
+            }
+            
+            // Process each file
+            Array.from(files).forEach(file => {
+                // Check if the file is an image
+                if (!file.type.match('image.*')) {
+                    alert('Please upload only image files (JPG, PNG, WebP)');
+                    return;
+                }
+                
+                // Read the file
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    formData.images.push(imageUrl);
+                    addImagePreview(imageUrl);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        // Add image preview
+        function addImagePreview(imageUrl) {
+            // Show the preview container
+            imagePreviewContainer.classList.remove('hidden');
+            
+            // Create the preview element
+            const previewElement = document.createElement('div');
+            previewElement.className = 'relative image-preview rounded-lg overflow-hidden';
+            previewElement.innerHTML = `
+                <img src="${imageUrl}" alt="Preview" class="w-full h-32 object-cover">
+                <button type="button" class="absolute top-2 right-2 p-1 bg-red-500 rounded-full text-white text-xs" onclick="removeImage(${formData.images.length - 1})">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            // Add to the container
+            imagePreviewContainer.appendChild(previewElement);
+            totalImages = formData.images.length;
+            
+            // Update preview buttons
+            updatePreviewButtons();
+        }
+        
+        // Remove an image
+        function removeImage(index) {
+            // Remove from the array
+            formData.images.splice(index, 1);
+            
+            // Rebuild the preview
+            imagePreviewContainer.innerHTML = '';
+            formData.images.forEach((url, i) => {
+                const previewElement = document.createElement('div');
+                previewElement.className = 'relative image-preview rounded-lg overflow-hidden';
+                previewElement.innerHTML = `
+                    <img src="${url}" alt="Preview" class="w-full h-32 object-cover">
+                    <button type="button" class="absolute top-2 right-2 p-1 bg-red-500 rounded-full text-white text-xs" onclick="removeImage(${i})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                imagePreviewContainer.appendChild(previewElement);
+            });
+            
+            // Hide the container if there are no images
+            if (formData.images.length === 0) {
+                imagePreviewContainer.classList.add('hidden');
+            }
+            
+            totalImages = formData.images.length;
+            currentImageIndex = Math.min(currentImageIndex, totalImages - 1);
+            
+            // Update preview buttons
+            updatePreviewButtons();
+        }
+        
+        // Update preview image navigation buttons
+        function updatePreviewButtons() {
+            const prevButton = document.getElementById('prev-image');
+            const nextButton = document.getElementById('next-image');
+            
+            if (totalImages <= 1) {
+                prevButton.classList.add('hidden');
+                nextButton.classList.add('hidden');
+            } else {
+                prevButton.classList.remove('hidden');
+                nextButton.classList.remove('hidden');
+                
+                // Add event listeners
+                prevButton.onclick = prevImage;
+                nextButton.onclick = nextImage;
+            }
+        }
+        
+        // Show previous image
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+            updatePreviewImage();
+        }
+        
+        // Show next image
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % totalImages;
+            updatePreviewImage();
+        }
+        
+        // Update the preview image
+        function updatePreviewImage() {
+            const previewImagesContainer = document.getElementById('preview-images-container');
+            
+            if (totalImages === 0) {
+                previewImagesContainer.innerHTML = `
+                    <div class="w-full h-full flex items-center justify-center text-indigo-100">
+                        <i class="fas fa-image text-4xl"></i>
+                    </div>
+                `;
+                return;
+            }
+            
+            previewImagesContainer.innerHTML = `
+                <img src="${formData.images[currentImageIndex]}" alt="Preview" class="w-full h-full object-contain">
+            `;
+        }
+        
+        // Populate the preview
+        function populatePreview() {
+            // Get the form values
+            const title = document.getElementById('product-title').value;
+            const category = document.getElementById('category').value;
+            const price = document.getElementById('price').value;
+            const negotiable = document.getElementById('negotiable').checked;
+            const description = document.getElementById('description').value;
+            const condition = document.getElementById('condition').value;
+            const age = document.getElementById('age').value;
+            
+            // Update the preview elements
+            document.getElementById('preview-title').textContent = title;
+            document.getElementById('preview-price').textContent = `₹${price}${negotiable ? ' (Negotiable)' : ''}`;
+            
+            // Format the category
+            const categoryText = document.querySelector(`#category option[value="${category}"]`).textContent;
+            document.getElementById('preview-category').textContent = categoryText;
+            
+            // Format the condition
+            const conditionMap = {
+                'new': 'New',
+                'like_new': 'Like New',
+                'good': 'Good',
+                'fair': 'Fair',
+                'poor': 'Poor'
+            };
+            document.getElementById('preview-condition').textContent = conditionMap[condition] || condition;
+            
+            // Description
+            document.getElementById('preview-description').textContent = description;
+            
+            // Age
+            document.getElementById('preview-age').textContent = age ? `${age} years old` : 'Age not specified';
+            
+            // Tags
+            const tagsContainer = document.getElementById('preview-tags-container');
+            tagsContainer.innerHTML = '';
+            
+            if (tags.length > 0) {
+                tags.forEach(tag => {
+                    const tagElement = document.createElement('span');
+                    tagElement.className = 'px-2 py-1 bg-navy-600/50 rounded text-xs';
+                    tagElement.textContent = tag;
+                    tagsContainer.appendChild(tagElement);
+                });
+            }
+            
+            // Images
+            updatePreviewImage();
+        }
+        
+        // Form element change listeners
+        document.getElementById('product-title').addEventListener('change', function() {
+            formData.title = this.value;
+        });
+        
+        document.getElementById('category').addEventListener('change', function() {
+            formData.category = this.value;
+        });
+        
+        document.getElementById('price').addEventListener('change', function() {
+            formData.price = this.value;
+        });
+        
+        document.getElementById('negotiable').addEventListener('change', function() {
+            formData.negotiable = this.checked;
+        });
+        
+        document.getElementById('description').addEventListener('change', function() {
+            formData.description = this.value;
+        });
+        
+        document.getElementById('age').addEventListener('change', function() {
+            formData.age = this.value;
+        });
+    </script>
+</body>
+</html>

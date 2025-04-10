@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>campusKART - Student Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': {
+                            400: '#2c5282',
+                            500: '#1e3a8a',
+                            600: '#1e40af',
+                            700: '#1e3a78',
+                            800: '#172554',
+                            900: '#0c1b44'
+                        },
+                        'royal-blue': {
+                            400: '#3b82f6',
+                            500: '#4169e1',
+                            600: '#2563eb'
+                        },
+                        'indigo': {
+                            50: '#eef2ff',
+                            100: '#e0e7ff'
+                        }
+                    },
+                    animation: {
+                        'pulse-border': 'pulseBorder 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                        'bounce-slow': 'bounce 3s infinite'
+                    },
+                    keyframes: {
+                        pulseBorder: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(65, 105, 225, 0.6)' },
+                            '50%': { boxShadow: '0 0 0 5px rgba(65, 105, 225, 0.4)' }
+                        },
+                        gradient: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' }
+                        }
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 30%);
+            background-color: #0c1b44;
+        }
+        
+        .logo-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 8s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .card-hover-effect {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .like-button:hover {
+            transform: scale(1.15);
+        }
+        
+        .sold-badge {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        .available-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .whatsapp-button {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+        }
+        
+        .search-input {
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+        
+        .category-badge {
+            transition: all 0.2s ease;
+        }
+        
+        .category-badge:hover {
+            transform: translateY(-2px);
+        }
+        
+        .seller-avatar {
+            border: 3px solid transparent;
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            background-image: 
+                linear-gradient(to right, #0c1b44, #0c1b44), 
+                linear-gradient(to right, #3b82f6, #2563eb);
+        }
+        
+        .floating-action-button {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .floating-action-button:hover {
+            transform: translateY(-3px) rotate(90deg);
+            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.6);
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="sticky top-0 z-50 bg-navy-900/90 backdrop-blur-md border-b border-navy-700 shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                    </div>
+                    <h1 class="text-2xl font-bold font-montserrat logo-text">
+                        campusKART
+                    </h1>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:block relative w-1/3">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <input type="text" placeholder="Search products, books, notes..." class="search-input pl-10 pr-4 py-2 bg-navy-800/60 border border-navy-600 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white placeholder-indigo-100/70 shadow-inner">
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="far fa-heart mr-1"></i> Wishlist
+                    </a>
+                    <a href="#" class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="far fa-bell mr-1"></i> Notifications
+                    </a>
+                    
+                    <!-- User Profile -->
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 focus:outline-none">
+                            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow">
+                                <span class="text-sm font-medium">JS</span>
+                            </div>
+                            <span class="hidden md:inline-block text-indigo-100">John Student</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="hidden md:inline-block h-4 w-4 text-indigo-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Search Bar - Only Visible on Mobile -->
+            <div class="mt-4 md:hidden relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                <input type="text" placeholder="Search products..." class="search-input pl-10 pr-4 py-2 bg-navy-800/60 border border-navy-600 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white placeholder-indigo-100/70 shadow-inner">
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Navigation -->
+    <div class="bg-navy-800 py-3 shadow-md border-b border-navy-700">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center space-x-1 md:space-x-4 overflow-x-auto hide-scrollbar pb-2">
+                <a href="#" class="category-badge btn-primary whitespace-nowrap px-4 py-1.5 rounded-full text-white text-sm font-medium">
+                    All Items
+                </a>
+                <a href="#" class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+                    Textbooks
+                </a>
+                <a href="#" class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+                    Notes
+                </a>
+                <a href="#" class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+                    Electronics
+                </a>
+                <a href="#" class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+                    Stationery
+                </a>
+                <a href="#" class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+                    Calculators
+                </a>
+                <a href="#" class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+                    Lab Equipment
+                </a>
+                <a href="#" class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+                    Others
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <div class="mb-10 relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy-600 to-navy-800 shadow-xl">
+            <div class="absolute inset-0 overflow-hidden opacity-20">
+                <div class="absolute top-10 left-10 w-32 h-32 rounded-full border-2 border-royal-blue-400"></div>
+                <div class="absolute bottom-10 right-10 w-48 h-48 rounded-full border-2 border-royal-blue-400"></div>
+                <div class="absolute top-1/3 right-1/4 w-24 h-24 rounded-full border-2 border-royal-blue-400"></div>
+            </div>
+            <div class="md:flex items-center justify-between p-6 md:p-10 relative">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Campus Marketplace</h2>
+                    <p class="text-indigo-100 mb-6 max-w-lg">Buy and sell academic resources from your peers. Find the best deals on textbooks, notes, and supplies.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="btn-primary px-6 py-3 rounded-lg text-white font-medium shadow-lg">
+                            Sell an Item
+                        </a>
+                        <a href="#" class="px-6 py-3 rounded-lg border border-royal-blue-400 text-white font-medium hover:bg-navy-700/50 transition-all duration-300">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center md:justify-end">
+                    <div class="relative w-64 h-64">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-48 h-48 bg-gradient-to-br from-royal-blue-400/30 to-royal-blue-600/30 rounded-full animate-pulse"></div>
+                        </div>
+                        <div class="absolute top-0 right-0 w-48 h-48 bg-navy-700/80 rounded-xl shadow-lg backdrop-blur-sm p-4 border border-navy-600">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow-md mr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-sm">Latest Listings</h3>
+                                    <p class="text-xs text-indigo-100/70">Updated hourly</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-2 rounded-lg bg-navy-800/60 shadow-inner">
+                                    <span class="text-xs">Data Structures</span>
+                                    <span class="text-xs text-green-400">₹450</span>
+                                </div>
+                                <div class="flex items-center justify-between p-2 rounded-lg bg-navy-800/60 shadow-inner">
+                                    <span class="text-xs">Physics Lab Manual</span>
+                                    <span class="text-xs text-green-400">₹200</span>
+                                </div>
+                                <div class="flex items-center justify-between p-2 rounded-lg bg-navy-800/60 shadow-inner">
+                                    <span class="text-xs">Scientific Calculator</span>
+                                    <span class="text-xs text-green-400">₹850</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-40 h-40 bg-navy-700/80 rounded-xl shadow-lg backdrop-blur-sm p-4 border border-navy-600 animate-bounce-slow">
+                            <div class="h-full flex flex-col justify-between">
+                                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="text-xl font-bold">50% Off</div>
+                                    <div class="text-sm text-indigo-100/70">on second-hand books</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Featured Products -->
+        <div class="mb-12">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold">Featured Items</h2>
+                <a href="#" class="text-royal-blue-400 hover:text-royal-blue-300 transition-colors text-sm font-medium">View All</a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Product Card 1 -->
+                <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=2574" alt="Calculus Textbook" class="h-48 w-full object-cover">
+                        <div class="absolute top-3 right-3">
+                            <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3">
+                            <button class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Seller" class="w-8 h-8 rounded-full seller-avatar">
+                                <span class="text-sm font-medium text-indigo-100">Raj Kumar</span>
+                            </div>
+                            <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">CS Dept</span>
+                        </div>
+                        <h3 class="font-bold text-white mb-1">Calculus: Early Transcendentals</h3>
+                        <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Great condition, hardly used. 9th Edition with all practice problems.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="font-bold text-lg text-white">₹650</div>
+                            <a href="#" class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                <span>Contact</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 2 -->
+                <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2940" alt="Computer Science Notes" class="h-48 w-full object-cover">
+                        <div class="absolute top-3 right-3">
+                            <span class="sold-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Sold</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3">
+                            <button class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                <i class="fas fa-heart text-red-500"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Seller" class="w-8 h-8 rounded-full seller-avatar">
+                                <span class="text-sm font-medium text-indigo-100">Priya Singh</span>
+                            </div>
+                            <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">CS Dept</span>
+                        </div>
+                        <h3 class="font-bold text-white mb-1">Data Structures & Algorithms Notes</h3>
+                        <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Complete handwritten notes with diagrams. Covers all semester topics.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="font-bold text-lg text-white">₹300</div>
+                            <a href="#" class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm opacity-60 cursor-not-allowed">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                <span>Sold Out</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 3 -->
+                <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1609607847926-da4702f01fef?q=80&w=2873" alt="Scientific Calculator" class="h-48 w-full object-cover">
+                        <div class="absolute top-3 right-3">
+                            <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3">
+                            <button class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Seller" class="w-8 h-8 rounded-full seller-avatar">
+                                <span class="text-sm font-medium text-indigo-100">Arjun Mehta</span>
+                            </div>
+                            <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">Engineering</span>
+                        </div>
+                        <h3 class="font-bold text-white mb-1">Texas Scientific Calculator</h3>
+                        <p class="text-indigo-100 text-sm mb-3 line-clamp-2">TI-84 Plus CE in excellent condition. All functions working perfectly.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="font-bold text-lg text-white">₹1,200</div>
+                            <a href="#" class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                <span>Contact</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 4 -->
+                <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2942" alt="Chemistry Lab Equipment" class="h-48 w-full object-cover">
+                        <div class="absolute top-3 right-3">
+                            <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3">
+                            <button class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://randomuser.me/api/portraits/women/26.jpg" alt="Seller" class="w-8 h-8 rounded-full seller-avatar">
+                                <span class="text-sm font-medium text-indigo-100">Meera Patel</span>
+                            </div>
+                            <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">Chemistry</span>
+                        </div>
+                        <h3 class="font-bold text-white mb-1">Chemistry Study Group Notes</h3>
+                        <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Complete set of Organic Chemistry study materials with practice tests.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="font-bold text-lg text-white">₹450</div>
+                            <a href="#" class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                <span>Contact</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recently Added Products -->
+        <div class="mb-12">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold">Recently Added</h2>
+                <a href="#" class="text-royal-blue-400 hover:text-royal-blue-300 transition-colors text-sm font-medium">View All</a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Product Card 5 -->
+                <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?q=80&w=2940" alt="Laptop" class="h-48 w-full object-cover">
+                        <div class="absolute top-3 right-3">
+                            <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3">
+                            <button class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Seller" class="w-8 h-8 rounded-full seller-avatar">
+                                <span class="text-sm font-medium text-indigo-100">Vijay Sharma</span>
+                            </div>
+                            <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">IT Dept</span>
+                        </div>
+                        <h3 class="font-bold text-white mb-1">Dell XPS Laptop (2 yrs old)</h3>
+                        <p class="text-indigo-100 text-sm mb-3 line-clamp-2">i5 processor, 8GB RAM, 512GB SSD. Minor scratches but works perfectly.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="font-bold text-lg text-white">₹35,000</div>
+                            <a href="#" class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                <span>Contact</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 6 -->
+                <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1598618986942-a60639b4e219?q=80&w=2940" alt="Drawing Supplies" class="h-48 w-full object-cover">
+                        <div class="absolute top-3 right-3">
+                            <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3">
+                            <button class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Seller" class="w-8 h-8 rounded-full seller-avatar">
+                                <span class="text-sm font-medium text-indigo-100">Ananya Das</span>
+                            </div>
+                            <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">Architecture</span>
+                        </div>
+                        <h3 class="font-bold text-white mb-1">Complete Drawing Kit</h3>
+                        <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Includes drafting board, T-square, compass set and high-quality pencils.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="font-bold text-lg text-white">₹1,800</div>
+                            <a href="#" class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                <span>Contact</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 7 -->
+                <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=2940" alt="Business Books" class="h-48 w-full object-cover">
+                        <div class="absolute top-3 right-3">
+                            <span class="sold-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Sold</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3">
+                            <button class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                <i class="fas fa-heart text-red-500"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Seller" class="w-8 h-8 rounded-full seller-avatar">
+                                <span class="text-sm font-medium text-indigo-100">Rahul Gupta</span>
+                            </div>
+                            <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">MBA</span>
+                        </div>
+                        <h3 class="font-bold text-white mb-1">MBA Business Ethics Collection</h3>
+                        <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Set of 5 business management textbooks. Perfect for MBA students.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="font-bold text-lg text-white">₹2,500</div>
+                            <a href="#" class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm opacity-60 cursor-not-allowed">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                <span>Sold Out</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 8 -->
+                <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1603193795297-882a4b4ca4de?q=80&w=2940" alt="Lab Coat" class="h-48 w-full object-cover">
+                        <div class="absolute top-3 right-3">
+                            <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                        </div>
+                        <div class="absolute bottom-3 right-3">
+                            <button class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://randomuser.me/api/portraits/women/36.jpg" alt="Seller" class="w-8 h-8 rounded-full seller-avatar">
+                                <span class="text-sm font-medium text-indigo-100">Neha Reddy</span>
+                            </div>
+                            <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">Biology</span>
+                        </div>
+                        <h3 class="font-bold text-white mb-1">Lab Coat & Safety Glasses</h3>
+                        <p class="text-indigo-100 text-sm mb-3 line-clamp-2">New lab coat (size M) and professional safety glasses. Never used.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="font-bold text-lg text-white">₹750</div>
+                            <a href="#" class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                <span>Contact</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Buy Request Section -->
+        <div class="mb-12 p-6 rounded-2xl bg-gradient-to-br from-navy-600 to-navy-800 shadow-xl">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-6 md:mb-0 md:mr-6">
+                    <h2 class="text-2xl font-bold mb-2">Can't find what you're looking for?</h2>
+                    <p class="text-indigo-100 max-w-xl">Post a buy request and let other students know what you need. Get notifications when someone has what you're looking for.</p>
+                </div>
+                <a href="#" class="btn-primary px-6 py-3 rounded-lg text-white font-medium shadow-lg whitespace-nowrap">
+                    Post Buy Request
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-800 border-t border-navy-700">
+        <div class="container mx-auto px-4 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <h1 class="text-xl font-bold font-montserrat logo-text">
+                            campusKART
+                        </h1>
+                    </div>
+                    <p class="text-indigo-100 text-sm mb-4">The campus marketplace for students to buy and sell academic resources, electronics, and more.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-indigo-100 hover:text-white transition-colors"><i class="fab fa-instagram text-lg"></i></a>
+                        <a href="#" class="text-indigo-100 hover:text-white transition-colors"><i class="fab fa-twitter text-lg"></i></a>
+                        <a href="#" class="text-indigo-100 hover:text-white transition-colors"><i class="fab fa-facebook text-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Home</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Browse Items</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Sell Item</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Buy Requests</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">My Account</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-white mb-4">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Textbooks</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Notes & Study Material</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Electronics</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Lab Equipment</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Other Resources</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-white mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Help Center</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Safety Tips</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Report an Issue</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Privacy Policy</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-navy-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-indigo-100 text-sm mb-4 md:mb-0">&copy; <%= new Date().getFullYear() %> campusKART. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Privacy Policy</a>
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Terms of Service</a>
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Floating Action Button - Post New Item -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button class="floating-action-button w-14 h-14 rounded-full flex items-center justify-center text-white shadow-xl transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+        </button>
+    </div>
+    
+    <script>
+        // JavaScript for handling like button clicks
+        document.querySelectorAll('.like-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas', 'text-red-500');
+                } else {
+                    icon.classList.remove('fas', 'text-red-500');
+                    icon.classList.add('far');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

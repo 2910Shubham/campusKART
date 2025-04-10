@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - campusKART</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': {
+                            400: '#2c5282',
+                            500: '#1e3a8a',
+                            600: '#1e40af',
+                            700: '#1e3a78',
+                            800: '#172554',
+                            900: '#0c1b44'
+                        },
+                        'royal-blue': {
+                            400: '#3b82f6',
+                            500: '#4169e1',
+                            600: '#2563eb'
+                        },
+                        'indigo': {
+                            50: '#eef2ff',
+                            100: '#e0e7ff'
+                        }
+                    },
+                    animation: {
+                        'pulse-border': 'pulseBorder 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                        'bounce-slow': 'bounce 3s infinite'
+                    },
+                    keyframes: {
+                        pulseBorder: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(65, 105, 225, 0.6)' },
+                            '50%': { boxShadow: '0 0 0 5px rgba(65, 105, 225, 0.4)' }
+                        },
+                        gradient: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' }
+                        }
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 30%);
+            background-color: #0c1b44;
+        }
+        
+        .logo-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 8s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .card-hover-effect {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .like-button:hover {
+            transform: scale(1.15);
+        }
+        
+        .sold-badge {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        .available-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .whatsapp-button {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+        }
+        
+        .edit-button {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            transition: all 0.3s ease;
+        }
+        
+        .edit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5);
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0.05));
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            backdrop-filter: blur(8px);
+        }
+        
+        .tab-active {
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            color: white;
+        }
+        
+        .tab {
+            transition: all 0.3s ease;
+        }
+        
+        .tab:hover:not(.tab-active) {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.8), rgba(23, 37, 84, 0.9)), 
+                        url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2940') center/cover no-repeat;
+        }
+        
+        .avatar-border {
+            padding: 3px;
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+        }
+        
+        /* Switch styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #1e3a78;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .dropdown {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="sticky top-0 z-50 bg-navy-900/90 backdrop-blur-md border-b border-navy-700 shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <a href="/home" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <h1 class="text-2xl font-bold font-montserrat logo-text">
+                            campusKART
+                        </h1>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="flex items-center space-x-6">
+                    <a href="/home" class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="fas fa-home mr-1"></i> Home
+                    </a>
+                    <a href="#" class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="far fa-bell mr-1"></i> Notifications
+                        <span class="inline-flex items-center justify-center w-5 h-5 ml-1 text-xs font-semibold text-white bg-red-500 rounded-full">3</span>
+                    </a>
+                    <a href="#" class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="far fa-envelope mr-1"></i> Messages
+                    </a>
+                    
+                    <!-- User Profile -->
+                    <div class="relative">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow">
+                                <span class="text-sm font-medium">RS</span>
+                            </div>
+                            <span class="hidden md:inline-block text-white font-medium">Rahul Singh</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- Profile Header Section -->
+        <div class="profile-header mb-8 rounded-2xl overflow-hidden shadow-xl">
+            <div class="relative">
+                <!-- Cover image area -->
+                <div class="h-48 md:h-64 w-full"></div>
+                
+                <!-- User info section that overlaps the cover image -->
+                <div class="absolute bottom-0 inset-x-0">
+                    <div class="bg-gradient-to-t from-navy-900 to-transparent h-48 w-full absolute bottom-0"></div>
+                    <div class="container px-4 md:px-8 mx-auto relative pb-4">
+                        <div class="flex flex-col md:flex-row items-center md:items-end mb-4">
+                            <!-- Profile Picture -->
+                            <div class="w-24 h-24 md:w-32 md:h-32 mb-4 md:mb-0 md:mr-6 rounded-full overflow-hidden border-4 border-navy-900 shadow-xl transform -translate-y-1/2 md:transform-none">
+                                <div class="avatar-border rounded-full overflow-hidden">
+                                    <img src="https://randomuser.me/api/portraits/men/86.jpg" alt="Profile Picture" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            
+                            <!-- User Details -->
+                            <div class="text-center md:text-left mb-4 md:mb-0 md:flex-grow">
+                                <h1 class="text-2xl md:text-3xl font-bold">Rahul Singh</h1>
+                                <div class="flex flex-col md:flex-row md:items-center text-indigo-100 mt-1 md:space-x-4">
+                                    <span class="flex items-center justify-center md:justify-start">
+                                        <i class="fas fa-graduation-cap mr-2"></i> Computer Science, 6th Semester
+                                    </span>
+                                    <span class="hidden md:inline-block">•</span>
+                                    <span class="flex items-center justify-center md:justify-start">
+                                        <i class="fas fa-map-marker-alt mr-2"></i> Delhi Institute of Technology
+                                    </span>
+                                </div>
+                                <p class="text-indigo-100 mt-2 max-w-xl">Selling textbooks and electronics. Quick responses and fair prices. Meet on campus for exchanges.</p>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex space-x-3">
+                                <button class="btn-primary px-4 py-2 rounded-lg text-sm font-medium shadow-md">
+                                    <i class="fas fa-edit mr-1"></i> Edit Profile
+                                </button>
+                                <button class="bg-navy-800 hover:bg-navy-700 border border-navy-700 px-4 py-2 rounded-lg text-sm font-medium shadow-md transition-colors duration-300">
+                                    <i class="fas fa-cog mr-1"></i> Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="stats-card rounded-xl p-4 shadow-md">
+                <div class="text-3xl font-bold mb-1">12</div>
+                <div class="text-sm text-indigo-100">Total Items Listed</div>
+            </div>
+            <div class="stats-card rounded-xl p-4 shadow-md">
+                <div class="text-3xl font-bold mb-1">8</div>
+                <div class="text-sm text-indigo-100">Items Sold</div>
+            </div>
+            <div class="stats-card rounded-xl p-4 shadow-md">
+                <div class="text-3xl font-bold mb-1">4.8</div>
+                <div class="text-sm text-indigo-100">Rating (15 reviews)</div>
+            </div>
+            <div class="stats-card rounded-xl p-4 shadow-md">
+                <div class="text-3xl font-bold mb-1">₹7,850</div>
+                <div class="text-sm text-indigo-100">Total Earnings</div>
+            </div>
+        </div>
+        
+        <!-- Tabs Section -->
+        <div class="mb-8">
+            <div class="border-b border-navy-700 flex overflow-x-auto hide-scrollbar">
+                <button class="tab tab-active px-4 py-3 font-medium text-sm rounded-t-lg" onclick="openTab('listings')">
+                    My Listings
+                </button>
+                <button class="tab px-4 py-3 font-medium text-sm text-indigo-100" onclick="openTab('sold')">
+                    Sold Items
+                </button>
+                <button class="tab px-4 py-3 font-medium text-sm text-indigo-100" onclick="openTab('wishlist')">
+                    Wishlist
+                </button>
+                <button class="tab px-4 py-3 font-medium text-sm text-indigo-100" onclick="openTab('reviews')">
+                    Reviews
+                </button>
+            </div>
+            
+            <!-- Product Management Section -->
+            <div id="listings" class="tab-content">
+                <div class="flex justify-between items-center my-6">
+                    <h2 class="text-xl font-bold">Active Listings (4)</h2>
+                    <button class="btn-primary px-4 py-2 rounded-lg text-sm font-medium shadow-md">
+                        <i class="fas fa-plus mr-1"></i> Add New Listing
+                    </button>
+                </div>
+                
+                <!-- Filter and Search for Products -->
+                <div class="bg-navy-800/50 rounded-xl p-4 mb-6 shadow-md">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+                        <div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="relative">
+                                <select class="bg-navy-900 border border-navy-700 rounded-lg text-indigo-100 text-sm pl-3 pr-8 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-royal-blue-400">
+                                    <option value="all">All Categories</option>
+                                    <option value="textbooks">Textbooks</option>
+                                    <option value="electronics">Electronics</option>
+                                    <option value="notes">Notes</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                    <svg class="w-4 h-4 text-indigo-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="relative">
+                                <select class="bg-navy-900 border border-navy-700 rounded-lg text-indigo-100 text-sm pl-3 pr-8 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-royal-blue-400">
+                                    <option value="recent">Most Recent</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="popular">Most Popular</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                    <svg class="w-4 h-4 text-indigo-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative">
+                            <input type="text" placeholder="Search listings..." class="w-full bg-navy-900 border border-navy-700 rounded-lg text-white pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-royal-blue-400">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-indigo-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product List -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Product 1 -->
+                    <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1637666505754-7316953cc2ad?q=80&w=2940" alt="Database Systems Book" class="h-48 w-full object-cover">
+                            <div class="absolute top-3 right-3">
+                                <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-white mb-1">Database Systems: Complete Book</h3>
+                            <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Excellent condition, 2nd Edition. Includes all supplementary materials and practice exercises.</p>
+                            
+                            <div class="flex justify-between items-center mt-4">
+                                <div class="font-bold text-lg text-white">₹550</div>
+                                <div class="flex space-x-2">
+                                    <button class="edit-button flex items-center py-1.5 px-3 rounded-lg text-white text-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="product-action-button flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
+                                        <i class="fas fa-check-circle mr-1"></i> Mark Sold
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center mt-4 pt-4 border-t border-navy-700">
+                                <div class="text-sm text-indigo-100">
+                                    <i class="far fa-eye mr-1"></i> 45 views
+                                </div>
+                                <div class="text-sm text-indigo-100">
+                                    <i class="far fa-clock mr-1"></i> Listed 3 days ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2940" alt="Wireless Headphones" class="h-48 w-full object-cover">
+                            <div class="absolute top-3 right-3">
+                                <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-white mb-1">Sony Wireless Headphones</h3>
+                            <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Noise cancelling, great battery life. Only 6 months old with original packaging.</p>
+                            
+                            <div class="flex justify-between items-center mt-4">
+                                <div class="font-bold text-lg text-white">₹1,800</div>
+                                <div class="flex space-x-2">
+                                    <button class="edit-button flex items-center py-1.5 px-3 rounded-lg text-white text-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="product-action-button flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
+                                        <i class="fas fa-check-circle mr-1"></i> Mark Sold
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center mt-4 pt-4 border-t border-navy-700">
+                                <div class="text-sm text-indigo-100">
+                                    <i class="far fa-eye mr-1"></i> 87 views
+                                </div>
+                                <div class="text-sm text-indigo-100">
+                                    <i class="far fa-clock mr-1"></i> Listed 1 week ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=2940" alt="Engineering Notes" class="h-48 w-full object-cover">
+                            <div class="absolute top-3 right-3">
+                                <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-white mb-1">Advanced Algorithm Notes Bundle</h3>
+                            <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Complete set of handwritten notes, diagrams, and practice problems. Very detailed.</p>
+                            
+                            <div class="flex justify-between items-center mt-4">
+                                <div class="font-bold text-lg text-white">₹450</div>
+                                <div class="flex space-x-2">
+                                    <button class="edit-button flex items-center py-1.5 px-3 rounded-lg text-white text-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="product-action-button flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
+                                        <i class="fas fa-check-circle mr-1"></i> Mark Sold
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center mt-4 pt-4 border-t border-navy-700">
+                                <div class="text-sm text-indigo-100">
+                                    <i class="far fa-eye mr-1"></i> 31 views
+                                </div>
+                                <div class="text-sm text-indigo-100">
+                                    <i class="far fa-clock mr-1"></i> Listed 5 days ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?q=80&w=2940" alt="Scientific Calculator" class="h-48 w-full object-cover">
+                            <div class="absolute top-3 right-3">
+                                <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-white mb-1">Texas Instruments Calculator</h3>
+                            <p class="text-indigo-100 text-sm mb-3 line-clamp-2">TI-84 Plus CE. Perfect for engineering and math courses. All functions working.</p>
+                            
+                            <div class="flex justify-between items-center mt-4">
+                                <div class="font-bold text-lg text-white">₹950</div>
+                                <div class="flex space-x-2">
+                                    <button class="edit-button flex items-center py-1.5 px-3 rounded-lg text-white text-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="product-action-button flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
+                                        <i class="fas fa-check-circle mr-1"></i> Mark Sold
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center mt-4 pt-4 border-t border-navy-700">
+                                <div class="text-sm text-indigo-100">
+                                    <i class="far fa-eye mr-1"></i> 52 views
+                                </div>
+                                <div class="text-sm text-indigo-100">
+                                    <i class="far fa-clock mr-1"></i> Listed 2 days ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sold Items Tab (Hidden by Default) -->
+            <div id="sold" class="tab-content hidden">
+                <div class="flex justify-between items-center my-6">
+                    <h2 class="text-xl font-bold">Sold Items (8)</h2>
+                </div>
+                
+                <!-- Sold Product List -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Sold Product 1 -->
+                    <div class="bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700 opacity-80">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=2574" alt="Calculus Textbook" class="h-48 w-full object-cover opacity-70">
+                            <div class="absolute top-3 right-3">
+                                <span class="sold-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Sold</span>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="bg-navy-900/70 rounded-full p-3">
+                                    <i class="fas fa-check-circle text-2xl text-green-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-white mb-1">Calculus: Early Transcendentals</h3>
+                            <div class="flex justify-between items-center mt-4">
+                                <div class="font-bold text-lg text-white">₹650</div>
+                                <div class="text-sm text-indigo-100">
+                                    <i class="fas fa-calendar-check mr-1"></i> Sold on 15 Mar 2025
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 pt-4 border-t border-navy-700">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="text-sm text-indigo-100">Buyer</div>
+                                        <div class="flex items-center mt-1">
+                                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Buyer" class="w-6 h-6 rounded-full mr-2">
+                                            <span class="text-sm">Amit Patel</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
+                                            <i class="fas fa-redo mr-1"></i> Relist
+                                        </button>
+                                        <button class="flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
+                                            <i class="far fa-trash-alt mr-1"></i> Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sold Product 2 -->
+                    <div class="bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700 opacity-80">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?q=80&w=2832" alt="Laptop" class="h-48 w-full object-cover opacity-70">
+                            <div class="absolute top-3 right-3">
+                                <span class="sold-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Sold</span>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="bg-navy-900/70 rounded-full p-3">
+                                    <i class="fas fa-check-circle text-2xl text-green-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-white mb-1">Lenovo ThinkPad X1 Carbon</h3>
+                            <div class="flex justify-between items-center mt-4">
+                                <div class="font-bold text-lg text-white">₹42,500</div>
+                                <div class="text-sm text-indigo-100">
+                                    <i class="fas fa-calendar-check mr-1"></i> Sold on 02 Feb 2025
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 pt-4 border-t border-navy-700">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="text-sm text-indigo-100">Buyer</div>
+                                        <div class="flex items-center mt-1">
+                                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Buyer" class="w-6 h-6 rounded-full mr-2">
+                                            <span class="text-sm">Priya Singh</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
+                                            <i class="fas fa-redo mr-1"></i> Relist
+                                        </button>
+                                        <button class="flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
+                                            <i class="far fa-trash-alt mr-1"></i> Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- More sold items would follow the same pattern -->
+                </div>
+            </div>
+            
+            <!-- Wishlist Tab (Hidden by Default) -->
+            <div id="wishlist" class="tab-content hidden">
+                <div class="flex justify-between items-center my-6">
+                    <h2 class="text-xl font-bold">My Wishlist (5)</h2>
+                </div>
+                
+                <!-- Wishlist Items -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Wishlist Item 1 -->
+                    <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1600431521340-491eca880813?q=80&w=2940" alt="AI Textbook" class="h-48 w-full object-cover">
+                            <div class="absolute top-3 right-3">
+                                <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                            </div>
+                            <div class="absolute bottom-3 right-3">
+                                <button class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                    <i class="fas fa-heart text-red-500"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center space-x-2">
+                                    <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Seller" class="w-8 h-8 rounded-full">
+                                    <span class="text-sm font-medium text-indigo-100">Neha Gupta</span>
+                                </div>
+                                <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">CS Dept</span>
+                            </div>
+                            <h3 class="font-bold text-white mb-1">Artificial Intelligence: A Modern Approach</h3>
+                            <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Latest edition, perfect condition with highlighting on important sections.</p>
+                            <div class="flex justify-between items-center mt-4">
+                                <div class="font-bold text-lg text-white">₹980</div>
+                                <a href="#" class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
+                                    <i class="fab fa-whatsapp text-lg"></i>
+                                    <span>Contact</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- More wishlist items would follow same pattern -->
+                </div>
+            </div>
+            
+            <!-- Reviews Tab (Hidden by Default) -->
+            <div id="reviews" class="tab-content hidden">
+                <div class="flex justify-between items-center my-6">
+                    <h2 class="text-xl font-bold">Buyer Reviews (15)</h2>
+                </div>
+                
+                <div class="bg-navy-800/50 rounded-xl p-6 mb-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 mr-4">
+                            <div class="w-full h-full rounded-full bg-navy-700 flex items-center justify-center text-2xl font-bold">
+                                4.8
+                            </div>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center text-yellow-400 mb-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="ml-2 text-indigo-100 text-sm">15 reviews</span>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex items-center">
+                                    <span class="text-xs w-14 text-indigo-100">5 stars</span>
+                                    <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
+                                        <div class="progress-bar h-2 rounded-full" style="width: 80%"></div>
+                                    </div>
+                                    <span class="text-xs w-8 text-right text-indigo-100">12</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-xs w-14 text-indigo-100">4 stars</span>
+                                    <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
+                                        <div class="progress-bar h-2 rounded-full" style="width: 13%"></div>
+                                    </div>
+                                    <span class="text-xs w-8 text-right text-indigo-100">2</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-xs w-14 text-indigo-100">3 stars</span>
+                                    <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
+                                        <div class="progress-bar h-2 rounded-full" style="width: 7%"></div>
+                                    </div>
+                                    <span class="text-xs w-8 text-right text-indigo-100">1</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-xs w-14 text-indigo-100">2 stars</span>
+                                    <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
+                                        <div class="progress-bar h-2 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                    <span class="text-xs w-8 text-right text-indigo-100">0</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-xs w-14 text-indigo-100">1 star</span>
+                                    <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
+                                        <div class="progress-bar h-2 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                    <span class="text-xs w-8 text-right text-indigo-100">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reviews List -->
+                <div class="space-y-4">
+                    <!-- Review 1 -->
+                    <div class="bg-navy-800 rounded-xl p-4 shadow-md border border-navy-700">
+                        <div class="flex items-start mb-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Reviewer" class="w-10 h-10 rounded-full mr-3">
+                            <div class="flex-grow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium">Amit Patel</h3>
+                                        <div class="flex items-center text-yellow-400 mt-1">
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs text-indigo-100">15 Mar 2025</div>
+                                </div>
+                                <p class="text-indigo-100 text-sm mt-2">Great seller! The book was in even better condition than described. Fast response and easy transaction. Would buy from again.</p>
+                                <div class="mt-2 bg-navy-700/50 rounded p-2 text-sm text-indigo-100">
+                                    <span class="font-medium text-royal-blue-400">Item:</span> Calculus: Early Transcendentals
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Review 2 -->
+                    <div class="bg-navy-800 rounded-xl p-4 shadow-md border border-navy-700">
+                        <div class="flex items-start mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer" class="w-10 h-10 rounded-full mr-3">
+                            <div class="flex-grow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium">Priya Singh</h3>
+                                        <div class="flex items-center text-yellow-400 mt-1">
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                            <i class="fas fa-star text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs text-indigo-100">02 Feb 2025</div>
+                                </div>
+                                <p class="text-indigo-100 text-sm mt-2">Laptop was exactly as described! Rahul was very responsive and made the transaction seamless. The price was fair and he even threw in a laptop sleeve for free. Highly recommend!</p>
+                                <div class="mt-2 bg-navy-700/50 rounded p-2 text-sm text-indigo-100">
+                                    <span class="font-medium text-royal-blue-400">Item:</span> Lenovo ThinkPad X1 Carbon
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- More reviews would follow the same pattern -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Account Settings Section -->
+        <div class="mb-12">
+            <h2 class="text-xl font-bold mb-6">Account Settings</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Notification Settings -->
+                <div class="bg-navy-800 rounded-xl p-6 shadow-md border border-navy-700">
+                    <h3 class="font-bold mb-4">Notification Settings</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-medium">New Messages</div>
+                                <div class="text-sm text-indigo-100">Get notified when someone sends you a message</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-medium">Product Inquiries</div>
+                                <div class="text-sm text-indigo-100">Get notified when someone is interested in your product</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-medium">New Reviews</div>
+                                <div class="text-sm text-indigo-100">Get notified when someone leaves a review</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-medium">Email Notifications</div>
+                                <div class="text-sm text-indigo-100">Receive email notifications in addition to in-app</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Account Privacy -->
+                <div class="bg-navy-800 rounded-xl p-6 shadow-md border border-navy-700">
+                    <h3 class="font-bold mb-4">Account Privacy</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-medium">Profile Visibility</div>
+                                <div class="text-sm text-indigo-100">Make your profile visible to other users</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-medium">Show Contact Info</div>
+                                <div class="text-sm text-indigo-100">Display your contact information on listings</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-medium">Show Department</div>
+                                <div class="text-sm text-indigo-100">Display your department on your profile</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-medium">Allow Messages</div>
+                                <div class="text-sm text-indigo-100">Allow other users to send you direct messages</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-800 border-t border-navy-700">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <div class="w-6 h-6 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                    </div>
+                    <h1 class="text-lg font-bold font-montserrat logo-text">
+                        campusKART
+                    </h1>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Privacy Policy</a>
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Terms of Service</a>
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Contact Us</a>
+                </div>
+            </div>
+            
+            <div class="mt-4 text-center md:text-left">
+                <p class="text-indigo-100 text-xs">&copy; <%= new Date().getFullYear() %> campusKART. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Function to handle tab switching
+        function openTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('tab-active');
+                tab.classList.add('text-indigo-100');
+            });
+            
+            // Show the selected tab content
+            document.getElementById(tabName).classList.remove('hidden');
+            
+            // Add active class to the clicked tab
+            const activeTab = document.querySelector(`[onclick="openTab('${tabName}')"]`);
+            activeTab.classList.add('tab-active');
+            activeTab.classList.remove('text-indigo-100');
+        }
+        
+        // Add event listeners to product action buttons (Mark as Sold)
+        document.querySelectorAll('.product-action-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const productCard = this.closest('.card-hover-effect');
+                const productTitle = productCard.querySelector('h3').textContent;
+                
+                if (confirm(`Mark "${productTitle}" as sold?`)) {
+                    // Show a success message (in a real app, this would save to the server)
+                    alert(`"${productTitle}" has been marked as sold!`);
+                    
+                    // Change the badge from available to sold
+                    const badge = productCard.querySelector('.available-badge');
+                    badge.textContent = 'Sold';
+                    badge.classList.remove('available-badge');
+                    badge.classList.add('sold-badge');
+                    
+                    // Change the button text
+                    this.innerHTML = '<i class="fas fa-undo mr-1"></i> Mark Available';
+                    
+                    // Add opacity to indicate sold status
+                    productCard.classList.add('opacity-80');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
