@@ -10,10 +10,15 @@ router.get('/profile', isLoggedin, async (req, res) => {
     try {
 
       const user = await User.findById(req.user.id)
-      .populate('listed_product')  // Populate the listed products
+      .populate('listed_product soldProduct')  // Populate the listed products
       .exec();
       
       const totalListedItems = user.listed_product.length;
+      const soldProduct = user.soldProduct.length;
+
+      const totalEarnings = user.soldProduct.reduce((total, product) => {
+        return total + (product.price || 0); // Adding null check for price
+      }, 0);
 
       const userData = {
         fullname: req.user.fullname,
@@ -24,6 +29,8 @@ router.get('/profile', isLoggedin, async (req, res) => {
         coverImage: req.user.cover_pic || '/images/cover.png',
         listedProduct: user.listed_product || [],
         totalListedItems: totalListedItems,
+        soldProduct: soldProduct,
+        totalEarnings: totalEarnings,
       };
   
       res.render('profile', { user: userData });

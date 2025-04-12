@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,32 +78,32 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-        
+
         :root {
             --transition-speed: 0.3s;
         }
-        
+
         body {
             font-family: 'Montserrat', sans-serif;
             transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
         }
-        
+
         body.dark-mode {
-            background-image: 
+            background-image:
                 radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 30%),
                 radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 30%);
             background-color: #0c1b44;
             color: #ffffff;
         }
-        
+
         body.light-mode {
-            background-image: 
+            background-image:
                 radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.05) 0%, transparent 30%),
                 radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.03) 0%, transparent 30%);
             background-color: #ffffff;
             color: #1f2937;
         }
-        
+
         .logo-text {
             background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
             -webkit-background-clip: text;
@@ -111,146 +112,146 @@
             animation: gradient 8s ease infinite;
             background-size: 200% 200%;
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
         }
-        
+
         .card-hover-effect {
             transition: all 0.3s ease;
         }
-        
+
         .card-hover-effect:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
         }
-        
+
         .like-button:hover {
             transform: scale(1.15);
         }
-        
+
         .sold-badge {
             background: linear-gradient(135deg, #ef4444, #dc2626);
         }
-        
+
         .available-badge {
             background: linear-gradient(135deg, #10b981, #059669);
         }
-        
+
         .whatsapp-button {
             background: linear-gradient(135deg, #25d366, #128c7e);
             transition: all 0.3s ease;
         }
-        
+
         .whatsapp-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
         }
-        
+
         .edit-button {
             background: linear-gradient(135deg, #f59e0b, #d97706);
             transition: all 0.3s ease;
         }
-        
+
         .edit-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5);
         }
-        
+
         .stats-card {
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0.05));
             border: 1px solid rgba(37, 99, 235, 0.2);
             backdrop-filter: blur(8px);
             transition: all 0.3s ease;
         }
-        
+
         .light-mode .stats-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(249, 250, 251, 0.9));
             border: 1px solid rgba(229, 231, 235, 0.5);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-        
+
         .tab-active {
             background: linear-gradient(90deg, #3b82f6, #2563eb);
             color: white;
         }
-        
+
         .tab {
             transition: all 0.3s ease;
         }
-        
+
         .light-mode .tab:not(.tab-active) {
             color: #4b5563;
         }
-        
+
         .tab:hover:not(.tab-active) {
             background: rgba(59, 130, 246, 0.1);
         }
-        
+
         .progress-bar {
             background: linear-gradient(90deg, #3b82f6, #2563eb);
         }
-        
+
         .profile-header {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.8), rgba(23, 37, 84, 0.9)), 
-                        url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2940') center/cover no-repeat;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.8), rgba(23, 37, 84, 0.9)),
+                url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2940') center/cover no-repeat;
         }
-        
+
         .light-mode .profile-header {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(37, 99, 235, 0.4)), 
-                        url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2940') center/cover no-repeat;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(37, 99, 235, 0.4)),
+                url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2940') center/cover no-repeat;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
-        
+
         .light-mode .profile-header .bg-gradient-to-t.from-navy-900.to-transparent {
             background: linear-gradient(to top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5), transparent);
         }
-        
+
         .light-mode .profile-header h1,
         .light-mode .profile-header .font-bold {
             color: #1f2937;
         }
-        
+
         .light-mode .profile-header .text-indigo-100 {
             color: #4b5563;
         }
-        
+
         .light-mode .profile-header .border-navy-900 {
             border-color: #e5e7eb;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        
+
         .avatar-border {
             padding: 3px;
             background: linear-gradient(90deg, #3b82f6, #2563eb);
         }
-        
+
         /* Light Mode Card Styles */
         .light-mode .product-card {
             background-color: #ffffff;
             border: 1px solid #e5e7eb;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-        
+
         .light-mode .product-card h3 {
             color: #1f2937;
         }
-        
+
         .light-mode .product-card p {
             color: #4b5563;
         }
-        
+
         .light-mode .tag {
             background-color: #f3f4f6;
             color: #4b5563;
         }
-        
+
         /* Switch styles */
         .switch {
             position: relative;
@@ -258,13 +259,13 @@
             width: 50px;
             height: 24px;
         }
-        
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
-        
+
         .slider {
             position: absolute;
             cursor: pointer;
@@ -276,11 +277,11 @@
             transition: .4s;
             border-radius: 34px;
         }
-        
+
         .light-mode .slider {
             background-color: #d1d5db;
         }
-        
+
         .slider:before {
             position: absolute;
             content: "";
@@ -292,80 +293,80 @@
             transition: .4s;
             border-radius: 50%;
         }
-        
+
         /* Theme Toggle Styles */
         .toggle-checkbox:checked {
             right: 0;
             border-color: #2563eb;
             transform: translateX(100%);
         }
-        
-        .toggle-checkbox:checked + .toggle-label {
+
+        .toggle-checkbox:checked+.toggle-label {
             background-color: #3b82f6;
         }
-        
+
         /* Theme transition class */
         .theme-transition * {
-            transition: background-color var(--transition-speed) ease, 
-                       border-color var(--transition-speed) ease, 
-                       color var(--transition-speed) ease,
-                       fill var(--transition-speed) ease,
-                       stroke var(--transition-speed) ease,
-                       box-shadow var(--transition-speed) ease;
+            transition: background-color var(--transition-speed) ease,
+                border-color var(--transition-speed) ease,
+                color var(--transition-speed) ease,
+                fill var(--transition-speed) ease,
+                stroke var(--transition-speed) ease,
+                box-shadow var(--transition-speed) ease;
         }
-        
+
         .theme-toggle {
             cursor: pointer;
         }
-        
+
         .theme-toggle:active svg {
             animation: theme-toggle 0.5s ease forwards;
         }
-        
+
         /* Additional light mode styles */
         .light-mode .text-white {
             color: #1f2937;
         }
-        
+
         .light-mode .text-indigo-100 {
             color: #4b5563;
         }
-        
+
         .light-mode svg.text-indigo-100,
         .light-mode svg.text-white {
             color: #4b5563;
         }
-        
+
         .light-mode .bg-navy-800 {
             background-color: #ffffff;
         }
-        
+
         .light-mode .bg-navy-900\/90 {
             background-color: #ffffff;
         }
-        
+
         .light-mode .border-navy-600 {
             border-color: #e5e7eb;
         }
-        
+
         .light-mode .border-navy-700 {
             border-color: #e5e7eb;
         }
-        
+
         /* Specific element handling */
         .light-mode .bg-navy-700 {
             background-color: #f3f4f6;
         }
-        
+
         .light-mode .bg-navy-600\/50 {
             background-color: #f3f4f6;
         }
-        
+
         .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 {
             background: linear-gradient(to bottom right, #ffffff, #f3f4f6);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-        
+
         /* Fix promotional sections and button text */
         .light-mode h1.text-white,
         .light-mode h2.text-white,
@@ -373,15 +374,15 @@
         .light-mode p.text-white {
             color: #1f2937;
         }
-        
+
         .light-mode .text-royal-blue-400 {
             color: #2563eb;
         }
-        
+
         .light-mode .text-royal-blue-500 {
             color: #2563eb;
         }
-        
+
         /* Make promotional buttons text white */
         .light-mode .btn-primary span,
         .light-mode a.btn-primary span,
@@ -390,7 +391,7 @@
         .light-mode a.bg-royal-blue-600 {
             color: white;
         }
-        
+
         /* Keep logo gradient unchanged */
         .light-mode .logo-text {
             background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
@@ -398,19 +399,19 @@
             background-clip: text;
             color: transparent;
         }
-        
+
         /* Keep buttons visible in light mode */
         .light-mode .btn-primary,
         .light-mode .edit-button,
         .light-mode .tab-active {
             color: white;
         }
-        
+
         /* Keep slider functionality */
         .light-mode .slider {
             background-color: #d1d5db;
         }
-        
+
         /* Fix for blue background sections in light mode */
         .light-mode .mb-10.relative.overflow-hidden.rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
         .light-mode .mb-12.p-6.rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
@@ -420,61 +421,61 @@
             border: 1px solid #e5e7eb;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
-        
+
         /* Adjust blue borders inside sections */
         .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 .border-royal-blue-400 {
             border-color: rgba(59, 130, 246, 0.3);
         }
-        
+
         /* Fix the Learn More and other outlined buttons in light mode */
         .light-mode .px-6.py-3.rounded-lg.border.border-royal-blue-400,
         .light-mode .border.border-royal-blue-400 {
             border-color: #3b82f6;
             color: #3b82f6;
         }
-        
+
         .light-mode .px-6.py-3.rounded-lg.border.border-royal-blue-400:hover,
         .light-mode .border.border-royal-blue-400:hover {
             background-color: rgba(59, 130, 246, 0.05);
         }
-        
+
         /* Fix text colors in blue sections */
         .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 h2,
         .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 h3 {
             color: #1f2937;
         }
-        
+
         .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 p {
             color: #4b5563;
         }
-        
+
         /* Fix filter and search area in light mode */
         .light-mode .bg-navy-800\/50 {
             background-color: #f9fafb;
             border: 1px solid #e5e7eb;
         }
-        
+
         .light-mode .bg-navy-900 {
             background-color: #ffffff;
             border-color: #e5e7eb;
         }
-        
+
         .light-mode select.bg-navy-900 {
             background-color: #ffffff;
             border-color: #e5e7eb;
             color: #4b5563;
         }
-        
+
         .light-mode input.bg-navy-900 {
             background-color: #ffffff;
             border-color: #e5e7eb;
             color: #4b5563;
         }
-        
+
         .light-mode input.bg-navy-900::placeholder {
             color: #9ca3af;
         }
-        
+
         .light-mode select.bg-navy-900:focus,
         .light-mode input.bg-navy-900:focus {
             border-color: #3b82f6;
@@ -482,59 +483,77 @@
         }
     </style>
 </head>
+
 <body class="text-white min-h-screen flex flex-col">
     <!-- Header Section -->
-    <header class="sticky top-0 z-50 bg-navy-900/90 backdrop-blur-md border-b border-navy-700 shadow-md dark:bg-navy-900/90 dark:border-navy-700 light:bg-white/90 light:border-gray-200">
+    <header
+        class="sticky top-0 z-50 bg-navy-900/90 backdrop-blur-md border-b border-navy-700 shadow-md dark:bg-navy-900/90 dark:border-navy-700 light:bg-white/90 light:border-gray-200">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    <div
+                        class="w-8 h-8 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                         </svg>
                     </div>
                     <h1 class="text-2xl font-bold font-montserrat logo-text">
                         campusKART
                     </h1>
                 </div>
-                
+
                 <!-- Navigation Links -->
                 <div class="flex items-center space-x-6">
                     <!-- Theme Toggle -->
                     <div class="theme-toggle flex items-center">
                         <span class="mr-2 dark:text-white light:text-gray-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-sun h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-sun h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                         </span>
                         <div class="relative inline-block w-10 mr-2 align-middle transition duration-200 ease-in">
-                            <input type="checkbox" name="toggle" id="theme-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none transition-transform duration-200 ease-in-out"
-                                   style="top: 0; left: 0; transition: transform 0.2s ease-in-out;">
-                            <label for="theme-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
+                            <input type="checkbox" name="toggle" id="theme-toggle"
+                                class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none transition-transform duration-200 ease-in-out"
+                                style="top: 0; left: 0; transition: transform 0.2s ease-in-out;">
+                            <label for="theme-toggle"
+                                class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
                         </div>
                         <span class="dark:text-white light:text-gray-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-moon h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-moon h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                             </svg>
                         </span>
                     </div>
-                    
-                    <a href="/home" class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200 dark:text-indigo-100 dark:hover:text-white light:text-gray-700 light:hover:text-gray-900">
+
+                    <a href="/home"
+                        class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200 dark:text-indigo-100 dark:hover:text-white light:text-gray-700 light:hover:text-gray-900">
                         <i class="fas fa-home mr-1"></i> Home
                     </a>
-                    <a href="#" class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200 dark:text-indigo-100 dark:hover:text-white light:text-gray-700 light:hover:text-gray-900">
+                    <a href="#"
+                        class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200 dark:text-indigo-100 dark:hover:text-white light:text-gray-700 light:hover:text-gray-900">
                         <i class="far fa-bell mr-1"></i> Notifications
                     </a>
-                    
+
                     <!-- User Profile -->
                     <div class="relative">
                         <button class="flex items-center space-x-2 focus:outline-none">
-                            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow">
-                                <span class="text-sm font-medium"> 
-                                    <img src="<%= user.image  %>" alt="Profile Picture" class="w-full h-full object-cover">
-                               </span>
+                            <div
+                                class="w-9 h-9 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow">
+                                <span class="text-sm font-medium">
+                                    <img src="<%= user.image  %>" alt="Profile Picture"
+                                        class="w-full h-full object-cover">
+                                </span>
                             </div>
-                            <span class="hidden md:inline-block text-indigo-100 dark:text-indigo-100 light:text-gray-700"><%= user.fullname %></span>
+                            <span
+                                class="hidden md:inline-block text-indigo-100 dark:text-indigo-100 light:text-gray-700">
+                                <%= user.fullname %>
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -551,75 +570,90 @@
                 <div class="h-48 md:h-64 w-full">
                     <% if ( user.coverImage) { %>
                         <img src="<%=  user.coverImage %>" alt="Cover Image" class="w-full h-full object-cover">
-                    <% } else { %>
-                        <div class="bg-navy-800 w-full h-full"></div>
-                    <% } %>
+                        <% } else { %>
+                            <div class="bg-navy-800 w-full h-full"></div>
+                            <% } %>
                 </div>
-        
+
                 <!-- Overlay with user info -->
                 <div class="absolute bottom-0 inset-x-0">
                     <div class="bg-gradient-to-t from-navy-900 to-transparent h-48 w-full absolute bottom-0"></div>
                     <div class="container px-4 md:px-8 mx-auto relative pb-4">
                         <div class="flex flex-col md:flex-row items-center md:items-end mb-4">
-                            
+
                             <!-- Profile Picture -->
-                            <div class="w-24 h-24 md:w-32 md:h-32 mb-4 md:mb-0 md:mr-6 rounded-full overflow-hidden border-4 border-navy-900 shadow-xl transform -translate-y-1/2 md:transform-none">
+                            <div
+                                class="w-24 h-24 md:w-32 md:h-32 mb-4 md:mb-0 md:mr-6 rounded-full overflow-hidden border-4 border-navy-900 shadow-xl transform -translate-y-1/2 md:transform-none">
                                 <div class="avatar-border rounded-full overflow-hidden">
                                     <% if (user.image) { %>
-                                        <img src="<%= user.image  %>" alt="Profile Picture" class="w-full h-full object-cover">
-                                    <% } else { %>
-                                        <div class="bg-navy-700 w-full h-full flex items-center justify-center text-4xl font-bold text-indigo-100">
-                                            <%= user.fullname ? user.fullname.substring(0, 2).toUpperCase() : 'U' %>
-                                        </div>
-                                    <% } %>
+                                        <img src="<%= user.image  %>" alt="Profile Picture"
+                                            class="w-full h-full object-cover">
+                                        <% } else { %>
+                                            <div
+                                                class="bg-navy-700 w-full h-full flex items-center justify-center text-4xl font-bold text-indigo-100">
+                                                <%= user.fullname ? user.fullname.substring(0, 2).toUpperCase() : 'U' %>
+                                            </div>
+                                            <% } %>
                                 </div>
                             </div>
-        
+
                             <!-- User Details -->
                             <div class="text-center md:text-left mb-4 md:mb-0 md:flex-grow">
-                                <h1 class="text-2xl md:text-3xl font-bold text-white"><%= user.fullname %></h1>
-                                <div class="flex flex-col md:flex-row md:items-center text-indigo-100 mt-1 md:space-x-4">
+                                <h1 class="text-2xl md:text-3xl font-bold text-white">
+                                    <%= user.fullname %>
+                                </h1>
+                                <div
+                                    class="flex flex-col md:flex-row md:items-center text-indigo-100 mt-1 md:space-x-4">
                                     <% if (user.department && user.year) { %>
                                         <span class="flex items-center justify-center md:justify-start">
-                                            <i class="fas fa-graduation-cap mr-2"></i> <%= user.department %>, <%= user.year %> Semester
+                                            <i class="fas fa-graduation-cap mr-2"></i>
+                                            <%= user.department %>, <%= user.year %> Semester
                                         </span>
                                         <span class="hidden md:inline-block">•</span>
-                                    <% } %>
-                                    <span class="flex items-center justify-center md:justify-start">
-                                        <i class="fas fa-map-marker-alt mr-2"></i> Patna University
-                                    </span>
+                                        <% } %>
+                                            <span class="flex items-center justify-center md:justify-start">
+                                                <i class="fas fa-map-marker-alt mr-2"></i> Patna University
+                                            </span>
                                 </div>
                                 <% if (user.bio) { %>
-                                    <p class="text-indigo-100 mt-2 max-w-xl"><%= user.bio %></p>
-                                <% } else { %>
-                                    <p class="text-indigo-100 mt-2 max-w-xl italic">No bio added yet.</p>
-                                <% } %>
+                                    <p class="text-indigo-100 mt-2 max-w-xl">
+                                        <%= user.bio %>
+                                    </p>
+                                    <% } else { %>
+                                        <p class="text-indigo-100 mt-2 max-w-xl italic">No bio added yet.</p>
+                                        <% } %>
                             </div>
-        
+
                             <!-- Action Buttons -->
                             <div class="flex space-x-3">
-                                <a href="/user/profile/update" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium shadow-md">
+                                <a href="/user/profile/update"
+                                    class="btn-primary px-4 py-2 rounded-lg text-sm font-medium shadow-md">
                                     <i class="fas fa-edit mr-1"></i> Edit Profile
                                 </a>
-                                <button class="bg-navy-800 hover:bg-navy-700 border border-navy-700 px-4 py-2 rounded-lg text-sm font-medium shadow-md transition-colors duration-300">
+                                <button
+                                    class="bg-navy-800 hover:bg-navy-700 border border-navy-700 px-4 py-2 rounded-lg text-sm font-medium shadow-md transition-colors duration-300">
                                     <i class="fas fa-cog mr-1"></i> Settings
                                 </button>
                             </div>
-        
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <!-- Stats Cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div class="stats-card rounded-xl p-4 shadow-md">
-                <div class="text-3xl font-bold mb-1"><%= user.totalListedItems %></div>
+                <div class="text-3xl font-bold mb-1">
+                    <%= user.totalListedItems %>
+                </div>
                 <div class="text-sm text-indigo-100">Total Items Listed</div>
-              </div>
+            </div>
             <div class="stats-card rounded-xl p-4 shadow-md">
-                <div class="text-3xl font-bold mb-1">8</div>
+                <div class="text-3xl font-bold mb-1">
+                    <%= user.soldProduct%>
+                </div>
                 <div class="text-sm text-indigo-100">Items Sold</div>
             </div>
             <div class="stats-card rounded-xl p-4 shadow-md">
@@ -627,11 +661,11 @@
                 <div class="text-sm text-indigo-100">Rating (15 reviews)</div>
             </div>
             <div class="stats-card rounded-xl p-4 shadow-md">
-                <div class="text-3xl font-bold mb-1">₹7,850</div>
+                <div class="text-3xl font-bold mb-1">₹ <%= user.totalEarnings %></div>
                 <div class="text-sm text-indigo-100">Total Earnings</div>
             </div>
         </div>
-        
+
         <!-- Tabs Section -->
         <div class="mb-8">
             <div class="border-b border-navy-700 flex overflow-x-auto hide-scrollbar">
@@ -648,7 +682,7 @@
                     Reviews
                 </button>
             </div>
-            
+
             <!-- Product Management Section -->
             <div id="listings" class="tab-content">
                 <div class="flex justify-between items-center my-6">
@@ -657,13 +691,14 @@
                         <i class="fas fa-plus mr-1"></i> Add New Listing
                     </a>
                 </div>
-                
+
                 <!-- Filter and Search for Products -->
                 <div class="bg-navy-800/50 rounded-xl p-4 mb-6 shadow-md">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
                         <div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
                             <div class="relative">
-                                <select class="bg-navy-900 border border-navy-700 rounded-lg text-indigo-100 text-sm pl-3 pr-8 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-royal-blue-400">
+                                <select
+                                    class="bg-navy-900 border border-navy-700 rounded-lg text-indigo-100 text-sm pl-3 pr-8 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-royal-blue-400">
                                     <option value="all">All Categories</option>
                                     <option value="textbooks">Textbooks</option>
                                     <option value="electronics">Electronics</option>
@@ -671,451 +706,503 @@
                                     <option value="other">Other</option>
                                 </select>
                                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                    <svg class="w-4 h-4 text-indigo-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    <svg class="w-4 h-4 text-indigo-100" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </div>
                             </div>
-                            
+
                             <div class="relative">
-                                <select class="bg-navy-900 border border-navy-700 rounded-lg text-indigo-100 text-sm pl-3 pr-8 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-royal-blue-400">
+                                <select
+                                    class="bg-navy-900 border border-navy-700 rounded-lg text-indigo-100 text-sm pl-3 pr-8 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-royal-blue-400">
                                     <option value="recent">Most Recent</option>
                                     <option value="price-high">Price: High to Low</option>
                                     <option value="price-low">Price: Low to High</option>
                                     <option value="popular">Most Popular</option>
                                 </select>
                                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                    <svg class="w-4 h-4 text-indigo-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    <svg class="w-4 h-4 text-indigo-100" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="relative">
-                            <input type="text" placeholder="Search listings..." class="w-full bg-navy-900 border border-navy-700 rounded-lg text-white pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-royal-blue-400">
+                            <input type="text" placeholder="Search listings..."
+                                class="w-full bg-navy-900 border border-navy-700 rounded-lg text-white pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-royal-blue-400">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="w-5 h-5 text-indigo-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                <svg class="w-5 h-5 text-indigo-100" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Product List -->
                 <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <% user.listedProduct.forEach(function(product) { %>
-                      <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
-                        <div class="relative">
-                          <img src="<%= product.images[0] %>" alt="<%= product.name %>" class="h-48 w-full object-cover">
-                          <div class="absolute top-3 right-3">
-                            <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
-                          </div>
-                        </div>
-                        <div class="p-4">
-                          <h3 class="font-bold text-white mb-1"><%= product.name %></h3>
-                          <p class="text-indigo-100 text-sm mb-3 line-clamp-2"><%= product.description %></p>
-                          <div class="flex justify-between items-center mt-4">
-                            <div class="font-bold text-lg text-white">₹<%= product.price %></div>
-                            <div class="flex space-x-2">
-                              <button class="edit-button flex items-center py-1.5 px-3 rounded-lg text-white text-sm">
-                                <i class="fas fa-edit"></i>
-                              </button>
-                              <button class="product-action-button flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
-                                <i class="fas fa-check-circle mr-1"></i> Mark Sold
-                              </button>
-                            </div>
-                          </div>
-                          <div class="flex justify-between items-center mt-4 pt-4 border-t border-navy-700">
-                            <div class="text-sm text-indigo-100">
-                              <i class="far fa-eye mr-1"></i> <%= product.views || 0 %> views
-                            </div>
-                            <div class="text-sm text-indigo-100">
-                              <i class="far fa-clock mr-1"></i> Listed <%= new Date(product.createdAt).toLocaleDateString() %>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    <% }) %>
-                  </div>
-                  
-            
-            <!-- Sold Items Tab (Hidden by Default) -->
-            <div id="sold" class="tab-content hidden">
-                <div class="flex justify-between items-center my-6">
-                    <h2 class="text-xl font-bold">Sold Items (8)</h2>
-                </div>
-                
-                <!-- Sold Product List -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Sold Product 1 -->
-                    <div class="bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700 opacity-80">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=2574" alt="Calculus Textbook" class="h-48 w-full object-cover opacity-70">
-                            <div class="absolute top-3 right-3">
-                                <span class="sold-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Sold</span>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-navy-900/70 rounded-full p-3">
-                                    <i class="fas fa-check-circle text-2xl text-green-400"></i>
+                        <div
+                            class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                            <div class="relative">
+                                <img src="<%= product.images[0] %>" alt="<%= product.name %>"
+                                    class="h-48 w-full object-cover">
+                                <div class="absolute top-3 right-3">
+                                    <span
+                                        class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-bold text-white mb-1">Calculus: Early Transcendentals</h3>
-                            <div class="flex justify-between items-center mt-4">
-                                <div class="font-bold text-lg text-white">₹650</div>
-                                <div class="text-sm text-indigo-100">
-                                    <i class="fas fa-calendar-check mr-1"></i> Sold on 15 Mar 2025
-                                </div>
-                            </div>
-                            
-                            <div class="mt-4 pt-4 border-t border-navy-700">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <div class="text-sm text-indigo-100">Buyer</div>
-                                        <div class="flex items-center mt-1">
-                                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Buyer" class="w-6 h-6 rounded-full mr-2">
-                                            <span class="text-sm">Amit Patel</span>
-                                        </div>
+                            <div class="p-4">
+                                <h3 class="font-bold text-white mb-1">
+                                    <%= product.name %>
+                                </h3>
+                                <p class="text-indigo-100 text-sm mb-3 line-clamp-2">
+                                    <%= product.description %>
+                                </p>
+                                <div class="flex justify-between items-center mt-4">
+                                    <div class="font-bold text-lg text-white">₹<%= product.price %>
                                     </div>
                                     <div class="flex space-x-2">
-                                        <button class="flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
-                                            <i class="fas fa-redo mr-1"></i> Relist
+                                        <button
+                                            class="edit-button flex items-center py-1.5 px-3 rounded-lg text-white text-sm">
+                                            <i class="fas fa-edit"></i>
                                         </button>
-                                        <button class="flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
-                                            <i class="far fa-trash-alt mr-1"></i> Delete
+                                        <button
+                                            class="product-action-button flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300"
+                                            data-product-id="<%= product._id %>">
+                                            <i class="fas fa-check-circle mr-1"></i> Mark Sold
                                         </button>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center mt-4 pt-4 border-t border-navy-700">
+                                    <div class="text-sm text-indigo-100">
+                                        <i class="far fa-eye mr-1"></i>
+                                        <%= product.views || 0 %> views
+                                    </div>
+                                    <div class="text-sm text-indigo-100">
+                                        <i class="far fa-clock mr-1"></i> Listed <%= new
+                                            Date(product.createdAt).toLocaleDateString() %>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <% }) %>
+                </div>
+
+
+                <!-- Sold Items Tab (Hidden by Default) -->
+                <div id="sold" class="tab-content hidden">
+                    <div class="flex justify-between items-center my-6">
+                        <h2 class="text-xl font-bold">Sold Items (8)</h2>
                     </div>
-                    
-                    <!-- Sold Product 2 -->
-                    <div class="bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700 opacity-80">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?q=80&w=2832" alt="Laptop" class="h-48 w-full object-cover opacity-70">
-                            <div class="absolute top-3 right-3">
-                                <span class="sold-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Sold</span>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-navy-900/70 rounded-full p-3">
-                                    <i class="fas fa-check-circle text-2xl text-green-400"></i>
+
+                    <!-- Sold Product List -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Sold Product 1 -->
+                        <div class="bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700 opacity-80">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=2574"
+                                    alt="Calculus Textbook" class="h-48 w-full object-cover opacity-70">
+                                <div class="absolute top-3 right-3">
+                                    <span
+                                        class="sold-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Sold</span>
+                                </div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="bg-navy-900/70 rounded-full p-3">
+                                        <i class="fas fa-check-circle text-2xl text-green-400"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-bold text-white mb-1">Lenovo ThinkPad X1 Carbon</h3>
-                            <div class="flex justify-between items-center mt-4">
-                                <div class="font-bold text-lg text-white">₹42,500</div>
-                                <div class="text-sm text-indigo-100">
-                                    <i class="fas fa-calendar-check mr-1"></i> Sold on 02 Feb 2025
+                            <div class="p-4">
+                                <h3 class="font-bold text-white mb-1">Calculus: Early Transcendentals</h3>
+                                <div class="flex justify-between items-center mt-4">
+                                    <div class="font-bold text-lg text-white">₹650</div>
+                                    <div class="text-sm text-indigo-100">
+                                        <i class="fas fa-calendar-check mr-1"></i> Sold on 15 Mar 2025
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <div class="mt-4 pt-4 border-t border-navy-700">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <div class="text-sm text-indigo-100">Buyer</div>
-                                        <div class="flex items-center mt-1">
-                                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Buyer" class="w-6 h-6 rounded-full mr-2">
-                                            <span class="text-sm">Priya Singh</span>
+
+                                <div class="mt-4 pt-4 border-t border-navy-700">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <div class="text-sm text-indigo-100">Buyer</div>
+                                            <div class="flex items-center mt-1">
+                                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Buyer"
+                                                    class="w-6 h-6 rounded-full mr-2">
+                                                <span class="text-sm">Amit Patel</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <button
+                                                class="flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
+                                                <i class="fas fa-redo mr-1"></i> Relist
+                                            </button>
+                                            <button
+                                                class="flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
+                                                <i class="far fa-trash-alt mr-1"></i> Delete
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="flex space-x-2">
-                                        <button class="flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
-                                            <i class="fas fa-redo mr-1"></i> Relist
-                                        </button>
-                                        <button class="flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
-                                            <i class="far fa-trash-alt mr-1"></i> Delete
-                                        </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sold Product 2 -->
+                        <div class="bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700 opacity-80">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?q=80&w=2832"
+                                    alt="Laptop" class="h-48 w-full object-cover opacity-70">
+                                <div class="absolute top-3 right-3">
+                                    <span
+                                        class="sold-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Sold</span>
+                                </div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="bg-navy-900/70 rounded-full p-3">
+                                        <i class="fas fa-check-circle text-2xl text-green-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold text-white mb-1">Lenovo ThinkPad X1 Carbon</h3>
+                                <div class="flex justify-between items-center mt-4">
+                                    <div class="font-bold text-lg text-white">₹42,500</div>
+                                    <div class="text-sm text-indigo-100">
+                                        <i class="fas fa-calendar-check mr-1"></i> Sold on 02 Feb 2025
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-navy-700">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <div class="text-sm text-indigo-100">Buyer</div>
+                                            <div class="flex items-center mt-1">
+                                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Buyer"
+                                                    class="w-6 h-6 rounded-full mr-2">
+                                                <span class="text-sm">Priya Singh</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <button
+                                                class="flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
+                                                <i class="fas fa-redo mr-1"></i> Relist
+                                            </button>
+                                            <button
+                                                class="flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300">
+                                                <i class="far fa-trash-alt mr-1"></i> Delete
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- More sold items would follow the same pattern -->
-                </div>
-            </div>
-            
-            <!-- Wishlist Tab (Hidden by Default) -->
-            <div id="wishlist" class="tab-content hidden">
-                <div class="flex justify-between items-center my-6">
-                    <h2 class="text-xl font-bold">My Wishlist (5)</h2>
-                </div>
-                
-                <!-- Wishlist Items -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Wishlist Item 1 -->
-                    <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1600431521340-491eca880813?q=80&w=2940" alt="AI Textbook" class="h-48 w-full object-cover">
-                            <div class="absolute top-3 right-3">
-                                <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
-                            </div>
-                            <div class="absolute bottom-3 right-3">
-                                <button class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
-                                    <i class="fas fa-heart text-red-500"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <div class="flex items-center justify-between mb-3">
-                                <div class="flex items-center space-x-2">
-                                    <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Seller" class="w-8 h-8 rounded-full">
-                                    <span class="text-sm font-medium text-indigo-100">Neha Gupta</span>
-                                </div>
-                                <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">CS Dept</span>
-                            </div>
-                            <h3 class="font-bold text-white mb-1">Artificial Intelligence: A Modern Approach</h3>
-                            <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Latest edition, perfect condition with highlighting on important sections.</p>
-                            <div class="flex justify-between items-center mt-4">
-                                <div class="font-bold text-lg text-white">₹980</div>
-                                <a href="#" class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
-                                    <i class="fab fa-whatsapp text-lg"></i>
-                                    <span>Contact</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- More wishlist items would follow same pattern -->
-                </div>
-            </div>
-            
-            <!-- Reviews Tab (Hidden by Default) -->
-            <div id="reviews" class="tab-content hidden">
-                <div class="flex justify-between items-center my-6">
-                    <h2 class="text-xl font-bold">Buyer Reviews (15)</h2>
-                </div>
-                
-                <div class="bg-navy-800/50 rounded-xl p-6 mb-6 shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 mr-4">
-                            <div class="w-full h-full rounded-full bg-navy-700 flex items-center justify-center text-2xl font-bold">
-                                4.8
-                            </div>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center text-yellow-400 mb-1">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span class="ml-2 text-indigo-100 text-sm">15 reviews</span>
-                            </div>
-                            <div class="space-y-1">
-                                <div class="flex items-center">
-                                    <span class="text-xs w-14 text-indigo-100">5 stars</span>
-                                    <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
-                                        <div class="progress-bar h-2 rounded-full" style="width: 80%"></div>
-                                    </div>
-                                    <span class="text-xs w-8 text-right text-indigo-100">12</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-xs w-14 text-indigo-100">4 stars</span>
-                                    <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
-                                        <div class="progress-bar h-2 rounded-full" style="width: 13%"></div>
-                                    </div>
-                                    <span class="text-xs w-8 text-right text-indigo-100">2</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-xs w-14 text-indigo-100">3 stars</span>
-                                    <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
-                                        <div class="progress-bar h-2 rounded-full" style="width: 7%"></div>
-                                    </div>
-                                    <span class="text-xs w-8 text-right text-indigo-100">1</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-xs w-14 text-indigo-100">2 stars</span>
-                                    <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
-                                        <div class="progress-bar h-2 rounded-full" style="width: 0%"></div>
-                                    </div>
-                                    <span class="text-xs w-8 text-right text-indigo-100">0</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-xs w-14 text-indigo-100">1 star</span>
-                                    <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
-                                        <div class="progress-bar h-2 rounded-full" style="width: 0%"></div>
-                                    </div>
-                                    <span class="text-xs w-8 text-right text-indigo-100">0</span>
-                                </div>
-                            </div>
-                        </div>
+
+                        <!-- More sold items would follow the same pattern -->
                     </div>
                 </div>
-                
-                <!-- Reviews List -->
-                <div class="space-y-4">
-                    <!-- Review 1 -->
-                    <div class="bg-navy-800 rounded-xl p-4 shadow-md border border-navy-700">
-                        <div class="flex items-start mb-4">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Reviewer" class="w-10 h-10 rounded-full mr-3">
+
+                <!-- Wishlist Tab (Hidden by Default) -->
+                <div id="wishlist" class="tab-content hidden">
+                    <div class="flex justify-between items-center my-6">
+                        <h2 class="text-xl font-bold">My Wishlist (5)</h2>
+                    </div>
+
+                    <!-- Wishlist Items -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Wishlist Item 1 -->
+                        <div
+                            class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1600431521340-491eca880813?q=80&w=2940"
+                                    alt="AI Textbook" class="h-48 w-full object-cover">
+                                <div class="absolute top-3 right-3">
+                                    <span
+                                        class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                                </div>
+                                <div class="absolute bottom-3 right-3">
+                                    <button
+                                        class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                        <i class="fas fa-heart text-red-500"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Seller"
+                                            class="w-8 h-8 rounded-full">
+                                        <span class="text-sm font-medium text-indigo-100">Neha Gupta</span>
+                                    </div>
+                                    <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">CS Dept</span>
+                                </div>
+                                <h3 class="font-bold text-white mb-1">Artificial Intelligence: A Modern Approach</h3>
+                                <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Latest edition, perfect condition
+                                    with highlighting on important sections.</p>
+                                <div class="flex justify-between items-center mt-4">
+                                    <div class="font-bold text-lg text-white">₹980</div>
+                                    <a href="#"
+                                        class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
+                                        <i class="fab fa-whatsapp text-lg"></i>
+                                        <span>Contact</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- More wishlist items would follow same pattern -->
+                    </div>
+                </div>
+
+                <!-- Reviews Tab (Hidden by Default) -->
+                <div id="reviews" class="tab-content hidden">
+                    <div class="flex justify-between items-center my-6">
+                        <h2 class="text-xl font-bold">Buyer Reviews (15)</h2>
+                    </div>
+
+                    <div class="bg-navy-800/50 rounded-xl p-6 mb-6 shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="w-16 h-16 mr-4">
+                                <div
+                                    class="w-full h-full rounded-full bg-navy-700 flex items-center justify-center text-2xl font-bold">
+                                    4.8
+                                </div>
+                            </div>
                             <div class="flex-grow">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h3 class="font-medium">Amit Patel</h3>
-                                        <div class="flex items-center text-yellow-400 mt-1">
-                                            <i class="fas fa-star text-xs"></i>
-                                            <i class="fas fa-star text-xs"></i>
-                                            <i class="fas fa-star text-xs"></i>
-                                            <i class="fas fa-star text-xs"></i>
-                                            <i class="fas fa-star text-xs"></i>
+                                <div class="flex items-center text-yellow-400 mb-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="ml-2 text-indigo-100 text-sm">15 reviews</span>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex items-center">
+                                        <span class="text-xs w-14 text-indigo-100">5 stars</span>
+                                        <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
+                                            <div class="progress-bar h-2 rounded-full" style="width: 80%"></div>
                                         </div>
+                                        <span class="text-xs w-8 text-right text-indigo-100">12</span>
                                     </div>
-                                    <div class="text-xs text-indigo-100">15 Mar 2025</div>
-                                </div>
-                                <p class="text-indigo-100 text-sm mt-2">Great seller! The book was in even better condition than described. Fast response and easy transaction. Would buy from again.</p>
-                                <div class="mt-2 bg-navy-700/50 rounded p-2 text-sm text-indigo-100">
-                                    <span class="font-medium text-royal-blue-400">Item:</span> Calculus: Early Transcendentals
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Review 2 -->
-                    <div class="bg-navy-800 rounded-xl p-4 shadow-md border border-navy-700">
-                        <div class="flex items-start mb-4">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer" class="w-10 h-10 rounded-full mr-3">
-                            <div class="flex-grow">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h3 class="font-medium">Priya Singh</h3>
-                                        <div class="flex items-center text-yellow-400 mt-1">
-                                            <i class="fas fa-star text-xs"></i>
-                                            <i class="fas fa-star text-xs"></i>
-                                            <i class="fas fa-star text-xs"></i>
-                                            <i class="fas fa-star text-xs"></i>
-                                            <i class="fas fa-star text-xs"></i>
+                                    <div class="flex items-center">
+                                        <span class="text-xs w-14 text-indigo-100">4 stars</span>
+                                        <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
+                                            <div class="progress-bar h-2 rounded-full" style="width: 13%"></div>
                                         </div>
+                                        <span class="text-xs w-8 text-right text-indigo-100">2</span>
                                     </div>
-                                    <div class="text-xs text-indigo-100">02 Feb 2025</div>
-                                </div>
-                                <p class="text-indigo-100 text-sm mt-2">Laptop was exactly as described! Rahul was very responsive and made the transaction seamless. The price was fair and he even threw in a laptop sleeve for free. Highly recommend!</p>
-                                <div class="mt-2 bg-navy-700/50 rounded p-2 text-sm text-indigo-100">
-                                    <span class="font-medium text-royal-blue-400">Item:</span> Lenovo ThinkPad X1 Carbon
+                                    <div class="flex items-center">
+                                        <span class="text-xs w-14 text-indigo-100">3 stars</span>
+                                        <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
+                                            <div class="progress-bar h-2 rounded-full" style="width: 7%"></div>
+                                        </div>
+                                        <span class="text-xs w-8 text-right text-indigo-100">1</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="text-xs w-14 text-indigo-100">2 stars</span>
+                                        <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
+                                            <div class="progress-bar h-2 rounded-full" style="width: 0%"></div>
+                                        </div>
+                                        <span class="text-xs w-8 text-right text-indigo-100">0</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="text-xs w-14 text-indigo-100">1 star</span>
+                                        <div class="flex-grow h-2 bg-navy-700 rounded-full ml-2">
+                                            <div class="progress-bar h-2 rounded-full" style="width: 0%"></div>
+                                        </div>
+                                        <span class="text-xs w-8 text-right text-indigo-100">0</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- More reviews would follow the same pattern -->
-                </div>
-            </div>
-        </div>
-        
-        <!-- Account Settings Section -->
-        <div class="mb-12">
-            <h2 class="text-xl font-bold mb-6">Account Settings</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Notification Settings -->
-                <div class="bg-navy-800 rounded-xl p-6 shadow-md border border-navy-700">
-                    <h3 class="font-bold mb-4">Notification Settings</h3>
-                    
+
+                    <!-- Reviews List -->
                     <div class="space-y-4">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <div class="font-medium">New Messages</div>
-                                <div class="text-sm text-indigo-100">Get notified when someone sends you a message</div>
+                        <!-- Review 1 -->
+                        <div class="bg-navy-800 rounded-xl p-4 shadow-md border border-navy-700">
+                            <div class="flex items-start mb-4">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Reviewer"
+                                    class="w-10 h-10 rounded-full mr-3">
+                                <div class="flex-grow">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h3 class="font-medium">Amit Patel</h3>
+                                            <div class="flex items-center text-yellow-400 mt-1">
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                            </div>
+                                        </div>
+                                        <div class="text-xs text-indigo-100">15 Mar 2025</div>
+                                    </div>
+                                    <p class="text-indigo-100 text-sm mt-2">Great seller! The book was in even better
+                                        condition than described. Fast response and easy transaction. Would buy from
+                                        again.</p>
+                                    <div class="mt-2 bg-navy-700/50 rounded p-2 text-sm text-indigo-100">
+                                        <span class="font-medium text-royal-blue-400">Item:</span> Calculus: Early
+                                        Transcendentals
+                                    </div>
+                                </div>
                             </div>
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider"></span>
-                            </label>
                         </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <div class="font-medium">Product Inquiries</div>
-                                <div class="text-sm text-indigo-100">Get notified when someone is interested in your product</div>
+
+                        <!-- Review 2 -->
+                        <div class="bg-navy-800 rounded-xl p-4 shadow-md border border-navy-700">
+                            <div class="flex items-start mb-4">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer"
+                                    class="w-10 h-10 rounded-full mr-3">
+                                <div class="flex-grow">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h3 class="font-medium">Priya Singh</h3>
+                                            <div class="flex items-center text-yellow-400 mt-1">
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                            </div>
+                                        </div>
+                                        <div class="text-xs text-indigo-100">02 Feb 2025</div>
+                                    </div>
+                                    <p class="text-indigo-100 text-sm mt-2">Laptop was exactly as described! Rahul was
+                                        very responsive and made the transaction seamless. The price was fair and he
+                                        even threw in a laptop sleeve for free. Highly recommend!</p>
+                                    <div class="mt-2 bg-navy-700/50 rounded p-2 text-sm text-indigo-100">
+                                        <span class="font-medium text-royal-blue-400">Item:</span> Lenovo ThinkPad X1
+                                        Carbon
+                                    </div>
+                                </div>
                             </div>
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider"></span>
-                            </label>
                         </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <div class="font-medium">New Reviews</div>
-                                <div class="text-sm text-indigo-100">Get notified when someone leaves a review</div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <div class="font-medium">Email Notifications</div>
-                                <div class="text-sm text-indigo-100">Receive email notifications in addition to in-app</div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Account Privacy -->
-                <div class="bg-navy-800 rounded-xl p-6 shadow-md border border-navy-700">
-                    <h3 class="font-bold mb-4">Account Privacy</h3>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <div class="font-medium">Profile Visibility</div>
-                                <div class="text-sm text-indigo-100">Make your profile visible to other users</div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <div class="font-medium">Show Contact Info</div>
-                                <div class="text-sm text-indigo-100">Display your contact information on listings</div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <div class="font-medium">Show Department</div>
-                                <div class="text-sm text-indigo-100">Display your department on your profile</div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <div class="font-medium">Allow Messages</div>
-                                <div class="text-sm text-indigo-100">Allow other users to send you direct messages</div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider"></span>
-                            </label>
-                        </div>
+
+                        <!-- More reviews would follow the same pattern -->
                     </div>
                 </div>
             </div>
-        </div>
+
+            <!-- Account Settings Section -->
+            <div class="mb-12">
+                <h2 class="text-xl font-bold mb-6">Account Settings</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Notification Settings -->
+                    <div class="bg-navy-800 rounded-xl p-6 shadow-md border border-navy-700">
+                        <h3 class="font-bold mb-4">Notification Settings</h3>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-medium">New Messages</div>
+                                    <div class="text-sm text-indigo-100">Get notified when someone sends you a message
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-medium">Product Inquiries</div>
+                                    <div class="text-sm text-indigo-100">Get notified when someone is interested in your
+                                        product</div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-medium">New Reviews</div>
+                                    <div class="text-sm text-indigo-100">Get notified when someone leaves a review</div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-medium">Email Notifications</div>
+                                    <div class="text-sm text-indigo-100">Receive email notifications in addition to
+                                        in-app</div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account Privacy -->
+                    <div class="bg-navy-800 rounded-xl p-6 shadow-md border border-navy-700">
+                        <h3 class="font-bold mb-4">Account Privacy</h3>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-medium">Profile Visibility</div>
+                                    <div class="text-sm text-indigo-100">Make your profile visible to other users</div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-medium">Show Contact Info</div>
+                                    <div class="text-sm text-indigo-100">Display your contact information on listings
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-medium">Show Department</div>
+                                    <div class="text-sm text-indigo-100">Display your department on your profile</div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-medium">Allow Messages</div>
+                                    <div class="text-sm text-indigo-100">Allow other users to send you direct messages
+                                    </div>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </main>
 
     <!-- Footer -->
@@ -1123,29 +1210,33 @@
         <div class="container mx-auto px-4 py-6">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="flex items-center space-x-2 mb-4 md:mb-0">
-                    <div class="w-6 h-6 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    <div
+                        class="w-6 h-6 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                         </svg>
                     </div>
                     <h1 class="text-lg font-bold font-montserrat logo-text">
                         campusKART
                     </h1>
                 </div>
-                
+
                 <div class="flex space-x-6">
                     <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Privacy Policy</a>
                     <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Terms of Service</a>
                     <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Contact Us</a>
                 </div>
             </div>
-            
+
             <div class="mt-4 text-center md:text-left">
-                <p class="text-indigo-100 text-xs">&copy; <%= new Date().getFullYear() %> campusKART. All rights reserved.</p>
+                <p class="text-indigo-100 text-xs">&copy; <%= new Date().getFullYear() %> campusKART. All rights
+                        reserved.</p>
             </div>
         </div>
     </footer>
-    
+
     <script>
         // Function to handle tab switching
         function openTab(tabName) {
@@ -1153,56 +1244,79 @@
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.add('hidden');
             });
-            
+
             // Remove active class from all tabs
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('tab-active');
                 tab.classList.add('text-indigo-100');
             });
-            
+
             // Show the selected tab content
             document.getElementById(tabName).classList.remove('hidden');
-            
+
             // Add active class to the clicked tab
             const activeTab = document.querySelector(`[onclick="openTab('${tabName}')"]`);
             activeTab.classList.add('tab-active');
             activeTab.classList.remove('text-indigo-100');
         }
-        
+
         // Add event listeners to product action buttons (Mark as Sold)
         document.querySelectorAll('.product-action-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const productCard = this.closest('.card-hover-effect');
-                const productTitle = productCard.querySelector('h3').textContent;
-                
-                if (confirm(`Mark "${productTitle}" as sold?`)) {
-                    // Show a success message (in a real app, this would save to the server)
-                    alert(`"${productTitle}" has been marked as sold!`);
-                    
-                    // Change the badge from available to sold
-                    const badge = productCard.querySelector('.available-badge');
-                    badge.textContent = 'Sold';
-                    badge.classList.remove('available-badge');
-                    badge.classList.add('sold-badge');
-                    
-                    // Change the button text
-                    this.innerHTML = '<i class="fas fa-undo mr-1"></i> Mark Available';
-                    
-                    // Add opacity to indicate sold status
-                    productCard.classList.add('opacity-80');
-                }
-            });
+  button.addEventListener('click', async function () {
+    const productCard = this.closest('.card-hover-effect');
+    const productTitle = productCard.querySelector('h3').textContent;
+    const productId = this.dataset.productId; // <-- make sure this gets the ID
+
+    if (!productId) {
+      alert("Product ID not found!");
+      return;
+    }
+
+    if (confirm(`Mark "${productTitle}" as sold?`)) {
+      try {
+        const response = await fetch('/product/mark-sold', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ productId }) // sends the productId
         });
 
+        const data = await response.json();
+        if (response.ok) {
+          alert(data.message);
+
+          // DOM updates
+          const badge = productCard.querySelector('.available-badge');
+          if (badge) {
+            badge.textContent = 'Sold';
+            badge.classList.remove('available-badge');
+            badge.classList.add('sold-badge');
+          }
+
+          this.innerHTML = '<i class="fas fa-undo mr-1"></i> Mark Available';
+          productCard.classList.add('opacity-80');
+        } else {
+          alert('Failed: ' + data.message);
+        }
+      } catch (err) {
+        alert('Server error: ' + err.message);
+      }
+    }
+  });
+});
+
+
+
         // Theme Toggle Script
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Check for saved theme preference or use preferred color scheme
             const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
             const savedTheme = localStorage.getItem('theme');
-            
+
             const toggleSwitch = document.getElementById('theme-toggle');
             const body = document.body;
-            
+
             // Apply theme class to body
             function applyTheme(isDark) {
                 if (isDark) {
@@ -1215,30 +1329,30 @@
                     if (toggleSwitch) toggleSwitch.checked = false;
                 }
             }
-            
+
             // Set initial theme
             if (savedTheme) {
                 applyTheme(savedTheme === 'dark');
             } else {
                 applyTheme(prefersDarkScheme.matches);
             }
-            
+
             // Add transition class after initial load to prevent transition on page load
             setTimeout(() => {
                 document.documentElement.classList.add('theme-transition');
             }, 100);
-            
+
             // Toggle theme when switch is clicked
             if (toggleSwitch) {
-                toggleSwitch.addEventListener('change', function() {
+                toggleSwitch.addEventListener('change', function () {
                     const isDarkMode = this.checked;
                     applyTheme(isDarkMode);
                     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-                    
+
                     // Animate the icon based on current theme
                     const sunIcon = document.querySelector('.icon-sun');
                     const moonIcon = document.querySelector('.icon-moon');
-                    
+
                     if (isDarkMode) {
                         moonIcon.classList.add('animate-theme-toggle');
                         setTimeout(() => moonIcon.classList.remove('animate-theme-toggle'), 500);
@@ -1248,9 +1362,9 @@
                     }
                 });
             }
-            
+
             // Listen for system theme changes
-            prefersDarkScheme.addEventListener('change', function(e) {
+            prefersDarkScheme.addEventListener('change', function (e) {
                 if (!localStorage.getItem('theme')) {
                     applyTheme(e.matches);
                 }
@@ -1258,4 +1372,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -13,9 +13,10 @@ const createProduct = async (req, res) => {
 
     const imageFiles = req.files; // multer handles multiple files in memory
    
+    
     if (!imageFiles || imageFiles.length === 0) {
       req.flash('Product_error', 'At least one image is required.');
-      return res.redirect('/product/create'); // Redirect back to create form
+      return res.redirect('/list');
     }
 
     

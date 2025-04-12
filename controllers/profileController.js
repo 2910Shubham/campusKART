@@ -36,7 +36,7 @@ export const getProfileUpdatePage = async (req, res) => {
       bio: user.bio || '',
       image: user.profile_pic || '/images/profile.png',
       coverImage: user.cover_pic || '/images/cover.png',
-      // Don't send sensitive data like whatsapp_number to frontend
+      contact: user.whatsapp_number || '',
     };
     
     // Render the profile update page with user data

@@ -46,7 +46,9 @@ app.use("/product", productRouter);
 
 
 
-const port = 3001;
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+// const port = 3001;
+// app.listen(port, () => {
+//     console.log(`Server is running on port ${port}`);
+// });
+
+app.listen(3001);
