@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { v2 as cloudinary } from 'cloudinary';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -45,4 +46,7 @@ app.use("/product", productRouter);
 
 
 
-app.listen(3001);
+const port = 3001;
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});

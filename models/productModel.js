@@ -66,9 +66,9 @@ const productSchema = new mongoose.Schema({
     validate: [arr => arr.length <= 5, "Maximum 5 images allowed"]
   },
   seller: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
-    required: true
+    id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    name: String,
+    email: String
   },
   isSold: {
     type: Boolean,

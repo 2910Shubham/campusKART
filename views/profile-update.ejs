@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile - campusKART</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': {
+                            400: '#2c5282',
+                            500: '#1e3a8a',
+                            600: '#1e40af',
+                            700: '#1e3a78',
+                            800: '#172554',
+                            900: '#0c1b44'
+                        },
+                        'royal-blue': {
+                            400: '#3b82f6',
+                            500: '#4169e1',
+                            600: '#2563eb'
+                        },
+                        'indigo': {
+                            50: '#eef2ff',
+                            100: '#e0e7ff'
+                        },
+                        'light': {
+                            50: '#ffffff',
+                            100: '#f9fafb',
+                            200: '#f3f4f6',
+                            300: '#e5e7eb',
+                            400: '#d1d5db',
+                            500: '#9ca3af',
+                            600: '#6b7280',
+                            700: '#4b5563',
+                            800: '#1f2937',
+                            900: '#111827'
+                        }
+                    },
+                    animation: {
+                        'pulse-border': 'pulseBorder 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'theme-toggle': 'themeToggle 0.5s ease forwards'
+                    },
+                    keyframes: {
+                        pulseBorder: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(65, 105, 225, 0.6)' },
+                            '50%': { boxShadow: '0 0 0 5px rgba(65, 105, 225, 0.4)' }
+                        },
+                        gradient: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' }
+                        },
+                        themeToggle: {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '100%': { transform: 'scale(1)' }
+                        }
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --transition-speed: 0.3s;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+        
+        body.dark-mode {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 30%);
+            background-color: #0c1b44;
+            color: #ffffff;
+        }
+        
+        body.light-mode {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.03) 0%, transparent 30%);
+            background-color: #ffffff;
+            color: #1f2937;
+        }
+        
+        /* Light Mode Specific Styles */
+        .light-mode .header {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-color: #e5e7eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .light-mode .header a {
+            color: #4b5563;
+        }
+        
+        .light-mode .header a:hover {
+            color: #1e40af;
+        }
+        
+        /* Text colors */
+        .light-mode .text-white {
+            color: #1f2937;
+        }
+        
+        .light-mode .text-indigo-100,
+        .light-mode .text-indigo-100\/70 {
+            color: #4b5563;
+        }
+        
+        .light-mode svg.text-indigo-100,
+        .light-mode svg.text-white {
+            color: #4b5563;
+        }
+        
+        /* Fix promotional text and headings */
+        .light-mode h1.text-white,
+        .light-mode h2.text-white,
+        .light-mode h3.text-white,
+        .light-mode h4.text-white,
+        .light-mode p.text-white {
+            color: #1f2937;
+        }
+        
+        /* Background colors */
+        .light-mode .bg-navy-800,
+        .light-mode .bg-navy-800\/80,
+        .light-mode .bg-navy-800\/60,
+        .light-mode .bg-navy-900\/90 {
+            background-color: #ffffff;
+        }
+        
+        .light-mode .border-navy-600,
+        .light-mode .border-navy-700 {
+            border-color: #e5e7eb;
+        }
+        
+        .light-mode .bg-navy-600\/50 {
+            background-color: #f3f4f6;
+        }
+        
+        .light-mode .bg-navy-700 {
+            background-color: #f3f4f6;
+        }
+        
+        /* Fix for blue background sections in light mode */
+        .light-mode .mb-10.relative.overflow-hidden.rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
+        .light-mode .mb-12.p-6.rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
+        .light-mode .rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
+        .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 {
+            background: linear-gradient(to bottom right, #f0f7ff, #e0eafc);
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Keep the logo text gradient unchanged */
+        .light-mode .logo-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Ensure buttons have white text in light mode */
+        .light-mode .btn-primary,
+        .light-mode .whatsapp-button,
+        .light-mode .floating-action-button,
+        .light-mode a.bg-gradient-to-r,
+        .light-mode a.bg-royal-blue-500, 
+        .light-mode a.bg-royal-blue-600,
+        .light-mode button.bg-royal-blue-500,
+        .light-mode button.bg-royal-blue-600,
+        .light-mode .action-button,
+        .light-mode .cta-button {
+            color: white !important;
+        }
+        
+        /* Theme Toggle Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #2563eb;
+            transform: translateX(100%);
+        }
+        
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #3b82f6;
+        }
+        
+        /* Theme transition class */
+        .theme-transition * {
+            transition: background-color var(--transition-speed) ease, 
+                       border-color var(--transition-speed) ease, 
+                       color var(--transition-speed) ease,
+                       fill var(--transition-speed) ease,
+                       stroke var(--transition-speed) ease,
+                       box-shadow var(--transition-speed) ease;
+        }
+        
+        .theme-toggle {
+            cursor: pointer;
+        }
+        
+        .theme-toggle:active svg {
+            animation: theme-toggle 0.5s ease forwards;
+        }
+        
+        .logo-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 8s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .image-upload-container {
+            border: 2px dashed rgba(59, 130, 246, 0.5);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .image-upload-container.dragging,
+        .image-upload-container:hover {
+            border-color: #3b82f6;
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+        
+        .file-input-label {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-label:hover {
+            transform: translateY(-2px);
+        }
+        
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="sticky top-0 z-50 bg-navy-900/90 backdrop-blur-md border-b border-navy-700 shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <a href="/home" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <h1 class="text-2xl font-bold font-montserrat logo-text">
+                            campusKART
+                        </h1>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="flex items-center space-x-6">
+                    <a href="/home" class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="fas fa-home mr-1"></i> Home
+                    </a>
+                    <a href="/user/profile" class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="fas fa-user mr-1"></i> Profile
+                    </a>
+                    
+                    <!-- Theme Toggle -->
+                    <div class="theme-toggle flex items-center">
+                        <span class="mr-2 dark:text-white light:text-gray-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-sun h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </span>
+                        <div class="relative inline-block w-10 mr-2 align-middle transition duration-200 ease-in">
+                            <input type="checkbox" name="toggle" id="theme-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none transition-transform duration-200 ease-in-out"
+                                   style="top: 0; left: 0; transition: transform 0.2s ease-in-out;">
+                            <label for="theme-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
+                        </div>
+                        <span class="dark:text-white light:text-gray-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-moon h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                        </span>
+                    </div>
+                    
+                    <!-- User Profile -->
+                    <div class="relative">
+                        <a href="/user/profile" class="flex items-center space-x-2 focus:outline-none">
+                            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow">
+                                <span class="text-sm font-medium"> <% if (user && user.image) { %>
+                                    <img src="<%= user.image %>" alt="Profile" class="w-full h-full object-cover">
+                                  <% } else { %>
+                                    <div class="text-sm font-medium">U</div>
+                                  <% } %></span>
+                            </div>
+                            <span class="hidden md:inline-block text-indigo-100"><% if (user && user.fullname) { %>
+                                <span class="hidden md:inline-block text-indigo-100 dark:text-indigo-100 light:text-gray-700 font-medium">
+                                    <%= user.fullname %>
+                                </span>
+                            <% } else { %>
+                                <span class="hidden md:inline-block text-indigo-100 dark:text-indigo-100 light:text-gray-700 font-medium">
+                                    Guest
+                                </span>
+                            <% } %>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <!-- Page Title and Description -->
+            <div class="mb-8 text-center">
+                <h1 class="text-3xl font-bold mb-4">Update Your Profile</h1>
+                <p class="text-indigo-100 max-w-xl mx-auto">Customize your profile by adding a profile picture, cover image, and personal bio.</p>
+            </div>
+            
+            <!-- Profile Update Form -->
+            <form id="profile-update-form" class="bg-navy-800 rounded-2xl shadow-xl border border-navy-700 overflow-hidden" action="/user/profile/update" method="POST" enctype="multipart/form-data">
+                <div class="p-6 md:p-8">
+                    <!-- Profile Picture Upload -->
+                    <div class="mb-8">
+                        <h2 class="text-xl font-bold mb-4">Profile Picture</h2>
+                        <div class="flex flex-col items-center">
+                            <div class="w-40 h-40 mb-6 overflow-hidden rounded-full bg-navy-700 border-4 border-royal-blue-400 relative">
+                                <% if(user.image) { %>
+                                    <img id="profile-preview" src="<%= user.image %>" alt="Profile Preview" class="w-full h-full object-cover">
+                                    <div id="profile-placeholder" class="w-full h-full flex items-center justify-center text-4xl font-bold text-indigo-100 hidden">
+                                        <%= user.fullname ? user.fullname.substring(0, 2).toUpperCase() : 'U' %>
+                                    </div>
+                                <% } else { %>
+                                    <img id="profile-preview" src="#" alt="Profile Preview" class="w-full h-full object-cover hidden">
+                                    <div id="profile-placeholder" class="w-full h-full flex items-center justify-center text-4xl font-bold text-indigo-100">
+                                        <%= user.fullname ? user.fullname.substring(0, 2).toUpperCase() : 'U' %>
+                                    </div>
+                                <% } %>
+                            </div>
+                            
+                            <label class="btn-primary px-6 py-2 rounded-lg text-white font-medium shadow-md file-input-label">
+                                <span>Choose Profile Picture</span>
+                                <input 
+                                    type="file" 
+                                    id="profile-picture" 
+                                    name="profilePicture" 
+                                    class="file-input" 
+                                    accept="image/jpeg, image/png, image/webp"
+                                    onchange="previewProfileImage(this)"
+                                >
+                            </label>
+                            <p class="text-xs text-indigo-100/70 mt-2">Recommended: Square image (1:1 ratio), JPG, PNG or WebP</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Cover Image Upload -->
+                    <div class="mb-8">
+                        <h2 class="text-xl font-bold mb-4">Cover Image</h2>
+                        <div id="cover-image-container" class="image-upload-container p-4 mb-4 h-48 overflow-hidden relative">
+                            <% if(user.coverImage) { %>
+                                <img id="cover-preview" src="<%= user.coverImage %>" alt="Cover Preview" class="w-full h-full object-cover">
+                                <div id="cover-placeholder" class="w-full h-full flex items-center justify-center flex-col hidden">
+                                    <div class="w-16 h-16 mb-4 rounded-full bg-navy-700 flex items-center justify-center">
+                                        <i class="fas fa-image text-2xl text-royal-blue-400"></i>
+                                    </div>
+                                    <p class="text-indigo-100">Click to choose a cover image</p>
+                                </div>
+                            <% } else { %>
+                                <img id="cover-preview" src="#" alt="Cover Preview" class="w-full h-full object-cover hidden">
+                                <div id="cover-placeholder" class="w-full h-full flex items-center justify-center flex-col">
+                                    <div class="w-16 h-16 mb-4 rounded-full bg-navy-700 flex items-center justify-center">
+                                        <i class="fas fa-image text-2xl text-royal-blue-400"></i>
+                                    </div>
+                                    <p class="text-indigo-100">Click to choose a cover image</p>
+                                </div>
+                            <% } %>
+                            <label class="absolute inset-0 cursor-pointer">
+                                <input 
+                                    type="file" 
+                                    id="cover-image" 
+                                    name="coverImage" 
+                                    class="hidden" 
+                                    accept="image/jpeg, image/png, image/webp"
+                                    onchange="previewCoverImage(this)"
+                                >
+                            </label>
+                        </div>
+                        <p class="text-xs text-indigo-100/70">Recommended: Wide image (16:9 or 3:1 ratio), JPG, PNG or WebP</p>
+                    </div>
+                    
+                    <!-- Bio Text Area -->
+                    <div class="mb-8">
+                        <label for="bio" class="block text-lg font-bold mb-4">About You</label>
+                        <textarea 
+                            id="bio" 
+                            name="bio" 
+                            rows="4" 
+                            class="form-input w-full px-4 py-3 bg-navy-700/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white shadow-inner" 
+                            placeholder="Tell others about yourself, your interests, and what you're looking to buy or sell on campusKART..."
+                        ><%= user.bio %></textarea>
+                        <p class="text-xs text-indigo-100/70 mt-2">Max 500 characters</p>
+                    </div>
+                    
+                    <!-- Additional Information -->
+                    <div class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="department" class="block text-sm font-medium mb-2 text-indigo-100">Department/Major</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-graduation-cap text-indigo-100"></i>
+                                </div>
+                                <input 
+                                    type="text" 
+                                    id="department" 
+                                    name="department" 
+                                    class="form-input w-full pl-10 pr-4 py-3 bg-navy-700/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white shadow-inner" 
+                                    placeholder="e.g. Computer Science"
+                                    value="<%= user.department %>"
+                                >
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="year" class="block text-sm font-medium mb-2 text-indigo-100">Year of Study</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-calendar-alt text-indigo-100"></i>
+                                </div>
+                                <select 
+                                    id="year" 
+                                    name="year" 
+                                    class="form-input w-full pl-10 pr-10 py-3 bg-navy-700/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white shadow-inner appearance-none"
+                                >
+                                    <option value="" <%= !user.year ? 'selected' : '' %> disabled>Select year</option>
+                                    <option value="1" <%= user.year === '1' ? 'selected' : '' %>>1st Year</option>
+                                    <option value="2" <%= user.year === '2' ? 'selected' : '' %>>2nd Year</option>
+                                    <option value="3" <%= user.year === '3' ? 'selected' : '' %>>3rd Year</option>
+                                    <option value="4" <%= user.year === '4' ? 'selected' : '' %>>4th Year</option>
+                                    <option value="5+" <%= user.year === '5+' ? 'selected' : '' %>>5+ Year</option>
+                                    <option value="Masters" <%= user.year === 'Masters' ? 'selected' : '' %>>Masters</option>
+                                    <option value="PhD" <%= user.year === 'PhD' ? 'selected' : '' %>>PhD</option>
+                                    <option value="Faculty" <%= user.year === 'Faculty' ? 'selected' : '' %>>Faculty</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <i class="fas fa-chevron-down text-indigo-100"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <label for="contact" class="block text-sm font-medium mb-2 text-indigo-100">Contact Information (WhatsApp/Phone)</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fab fa-whatsapp text-indigo-100"></i>
+                            </div>
+                            <input 
+                                type="text" 
+                                id="contact" 
+                                name="contact" 
+                                class="form-input w-full pl-10 pr-4 py-3 bg-navy-700/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white shadow-inner" 
+                                placeholder="e.g. +91 98765 43210"
+                            >
+                        </div>
+                        <p class="text-xs text-indigo-100/70 mt-2">This will be shown to users when they want to contact you about your listings</p>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="flex justify-between mt-8">
+                        <a href="/profile" class="px-6 py-2 rounded-lg border border-navy-600 text-indigo-100 font-medium hover:bg-navy-700 transition-colors duration-300">
+                            <i class="fas fa-arrow-left mr-2"></i> Back to Profile
+                        </a>
+                        <button type="submit" class="btn-primary px-8 py-3 rounded-lg text-white font-medium shadow-md">
+                            Save Changes <i class="fas fa-check ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-800 border-t border-navy-700">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <div class="w-6 h-6 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                    </div>
+                    <h1 class="text-lg font-bold font-montserrat logo-text">
+                        campusKART
+                    </h1>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Privacy Policy</a>
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Terms of Service</a>
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Contact Us</a>
+                </div>
+            </div>
+            
+            <div class="mt-4 text-center md:text-left">
+                <p class="text-indigo-100 text-xs">&copy; <%= new Date().getFullYear() %> campusKART. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Preview profile image
+        function previewProfileImage(input) {
+            const preview = document.getElementById('profile-preview');
+            const placeholder = document.getElementById('profile-placeholder');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('hidden');
+                    placeholder.classList.add('hidden');
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        // Preview cover image
+        function previewCoverImage(input) {
+            const preview = document.getElementById('cover-preview');
+            const placeholder = document.getElementById('cover-placeholder');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('hidden');
+                    placeholder.classList.add('hidden');
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        // Add drag and drop functionality for the cover image
+        const coverImageContainer = document.getElementById('cover-image-container');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            coverImageContainer.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            coverImageContainer.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            coverImageContainer.addEventListener(eventName, unhighlight, false);
+        });
+        
+        coverImageContainer.addEventListener('drop', handleDrop, false);
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        function highlight() {
+            coverImageContainer.classList.add('dragging');
+        }
+        
+        function unhighlight() {
+            coverImageContainer.classList.remove('dragging');
+        }
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files && files.length) {
+                document.getElementById('cover-image').files = files;
+                previewCoverImage(document.getElementById('cover-image'));
+            }
+        }
+        
+        // Form validation
+        document.getElementById('profile-update-form').addEventListener('submit', function(e) {
+            const bio = document.getElementById('bio').value;
+            
+            if (bio && bio.length > 500) {
+                e.preventDefault();
+                alert('Bio must be less than 500 characters');
+            }
+        });
+    </script>
+    
+    <!-- Theme toggle script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for saved theme preference or use preferred color scheme
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            const savedTheme = localStorage.getItem('theme');
+            
+            const toggleSwitch = document.getElementById('theme-toggle');
+            const body = document.body;
+            
+            // Apply theme class to body
+            function applyTheme(isDark) {
+                if (isDark) {
+                    body.classList.remove('light-mode');
+                    body.classList.add('dark-mode');
+                    if (toggleSwitch) toggleSwitch.checked = true;
+                } else {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('light-mode');
+                    if (toggleSwitch) toggleSwitch.checked = false;
+                }
+            }
+            
+            // Set initial theme
+            if (savedTheme) {
+                applyTheme(savedTheme === 'dark');
+            } else {
+                applyTheme(prefersDarkScheme.matches);
+            }
+            
+            // Add transition class after initial load to prevent transition on page load
+            setTimeout(() => {
+                document.documentElement.classList.add('theme-transition');
+            }, 100);
+            
+            // Toggle theme when switch is clicked
+            if (toggleSwitch) {
+                toggleSwitch.addEventListener('change', function() {
+                    const isDarkMode = this.checked;
+                    applyTheme(isDarkMode);
+                    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                    
+                    // Animate the icon based on current theme
+                    const sunIcon = document.querySelector('.icon-sun');
+                    const moonIcon = document.querySelector('.icon-moon');
+                    
+                    if (isDarkMode) {
+                        moonIcon.classList.add('animate-theme-toggle');
+                        setTimeout(() => moonIcon.classList.remove('animate-theme-toggle'), 500);
+                    } else {
+                        sunIcon.classList.add('animate-theme-toggle');
+                        setTimeout(() => sunIcon.classList.remove('animate-theme-toggle'), 500);
+                    }
+                });
+            }
+            
+            // Listen for system theme changes
+            prefersDarkScheme.addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

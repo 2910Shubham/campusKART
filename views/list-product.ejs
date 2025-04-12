@@ -60,6 +60,186 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
         
+        :root {
+            --transition-speed: 0.3s;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+        
+        body.dark-mode {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 30%);
+            background-color: #0c1b44;
+            color: #ffffff;
+        }
+        
+        body.light-mode {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.03) 0%, transparent 30%);
+            background-color: #ffffff;
+            color: #1f2937;
+        }
+        
+        /* Light Mode Specific Styles */
+        .light-mode .header {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-color: #e5e7eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .light-mode .header a {
+            color: #4b5563;
+        }
+        
+        .light-mode .header a:hover {
+            color: #1e40af;
+        }
+        
+        /* Text colors */
+        .light-mode .text-white {
+            color: #1f2937;
+        }
+        
+        .light-mode .text-indigo-100,
+        .light-mode .text-indigo-100\/70 {
+            color: #4b5563;
+        }
+        
+        .light-mode svg.text-indigo-100,
+        .light-mode svg.text-white {
+            color: #4b5563;
+        }
+        
+        /* Fix promotional text and headings */
+        .light-mode h1.text-white,
+        .light-mode h2.text-white,
+        .light-mode h3.text-white,
+        .light-mode h4.text-white,
+        .light-mode p.text-white {
+            color: #1f2937;
+        }
+        
+        /* Background colors */
+        .light-mode .bg-navy-800,
+        .light-mode .bg-navy-800\/80,
+        .light-mode .bg-navy-800\/60,
+        .light-mode .bg-navy-900\/90 {
+            background-color: #ffffff;
+        }
+        
+        .light-mode .border-navy-600,
+        .light-mode .border-navy-700 {
+            border-color: #e5e7eb;
+        }
+        
+        .light-mode .bg-navy-600\/50 {
+            background-color: #f3f4f6;
+        }
+        
+        .light-mode .bg-navy-700 {
+            background-color: #f3f4f6;
+        }
+        
+        /* Fix for blue background sections in light mode */
+        .light-mode .mb-10.relative.overflow-hidden.rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
+        .light-mode .mb-12.p-6.rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
+        .light-mode .rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
+        .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 {
+            background: linear-gradient(to bottom right, #f0f7ff, #e0eafc);
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Adjust blue borders inside sections */
+        .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 .border-royal-blue-400 {
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Fix the Learn More and other outlined buttons in light mode */
+        .light-mode .px-6.py-3.rounded-lg.border.border-royal-blue-400,
+        .light-mode .border.border-royal-blue-400 {
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+        
+        .light-mode .px-6.py-3.rounded-lg.border.border-royal-blue-400:hover,
+        .light-mode .border.border-royal-blue-400:hover {
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+        
+        /* Fix text colors in blue sections */
+        .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 h2,
+        .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 h3 {
+            color: #1f2937;
+        }
+        
+        .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 p {
+            color: #4b5563;
+        }
+        
+        /* Keep the logo text gradient unchanged */
+        .light-mode .logo-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Ensure buttons have white text in light mode */
+        .light-mode .btn-primary,
+        .light-mode .whatsapp-button,
+        .light-mode .floating-action-button,
+        .light-mode a.bg-gradient-to-r,
+        .light-mode a.bg-royal-blue-500, 
+        .light-mode a.bg-royal-blue-600,
+        .light-mode button.bg-royal-blue-500,
+        .light-mode button.bg-royal-blue-600,
+        .light-mode .action-button,
+        .light-mode .cta-button {
+            color: white !important;
+        }
+        
+        /* Theme Toggle Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #2563eb;
+            transform: translateX(100%);
+        }
+        
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #3b82f6;
+        }
+        
+        /* Theme transition class */
+        .theme-transition * {
+            transition: background-color var(--transition-speed) ease, 
+                       border-color var(--transition-speed) ease, 
+                       color var(--transition-speed) ease,
+                       fill var(--transition-speed) ease,
+                       stroke var(--transition-speed) ease,
+                       box-shadow var(--transition-speed) ease;
+        }
+        
+        .theme-toggle {
+            cursor: pointer;
+        }
+        
+        .theme-toggle:active svg {
+            animation: theme-toggle 0.5s ease forwards;
+        }
+        
+        @keyframes theme-toggle {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
         body {
             font-family: 'Montserrat', sans-serif;
             background-image: 
@@ -224,6 +404,27 @@
 </head>
 <body class="text-white min-h-screen flex flex-col">
     <!-- Header Section -->
+     <!-- Success Flash Message -->
+     <% if (success) { %>
+        <div class="mb-4 rounded-xl border border-green-300 bg-green-100 text-green-800 px-6 py-4 flex items-center justify-between shadow-sm">
+          <span><%= success %></span>
+          <button onclick="this.parentElement.remove()" class="text-green-800 hover:text-green-600 transition duration-150 ease-in-out">
+            &times;
+          </button>
+        </div>
+      <% } %>
+      
+      <% if (error) { %>
+        <div class="mb-4 rounded-xl border border-red-300 bg-red-100 text-red-800 px-6 py-4 flex items-center justify-between shadow-sm">
+          <span><%= error %></span>
+          <button onclick="this.parentElement.remove()" class="text-red-800 hover:text-red-600 transition duration-150 ease-in-out">
+            &times;
+          </button>
+        </div>
+      <% } %>
+      
+      
+      
     <header class="sticky top-0 z-50 bg-navy-900/90 backdrop-blur-md border-b border-navy-700 shadow-md">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
@@ -249,14 +450,46 @@
                         <i class="far fa-bell mr-1"></i> Notifications
                     </a>
                     
+                    <!-- Theme Toggle -->
+                    <div class="theme-toggle flex items-center">
+                        <span class="mr-2 dark:text-white light:text-gray-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-sun h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </span>
+                        <div class="relative inline-block w-10 mr-2 align-middle transition duration-200 ease-in">
+                            <input type="checkbox" name="toggle" id="theme-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none transition-transform duration-200 ease-in-out"
+                                   style="top: 0; left: 0; transition: transform 0.2s ease-in-out;">
+                            <label for="theme-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
+                        </div>
+                        <span class="dark:text-white light:text-gray-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-moon h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                        </span>
+                    </div>
+                    
                     <!-- User Profile -->
                     <div class="relative">
-                        <a href="/profile" class="flex items-center space-x-2 focus:outline-none">
+                        <a href="/user/profile" class="flex items-center space-x-2 focus:outline-none">
                             <div class="w-9 h-9 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow">
-                                <span class="text-sm font-medium">RS</span>
+                                <span class="text-sm font-medium">
+                                    <% if (user && user.image) { %>
+                                        <img src="<%= user.image %>" alt="Profile" class="w-full h-full object-cover">
+                                    <% } else { %>
+                                        <div class="text-sm font-medium">U</div>
+                                    <% } %>
+                                </span>
                             </div>
-                            <span class="hidden md:inline-block text-indigo-100">Rahul Singh</span>
+                            <span class="hidden md:inline-block text-indigo-100">
+                                <% if (user) { %>
+                                    <%= user.fullname %>
+                                <% } else { %>
+                                    Guest
+                                <% } %>
+                            </span>
                         </a>
+                        
                     </div>
                 </div>
             </div>
@@ -311,7 +544,7 @@
             </div>
             
             <!-- Listing Form -->
-            <form id="listing-form" class="bg-navy-800 rounded-2xl shadow-xl border border-navy-700 overflow-hidden">
+            <form id="listing-form" class="bg-navy-800 rounded-2xl shadow-xl border border-navy-700 overflow-hidden" action="/product/create" method="post" enctype="multipart/form-data">
                 <!-- Step 1: Basic Information -->
                 <div id="step-1" class="step-content p-6 md:p-8">
                     <h2 class="text-xl font-bold mb-6">Basic Information</h2>
@@ -680,20 +913,20 @@
             setupImageUpload();
             
             // Set up the form submission
-            document.getElementById('listing-form').addEventListener('submit', handleFormSubmit);
+            // document.getElementById('listing-form').addEventListener('submit', handleFormSubmit);
         });
         
-        // Handle form submission
-        function handleFormSubmit(e) {
-            e.preventDefault();
+        // // Handle form submission
+        // function handleFormSubmit(e) {
+        //     e.preventDefault();
             
-            // In a real application, you would send the form data to the server
-            // For demonstration purposes, we'll show a success message
-            alert('Your listing has been submitted successfully!');
+        //     // In a real application, you would send the form data to the server
+        //     // For demonstration purposes, we'll show a success message
+        //     alert('Your listing has been submitted successfully!');
             
-            // Redirect to the home page
-            window.location.href = '/home';
-        }
+        //     // Redirect to the home page
+        //     window.location.href = '/home';
+        // }
         
         // Update the progress bar
         function updateProgressBar() {
@@ -1136,6 +1369,70 @@
         
         document.getElementById('age').addEventListener('change', function() {
             formData.age = this.value;
+        });
+    </script>
+    <!-- Add theme toggle script before the closing body tag -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for saved theme preference or use preferred color scheme
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            const savedTheme = localStorage.getItem('theme');
+            
+            const toggleSwitch = document.getElementById('theme-toggle');
+            const body = document.body;
+            
+            // Apply theme class to body
+            function applyTheme(isDark) {
+                if (isDark) {
+                    body.classList.remove('light-mode');
+                    body.classList.add('dark-mode');
+                    if (toggleSwitch) toggleSwitch.checked = true;
+                } else {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('light-mode');
+                    if (toggleSwitch) toggleSwitch.checked = false;
+                }
+            }
+            
+            // Set initial theme
+            if (savedTheme) {
+                applyTheme(savedTheme === 'dark');
+            } else {
+                applyTheme(prefersDarkScheme.matches);
+            }
+            
+            // Add transition class after initial load to prevent transition on page load
+            setTimeout(() => {
+                document.documentElement.classList.add('theme-transition');
+            }, 100);
+            
+            // Toggle theme when switch is clicked
+            if (toggleSwitch) {
+                toggleSwitch.addEventListener('change', function() {
+                    const isDarkMode = this.checked;
+                    applyTheme(isDarkMode);
+                    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                    
+                    // Animate the icon based on current theme
+                    const sunIcon = document.querySelector('.icon-sun');
+                    const moonIcon = document.querySelector('.icon-moon');
+                    
+                    if (isDarkMode) {
+                        moonIcon.classList.add('animate-theme-toggle');
+                        setTimeout(() => moonIcon.classList.remove('animate-theme-toggle'), 500);
+                    } else {
+                        sunIcon.classList.add('animate-theme-toggle');
+                        setTimeout(() => sunIcon.classList.remove('animate-theme-toggle'), 500);
+                    }
+                });
+            }
+            
+            // Listen for system theme changes
+            prefersDarkScheme.addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches);
+                }
+            });
         });
     </script>
 </body>

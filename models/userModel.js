@@ -37,10 +37,19 @@ const userSchema = new mongoose.Schema({
       ref: "product"
     }
   ],
-  image: {
-    type: String
+  profile_pic: {
+    type: String,
+    default: "/images/profile.png"
   },
-  order: [
+  cover_pic: {
+    type: String,
+    default: "/images/cover.png",
+  },
+  bio: {
+    type: String,
+    default: "This is my bio"
+  },
+  soldProduct: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "product",
@@ -49,4 +58,4 @@ const userSchema = new mongoose.Schema({
   ]
 });
 
-export default mongoose.model('user', userSchema);
+export default mongoose.model('User', userSchema);

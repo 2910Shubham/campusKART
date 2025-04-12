@@ -26,11 +26,24 @@
                         'indigo': {
                             50: '#eef2ff',
                             100: '#e0e7ff'
+                        },
+                        'light': {
+                            50: '#ffffff',
+                            100: '#f9fafb',
+                            200: '#f3f4f6',
+                            300: '#e5e7eb',
+                            400: '#d1d5db',
+                            500: '#9ca3af',
+                            600: '#6b7280',
+                            700: '#4b5563',
+                            800: '#1f2937',
+                            900: '#111827'
                         }
                     },
                     animation: {
                         'pulse-border': 'pulseBorder 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'gradient': 'gradient 8s ease infinite'
+                        'gradient': 'gradient 8s ease infinite',
+                        'theme-toggle': 'themeToggle 0.5s ease forwards'
                     },
                     keyframes: {
                         pulseBorder: {
@@ -41,6 +54,11 @@
                             '0%': { backgroundPosition: '0% 50%' },
                             '50%': { backgroundPosition: '100% 50%' },
                             '100%': { backgroundPosition: '0% 50%' }
+                        },
+                        themeToggle: {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '100%': { transform: 'scale(1)' }
                         }
                     },
                     fontFamily: {
@@ -58,12 +76,29 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
         
+        :root {
+            --transition-speed: 0.3s;
+        }
+        
         body {
             font-family: 'Montserrat', sans-serif;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+        
+        body.dark-mode {
             background-image: 
                 radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 30%),
                 radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 30%);
             background-color: #0c1b44;
+            color: #ffffff;
+        }
+        
+        body.light-mode {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.03) 0%, transparent 30%);
+            background-color: #ffffff;
+            color: #1f2937;
         }
         
         .toggle-checkbox:checked {
@@ -122,32 +157,160 @@
             animation: gradient 8s ease infinite;
             background-size: 200% 200%;
         }
+        
+        /* Light Mode Specific Styles */
+        .light-mode .card {
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .light-mode .form-input {
+            background-color: #f9fafb;
+            border-color: #e5e7eb;
+            color: #1f2937;
+        }
+        
+        .light-mode .form-input::placeholder {
+            color: #9ca3af;
+        }
+        
+        .light-mode .btn-secondary {
+            background-color: #f3f4f6;
+            color: #4b5563;
+        }
+        
+        /* Additional Light Mode Styles */
+        .light-mode a.text-indigo-100 {
+            color: #4b5563;
+        }
+        
+        .light-mode a.text-indigo-100:hover {
+            color: #1e40af;
+        }
+        
+        .light-mode .text-white {
+            color: #1f2937;
+        }
+        
+        .light-mode .text-indigo-100 {
+            color: #4b5563;
+        }
+
+        .light-mode svg.text-indigo-100 {
+            color: #4b5563;
+        }
+        
+        .light-mode .text-indigo-100\/70 {
+            color: rgba(75, 85, 99, 0.7);
+        }
+        
+        .light-mode .bg-navy-800\/50,
+        .light-mode .bg-navy-900\/50 {
+            background-color: rgba(249, 250, 251, 0.8);
+        }
+        
+        .light-mode .border-navy-600,
+        .light-mode .border-navy-700 {
+            border-color: #e5e7eb;
+        }
+        
+        .light-mode .shadow-inner {
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 {
+            background: linear-gradient(to bottom right, #ffffff, #f3f4f6);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .light-mode .neon-border {
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.2), 0 0 20px rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Special handling for left panel in light mode */
+        .light-mode .md\:flex.md\:col-span-2.flex-col.justify-between.p-8.rounded-l-2xl.bg-gradient-to-br.from-navy-600.to-navy-800 {
+            background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
+        }
+        
+        .light-mode .md\:flex.md\:col-span-2 .text-white {
+            color: #1f2937;
+        }
+        
+        .light-mode .md\:flex.md\:col-span-2 .text-indigo-100 {
+            color: #4b5563;
+        }
+        
+        .light-mode .toggle-label {
+            background-color: #d1d5db;
+        }
+
+        /* Keep the original styles for elements that should remain the same */
+        .light-mode .logo-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .light-mode .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+        
+        /* Theme Toggle Animation */
+        .theme-transition * {
+            transition: background-color var(--transition-speed) ease, 
+                       border-color var(--transition-speed) ease, 
+                       color var(--transition-speed) ease,
+                       fill var(--transition-speed) ease,
+                       stroke var(--transition-speed) ease,
+                       box-shadow var(--transition-speed) ease;
+        }
+        
+        .theme-toggle {
+            cursor: pointer;
+        }
+        
+        .theme-toggle:active svg {
+            animation: theme-toggle 0.5s ease forwards;
+        }
     </style>
 </head>
 <body class="text-white min-h-screen flex flex-col">
+
     <!-- 🔒 Login Error (Red) -->
-<% if (messages.error && messages.error.length > 0) { %>
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-      <strong class="font-bold">Error:</strong>
-      <span class="block sm:inline"><%= messages.error[0] %></span>
-    </div>
-  <% } %>
-  
-  <!-- 🛑 Register Error (Red) -->
-  <% if (messages.R_error && messages.R_error.length > 0) { %>
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-      <strong class="font-bold">Error:</strong>
-      <span class="block sm:inline"><%= messages.R_error[0] %></span>
-    </div>
-  <% } %>
-  
-  <!-- ✅ Register Success (Navy Blue) -->
-  <% if (messages.R_success && messages.R_success.length > 0) { %>
-    <div class="bg-blue-900 border border-blue-700 text-white px-4 py-3 rounded mb-4">
-      <strong class="font-bold">Success:</strong>
-      <span class="block sm:inline"><%= messages.R_success[0] %></span>
-    </div>
-  <% } %>
+    <% if (messages.error && messages.error.length > 0) { %>
+       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+         <strong class="font-bold">Error:</strong>
+         <span class="block sm:inline"><%= messages.error[0] %></span>
+       </div>
+     <% } %>
+     
+     <!-- 🛑 Register Error (Red) -->
+     <% if (messages.R_error && messages.R_error.length > 0) { %>
+       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+         <strong class="font-bold">Error:</strong>
+         <span class="block sm:inline"><%= messages.R_error[0] %></span>
+       </div>
+     <% } %>
+     
+     <!-- ✅ Register Success (Navy Blue) -->
+     <% if (messages.R_success && messages.R_success.length > 0) { %>
+       <div class="bg-blue-900 border border-blue-700 text-white px-4 py-3 rounded mb-4">
+         <strong class="font-bold">Success:</strong>
+         <span class="block sm:inline"><%= messages.R_success[0] %></span>
+       </div>
+     <% } %>
+   
+     <% if (messages.logError && messages.logError.length > 0) { %>
+       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+         <strong class="font-bold">Login Error:</strong>
+         <span class="block sm:inline"><%= messages.logError[0] %></span>
+       </div>
+     <% } %>
+      
   
     <header class="container mx-auto px-6 py-6">
         <div class="flex items-center justify-between">
@@ -162,6 +325,23 @@
                 </h1>
             </div>
             <div class="hidden md:flex space-x-4 items-center">
+                <div class="theme-toggle mr-4 flex items-center">
+                    <span class="mr-2 dark:text-white light:text-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon-sun h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </span>
+                    <div class="relative inline-block w-10 mr-2 align-middle transition duration-200 ease-in">
+                        <input type="checkbox" name="toggle" id="theme-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none transition-transform duration-200 ease-in-out"
+                               style="top: 0; left: 0; transform: translateX(0); transition: transform 0.2s ease-in-out;">
+                        <label for="theme-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
+                    </div>
+                    <span class="dark:text-white light:text-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon-moon h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </span>
+                </div>
                 <a href="#" class="text-indigo-100 hover:text-white transition-colors duration-200">About</a>
                 <a href="#" class="text-indigo-100 hover:text-white transition-colors duration-200">Help</a>
                 <a href="#" class="bg-gradient-to-r from-royal-blue-400 to-royal-blue-600 px-4 py-2 rounded-lg text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
@@ -559,34 +739,67 @@
             }
         }
 
-//         // Form submission handling
-//         document.getElementById('login-form').addEventListener('submit', function(e) {
-//             e.preventDefault();
-//             // Here you would typically handle login form submission
-//             const email = document.getElementById('login-email').value;
-//             const password = document.getElementById('login-password').value;
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for saved theme preference or use preferred color scheme
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            const savedTheme = localStorage.getItem('theme');
             
-//             console.log('Login attempt with:', { email, password });
-//             // In a real app, you would send this data to your server
-//             alert('Login functionality would be implemented here');
-//         });
-
-//         document.getElementById('register-form').addEventListener('submit', function(e) {
-//             e.preventDefault();
-//             // Here you would typically handle registration form submission
-//             const formData = {
-//                 fullName: document.getElementById('full-name').value,
-//                 email: document.getElementById('register-email').value,
-//                 password: document.getElementById('register-password').value,
-//                 department: document.getElementById('department').value,
-//                 semester: document.getElementById('semester').value,
-//                 rollNo: document.getElementById('roll-no').value,
-//             };
+            const toggleSwitch = document.getElementById('theme-toggle');
+            const body = document.body;
             
-//             console.log('Registration with:', formData);
-//             // In a real app, you would send this data to your server
-//             alert('Registration functionality would be implemented here');
-//         });
+            // Apply theme class to body
+            function applyTheme(isDark) {
+                if (isDark) {
+                    body.classList.remove('light-mode');
+                    body.classList.add('dark-mode');
+                    if (toggleSwitch) toggleSwitch.checked = true;
+                } else {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('light-mode');
+                    if (toggleSwitch) toggleSwitch.checked = false;
+                }
+            }
+            
+            // Set initial theme
+            if (savedTheme) {
+                applyTheme(savedTheme === 'dark');
+            } else {
+                applyTheme(prefersDarkScheme.matches);
+            }
+            
+            // Add transition class after initial load to prevent transition on page load
+            setTimeout(() => {
+                document.documentElement.classList.add('theme-transition');
+            }, 100);
+            
+            // Toggle theme when switch is clicked
+            if (toggleSwitch) {
+                toggleSwitch.addEventListener('change', function() {
+                    const isDarkMode = this.checked;
+                    applyTheme(isDarkMode);
+                    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                    
+                    // Animate the icon based on current theme
+                    const sunIcon = document.querySelector('.icon-sun');
+                    const moonIcon = document.querySelector('.icon-moon');
+                    
+                    if (isDarkMode) {
+                        moonIcon.classList.add('animate-theme-toggle');
+                        setTimeout(() => moonIcon.classList.remove('animate-theme-toggle'), 500);
+                    } else {
+                        sunIcon.classList.add('animate-theme-toggle');
+                        setTimeout(() => sunIcon.classList.remove('animate-theme-toggle'), 500);
+                    }
+                });
+            }
+            
+            // Listen for system theme changes
+            prefersDarkScheme.addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches);
+                }
+            });
+        });
     </script>
  </body>
  </html>
