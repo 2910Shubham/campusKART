@@ -21,15 +21,15 @@ router.post('/mark-sold', isLoggedin, async (req, res) => {
         return res.status(404).json({ message: 'Product not found.' });
       }
       
-      // Mark product as sold
+      
       product.isSold = true;
       await product.save();
       
-      // Update the seller's soldProducts - Modified with error handling
+     
       const updateResult = await User.findByIdAndUpdate(
         product.seller.id, 
         { $addToSet: { soldProduct: productId } },
-        { new: true }  // Return the updated document
+        { new: true }  
       );
       
       if (!updateResult) {

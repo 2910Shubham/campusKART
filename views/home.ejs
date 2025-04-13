@@ -509,7 +509,7 @@
                         <i class="far fa-bell mr-1"></i> Notifications
                     </a>
 
-                    <!-- User Profile -->
+                
                     <!-- User Profile -->
                     <div class="relative">
                         <a href="/user/profile" class="flex items-center space-x-2 focus:outline-none">
@@ -559,41 +559,70 @@
     <div class="bg-navy-800 py-3 shadow-md border-b border-navy-700">
         <div class="container mx-auto px-4">
             <div class="flex items-center space-x-1 md:space-x-4 overflow-x-auto hide-scrollbar pb-2">
-                <a href="#"
-                    class="category-badge btn-primary whitespace-nowrap px-4 py-1.5 rounded-full text-white text-sm font-medium">
+                <a href="/home"
+                    class="category-badge <%= selectedCategory === 'All' ? 'btn-primary text-white' : 'bg-navy-700 text-indigo-100' %> whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium">
                     All Items
                 </a>
-                <a href="#"
-                    class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+
+                <a href="/home?category=textbooks"
+                    class="category-badge <%= selectedCategory === 'textbooks' ? 'btn-primary text-white' : 'bg-navy-700 text-indigo-100' %> whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium">
                     Textbooks
                 </a>
-                <a href="#"
-                    class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+
+                <a href="/home?category=course_notes"
+                    class="category-badge <%= selectedCategory === 'course_notes' ? 'btn-primary text-white' : 'bg-navy-700 text-indigo-100' %> whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium">
                     Notes
                 </a>
-                <a href="#"
-                    class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+
+                <a href="/home?category=electronics"
+                    class="category-badge <%= selectedCategory === 'electronics' ? 'btn-primary text-white' : 'bg-navy-700 text-indigo-100' %> whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium">
                     Electronics
                 </a>
-                <a href="#"
-                    class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+
+                <a href="/home?category=stationery"
+                    class="category-badge <%= selectedCategory === 'stationery' ? 'btn-primary text-white' : 'bg-navy-700 text-indigo-100' %> whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium">
                     Stationery
                 </a>
-                <a href="#"
-                    class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+
+                <a href="/home?category=calculators"
+                    class="category-badge <%= selectedCategory === 'calculators' ? 'btn-primary text-white' : 'bg-navy-700 text-indigo-100' %> whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium">
                     Calculators
                 </a>
-                <a href="#"
-                    class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+
+                <a href="/home?category=lab_equipment"
+                    class="category-badge <%= selectedCategory === 'lab_equipment' ? 'btn-primary text-white' : 'bg-navy-700 text-indigo-100' %> whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium">
                     Lab Equipment
                 </a>
-                <a href="#"
-                    class="category-badge whitespace-nowrap px-4 py-1.5 rounded-full bg-navy-700 text-indigo-100 text-sm font-medium hover:bg-navy-600">
+
+                <a href="/home?category=furniture"
+                    class="category-badge <%= selectedCategory === 'furniture' ? 'btn-primary text-white' : 'bg-navy-700 text-indigo-100' %> whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium">
+                    Furniture
+                </a>
+
+                <a href="/home?category=clothing"
+                    class="category-badge <%= selectedCategory === 'clothing' ? 'btn-primary text-white' : 'bg-navy-700 text-indigo-100' %> whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium">
+                    Clothing
+                </a>
+
+                <a href="/home?category=sports_equipment"
+                    class="category-badge <%= selectedCategory === 'sports_equipment' ? 'btn-primary text-white' : 'bg-navy-700 text-indigo-100' %> whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium">
+                    Sports Equipment
+                </a>
+
+                <a href="/home?category=musical_instruments"
+                    class="category-badge <%= selectedCategory === 'musical_instruments' ? 'btn-primary text-white' : 'bg-navy-700 text-indigo-100' %> whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium">
+                    Musical Instruments
+                </a>
+
+                <a href="/home?category=other"
+                    class="category-badge <%= selectedCategory === 'other' ? 'btn-primary text-white' : 'bg-navy-700 text-indigo-100' %> whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium">
                     Others
                 </a>
             </div>
         </div>
     </div>
+
+
 
     <!-- Main Content -->
     <main class="flex-grow container mx-auto px-4 py-8">
@@ -681,260 +710,309 @@
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <% products.forEach(function(product) { %>
-                <div
-                    class="product-card bg-navy-800/80 rounded-xl overflow-hidden shadow-lg border border-navy-700 hover:shadow-xl transition-all duration-300 card-hover-effect dark:bg-navy-800/80 dark:border-navy-700 light:bg-white light:border-gray-200">
-                    <!-- Product Image -->
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="<%= product.images[0] %>" alt="Product" class="w-full h-full object-cover">
-                        <div class="absolute top-2 right-2">
-                            <span
-                                class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">
-                                <%= product.isSold ? "Sold" : "Available" %>
-                            </span>
-                        </div>
-                        <button
-                            class="absolute top-2 left-2 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-200 like-button">
-                            <i class="far fa-heart text-white"></i>
-                        </button>
-                    </div>
 
-                    <!-- Product Details -->
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-lg font-semibold text-white mb-1 truncate">
-                                <%= product.title %>
-                            </h3>
-                            <span class="text-xl font-bold text-royal-blue-400">₹<%= product.price %></span>
-                        </div>
-                        <p class="text-sm text-indigo-100 mb-3 line-clamp-2">
-                            <%= product.description %>
-                        </p>
 
-                        <!-- Tags/Categories -->
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            <% product.keywords.forEach(function(tag) { %>
-                                <span class="bg-navy-600/50 text-xs px-2 py-1 rounded text-indigo-100">
-                                    <%= tag %>
-                                </span>
-                                <% }); %>
-                                    <span class="bg-navy-600/50 text-xs px-2 py-1 rounded text-indigo-100">
-                                        <%= product.category %>
-                                    </span>
-                        </div>
+      <!-- Product Grid or No Product Message -->
+<% if (products.length === 0) { %>
+    <!-- Only show the message if no products are found in the category -->
+    <div class="text-center py-12">
+        <h3 class="text-xl font-semibold text-white mb-2">No products found in this category.</h3>
+        <p class="text-indigo-200 mb-4">You can check out other categories or browse all available products.</p>
+        <a href="/home" class="inline-block bg-royal-blue-500 hover:bg-royal-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition duration-300">
+            Explore All Products
+        </a>
+    </div>
+<% } %>
 
-                        <!-- Seller Info -->
-                        <div class="flex items-center justify-between mt-4">
-                            <div class="flex items-center space-x-2">
-                                <div class="w-8 h-8 rounded-full overflow-hidden seller-avatar">
-                                    <img src="<%= product.seller.id.profile_pic || 'default-avatar-url' %>" alt="Seller"
-                                        class="w-full h-full object-cover">
+
+       <!-- original product display in home -->
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <% products.forEach(function(product) { %>
+                            <div
+                                class="product-card bg-navy-800/80 rounded-xl overflow-hidden shadow-lg border border-navy-700 hover:shadow-xl transition-all duration-300 card-hover-effect dark:bg-navy-800/80 dark:border-navy-700 light:bg-white light:border-gray-200">
+                                <!-- Product Image -->
+                                 <a href="/product/<%= product._id %>">
+
+                                     <div class="relative h-48 overflow-hidden">
+                                         <img src="<%= product.images[0] %>" alt="Product"
+                                             class="w-full h-full object-cover">
+                                         <div class="absolute top-2 right-2">
+                                             <% if (product.isSold) { %>
+                                                 <span
+                                                     class="sold-badge bg-red-500 text-xs px-2 py-1 rounded text-white mt-1">Sold</span>
+                                                 <% } else { %>
+                                                     <span
+                                                         class="available-badge bg-green-500 text-xs px-2 py-1 rounded text-white mt-1">Available</span>
+                                                     <% } %>
+                                         </div>
+                                         <button
+                                             class="absolute top-2 left-2 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-200 like-button">
+                                             <i class="far fa-heart text-white"></i>
+                                         </button>
+                                     </div>
+
+                                 </a>
+
+                                <!-- Product Details -->
+                                <div class="p-4">
+                                    <div class="flex justify-between items-start">
+                                        <a href="/product/<%= product._id %>">
+
+                                            <h3 class="text-lg font-semibold text-white mb-1 truncate">
+                                                <%= product.title %>
+                                            </h3>
+
+                                        </a>
+                                        <span class="text-xl font-bold text-royal-blue-400">₹<%= product.price %></span>
+                                    </div>
+                                    <p class="text-sm text-indigo-100 mb-3 line-clamp-2">
+                                        <%= product.description %>
+                                    </p>
+
+                                    <!-- Tags/Categories -->
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <% product.keywords.forEach(function(tag) { %>
+                                            <span class="bg-navy-600/50 text-xs px-2 py-1 rounded text-indigo-100">
+                                                <%= tag %>
+                                            </span>
+                                            <% }); %>
+                                                <span class="bg-navy-600/50 text-xs px-2 py-1 rounded text-indigo-100">
+                                                    <p>Category: <%= product.category %>
+                                                    </p>
+                                                </span>
+                                    </div>
+
+                                    <!-- Seller Info -->
+                                    <div class="flex items-center justify-between mt-4">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-8 h-8 rounded-full overflow-hidden seller-avatar">
+                                                <img src="<%= product.seller.id.profile_pic || 'default-avatar-url' %>"
+                                                    alt="Seller" class="w-full h-full object-cover">
+                                            </div>
+                                            <span class="text-sm text-indigo-100">
+                                                <%= product.seller.id.fullname %>
+                                            </span>
+                                        </div>
+                                        <span class="text-xs text-indigo-100/70">
+                                            <%= new Date(product.createdAt).toLocaleDateString() %>
+                                        </span>
+                                    </div>
+
+                                    <!-- Action Button -->
+                                    <% if (product.isSold) { %>
+                                        <button disabled
+                                            class="disabled-button w-full mt-4 py-2 px-4 rounded-lg text-gray-400 font-medium bg-navy-600/50 cursor-not-allowed flex items-center justify-center space-x-2">
+                                            <i class="fas fa-ban text-lg"></i>
+                                            <span>Product Sold</span>
+                                        </button>
+                                        <% } else { %>
+                                            <a href="https://wa.me/<%= product.seller.id.whatsapp_number%>?text=Hi, I'm interested in your product: <%= product.title %>"
+                                                target="_blank"
+                                                class="whatsapp-button w-full mt-4 py-2 px-4 rounded-lg text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2">
+                                                <i class="fab fa-whatsapp text-lg"></i>
+                                                <span>Contact Seller</span>
+                                            </a>
+                                            <% } %>
+
+
                                 </div>
-                                <span class="text-sm text-indigo-100">
-                                    <%= product.seller.id.fullname %>
-                                </span>
                             </div>
-                            <span class="text-xs text-indigo-100/70">
-                                <%= new Date(product.createdAt).toLocaleDateString() %>
-                            </span>
-                        </div>
-
-                        <!-- Action Button -->
-                        <a href="https://wa.me/<%= product.seller.id.whatsapp_number%>?text=Hi, I'm interested in your product: <%= product.title %>"
-                            target="_blank"
-                            class="whatsapp-button w-full mt-4 py-2 px-4 rounded-lg text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2">
-                            <i class="fab fa-whatsapp text-lg"></i>
-                            <span>Contact Seller</span>
-                        </a>
-
+                            <% }) %>
                     </div>
-                </div>
-                <% }) %>
-        </div>
 
 
-        <!-- Recently Added Products -->
-        <div class="mb-12">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold">Recently Added</h2>
-                <a href="#"
-                    class="text-royal-blue-400 hover:text-royal-blue-300 transition-colors text-sm font-medium">View
-                    All</a>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Product Card 5 -->
-                <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?q=80&w=2940" alt="Laptop"
-                            class="h-48 w-full object-cover">
-                        <div class="absolute top-3 right-3">
-                            <span
-                                class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
-                        </div>
-                        <div class="absolute bottom-3 right-3">
-                            <button
-                                class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center space-x-2">
-                                <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Seller"
-                                    class="w-8 h-8 rounded-full seller-avatar">
-                                <span class="text-sm font-medium text-indigo-100">Vijay Sharma</span>
-                            </div>
-                            <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">IT Dept</span>
-                        </div>
-                        <h3 class="font-bold text-white mb-1">Dell XPS Laptop (2 yrs old)</h3>
-                        <p class="text-indigo-100 text-sm mb-3 line-clamp-2">i5 processor, 8GB RAM, 512GB SSD. Minor
-                            scratches but works perfectly.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <div class="font-bold text-lg text-white">₹35,000</div>
+                    <!-- Recently Added Products -->
+                    <div class="mb-12">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-bold">Recently Added</h2>
                             <a href="#"
-                                class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
-                                <i class="fab fa-whatsapp text-lg"></i>
-                                <span>Contact</span>
+                                class="text-royal-blue-400 hover:text-royal-blue-300 transition-colors text-sm font-medium">View
+                                All</a>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            <!-- Product Card 5 -->
+                            <div
+                                class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?q=80&w=2940"
+                                        alt="Laptop" class="h-48 w-full object-cover">
+                                    <div class="absolute top-3 right-3">
+                                        <span
+                                            class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                                    </div>
+                                    <div class="absolute bottom-3 right-3">
+                                        <button
+                                            class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center space-x-2">
+                                            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Seller"
+                                                class="w-8 h-8 rounded-full seller-avatar">
+                                            <span class="text-sm font-medium text-indigo-100">Vijay Sharma</span>
+                                        </div>
+                                        <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">IT Dept</span>
+                                    </div>
+                                    <h3 class="font-bold text-white mb-1">Dell XPS Laptop (2 yrs old)</h3>
+                                    <p class="text-indigo-100 text-sm mb-3 line-clamp-2">i5 processor, 8GB RAM, 512GB
+                                        SSD. Minor
+                                        scratches but works perfectly.</p>
+                                    <div class="flex justify-between items-center mt-4">
+                                        <div class="font-bold text-lg text-white">₹35,000</div>
+                                        <a href="#"
+                                            class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
+                                            <i class="fab fa-whatsapp text-lg"></i>
+                                            <span>Contact</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Card 6 -->
+                            <div
+                                class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1598618986942-a60639b4e219?q=80&w=2940"
+                                        alt="Drawing Supplies" class="h-48 w-full object-cover">
+                                    <div class="absolute top-3 right-3">
+                                        <span
+                                            class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                                    </div>
+                                    <div class="absolute bottom-3 right-3">
+                                        <button
+                                            class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center space-x-2">
+                                            <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Seller"
+                                                class="w-8 h-8 rounded-full seller-avatar">
+                                            <span class="text-sm font-medium text-indigo-100">Ananya Das</span>
+                                        </div>
+                                        <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">Architecture</span>
+                                    </div>
+                                    <h3 class="font-bold text-white mb-1">Complete Drawing Kit</h3>
+                                    <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Includes drafting board,
+                                        T-square, compass
+                                        set and high-quality pencils.</p>
+                                    <div class="flex justify-between items-center mt-4">
+                                        <div class="font-bold text-lg text-white">₹1,800</div>
+                                        <a href="#"
+                                            class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
+                                            <i class="fab fa-whatsapp text-lg"></i>
+                                            <span>Contact</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Card 7 -->
+                            <div
+                                class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=2940"
+                                        alt="Business Books" class="h-48 w-full object-cover">
+                                    <div class="absolute top-3 right-3">
+                                        <span
+                                            class="sold-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Sold</span>
+                                    </div>
+                                    <div class="absolute bottom-3 right-3">
+                                        <button
+                                            class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                            <i class="fas fa-heart text-red-500"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center space-x-2">
+                                            <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Seller"
+                                                class="w-8 h-8 rounded-full seller-avatar">
+                                            <span class="text-sm font-medium text-indigo-100">Rahul Gupta</span>
+                                        </div>
+                                        <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">MBA</span>
+                                    </div>
+                                    <h3 class="font-bold text-white mb-1">MBA Business Ethics Collection</h3>
+                                    <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Set of 5 business management
+                                        textbooks.
+                                        Perfect for MBA students.</p>
+                                    <div class="flex justify-between items-center mt-4">
+                                        <div class="font-bold text-lg text-white">₹2,500</div>
+                                        <a href="#"
+                                            class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm opacity-60 cursor-not-allowed">
+                                            <i class="fab fa-whatsapp text-lg"></i>
+                                            <span>Sold Out</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Card 8 -->
+                            <div
+                                class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1603193795297-882a4b4ca4de?q=80&w=2940"
+                                        alt="Lab Coat" class="h-48 w-full object-cover">
+                                    <div class="absolute top-3 right-3">
+                                        <span
+                                            class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                                    </div>
+                                    <div class="absolute bottom-3 right-3">
+                                        <button
+                                            class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center space-x-2">
+                                            <img src="https://randomuser.me/api/portraits/women/36.jpg" alt="Seller"
+                                                class="w-8 h-8 rounded-full seller-avatar">
+                                            <span class="text-sm font-medium text-indigo-100">Neha Reddy</span>
+                                        </div>
+                                        <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">Biology</span>
+                                    </div>
+                                    <h3 class="font-bold text-white mb-1">Lab Coat & Safety Glasses</h3>
+                                    <p class="text-indigo-100 text-sm mb-3 line-clamp-2">New lab coat (size M) and
+                                        professional
+                                        safety glasses. Never used.</p>
+                                    <div class="flex justify-between items-center mt-4">
+                                        <div class="font-bold text-lg text-white">₹750</div>
+                                        <a href="#"
+                                            class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
+                                            <i class="fab fa-whatsapp text-lg"></i>
+                                            <span>Contact</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Buy Request Section -->
+                    <div class="mb-12 p-6 rounded-2xl bg-gradient-to-br from-navy-600 to-navy-800 shadow-xl">
+                        <div class="flex flex-col md:flex-row items-center justify-between">
+                            <div class="mb-6 md:mb-0 md:mr-6">
+                                <h2 class="text-2xl font-bold mb-2">Can't find what you're looking for?</h2>
+                                <p class="text-indigo-100 max-w-xl">Post a buy request and let other students know what
+                                    you need.
+                                    Get notifications when someone has what you're looking for.</p>
+                            </div>
+                            <a href="#"
+                                class="btn-primary px-6 py-3 rounded-lg text-white font-medium shadow-lg whitespace-nowrap">
+                                Post Buy Request
                             </a>
                         </div>
                     </div>
-                </div>
-
-                <!-- Product Card 6 -->
-                <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1598618986942-a60639b4e219?q=80&w=2940"
-                            alt="Drawing Supplies" class="h-48 w-full object-cover">
-                        <div class="absolute top-3 right-3">
-                            <span
-                                class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
-                        </div>
-                        <div class="absolute bottom-3 right-3">
-                            <button
-                                class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center space-x-2">
-                                <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Seller"
-                                    class="w-8 h-8 rounded-full seller-avatar">
-                                <span class="text-sm font-medium text-indigo-100">Ananya Das</span>
-                            </div>
-                            <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">Architecture</span>
-                        </div>
-                        <h3 class="font-bold text-white mb-1">Complete Drawing Kit</h3>
-                        <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Includes drafting board, T-square, compass
-                            set and high-quality pencils.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <div class="font-bold text-lg text-white">₹1,800</div>
-                            <a href="#"
-                                class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
-                                <i class="fab fa-whatsapp text-lg"></i>
-                                <span>Contact</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 7 -->
-                <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=2940"
-                            alt="Business Books" class="h-48 w-full object-cover">
-                        <div class="absolute top-3 right-3">
-                            <span
-                                class="sold-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Sold</span>
-                        </div>
-                        <div class="absolute bottom-3 right-3">
-                            <button
-                                class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
-                                <i class="fas fa-heart text-red-500"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center space-x-2">
-                                <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Seller"
-                                    class="w-8 h-8 rounded-full seller-avatar">
-                                <span class="text-sm font-medium text-indigo-100">Rahul Gupta</span>
-                            </div>
-                            <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">MBA</span>
-                        </div>
-                        <h3 class="font-bold text-white mb-1">MBA Business Ethics Collection</h3>
-                        <p class="text-indigo-100 text-sm mb-3 line-clamp-2">Set of 5 business management textbooks.
-                            Perfect for MBA students.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <div class="font-bold text-lg text-white">₹2,500</div>
-                            <a href="#"
-                                class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm opacity-60 cursor-not-allowed">
-                                <i class="fab fa-whatsapp text-lg"></i>
-                                <span>Sold Out</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Card 8 -->
-                <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1603193795297-882a4b4ca4de?q=80&w=2940"
-                            alt="Lab Coat" class="h-48 w-full object-cover">
-                        <div class="absolute top-3 right-3">
-                            <span
-                                class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
-                        </div>
-                        <div class="absolute bottom-3 right-3">
-                            <button
-                                class="like-button bg-white/10 backdrop-blur-md p-2 rounded-full text-white shadow-md transition-transform duration-200">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center space-x-2">
-                                <img src="https://randomuser.me/api/portraits/women/36.jpg" alt="Seller"
-                                    class="w-8 h-8 rounded-full seller-avatar">
-                                <span class="text-sm font-medium text-indigo-100">Neha Reddy</span>
-                            </div>
-                            <span class="text-xs px-2 py-1 rounded-lg bg-navy-700">Biology</span>
-                        </div>
-                        <h3 class="font-bold text-white mb-1">Lab Coat & Safety Glasses</h3>
-                        <p class="text-indigo-100 text-sm mb-3 line-clamp-2">New lab coat (size M) and professional
-                            safety glasses. Never used.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <div class="font-bold text-lg text-white">₹750</div>
-                            <a href="#"
-                                class="whatsapp-button flex items-center space-x-1 py-2 px-3 rounded-lg text-white text-sm">
-                                <i class="fab fa-whatsapp text-lg"></i>
-                                <span>Contact</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Buy Request Section -->
-        <div class="mb-12 p-6 rounded-2xl bg-gradient-to-br from-navy-600 to-navy-800 shadow-xl">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="mb-6 md:mb-0 md:mr-6">
-                    <h2 class="text-2xl font-bold mb-2">Can't find what you're looking for?</h2>
-                    <p class="text-indigo-100 max-w-xl">Post a buy request and let other students know what you need.
-                        Get notifications when someone has what you're looking for.</p>
-                </div>
-                <a href="#" class="btn-primary px-6 py-3 rounded-lg text-white font-medium shadow-lg whitespace-nowrap">
-                    Post Buy Request
-                </a>
-            </div>
-        </div>
     </main>
 
     <!-- Footer -->

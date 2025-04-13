@@ -657,8 +657,8 @@
                 <div class="text-sm text-indigo-100">Items Sold</div>
             </div>
             <div class="stats-card rounded-xl p-4 shadow-md">
-                <div class="text-3xl font-bold mb-1">4.8</div>
-                <div class="text-sm text-indigo-100">Rating (15 reviews)</div>
+                <div class="text-3xl font-bold mb-1">0</div>
+                <div class="text-sm text-indigo-100">Rating (0 reviews)</div>
             </div>
             <div class="stats-card rounded-xl p-4 shadow-md">
                 <div class="text-3xl font-bold mb-1">₹ <%= user.totalEarnings %></div>
@@ -749,14 +749,16 @@
                 <!-- Product List -->
                 <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <% user.listedProduct.forEach(function(product) { %>
-                        <div
-                            class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700">
+                        <div class="card-hover-effect bg-navy-800 rounded-xl overflow-hidden shadow-lg border border-navy-700 <%= product.isSold ? 'opacity-80' : '' %>">
                             <div class="relative">
                                 <img src="<%= product.images[0] %>" alt="<%= product.name %>"
                                     class="h-48 w-full object-cover">
                                 <div class="absolute top-3 right-3">
-                                    <span
-                                        class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                                    <% if (product.isSold) { %>
+                                        <span class="sold-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Sold</span>
+                                    <% } else { %>
+                                        <span class="available-badge text-xs font-medium px-2 py-1 rounded-full text-white shadow-md">Available</span>
+                                    <% } %>
                                 </div>
                             </div>
                             <div class="p-4">
@@ -777,7 +779,11 @@
                                         <button
                                             class="product-action-button flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300"
                                             data-product-id="<%= product._id %>">
-                                            <i class="fas fa-check-circle mr-1"></i> Mark Sold
+                                            <% if (product.isSold) { %>
+                                                <i class="fas fa-undo mr-1"></i> Mark Available
+                                            <% } else { %>
+                                                <i class="fas fa-check-circle mr-1"></i> Mark Sold
+                                            <% } %>
                                         </button>
                                     </div>
                                 </div>
@@ -793,9 +799,8 @@
                                 </div>
                             </div>
                         </div>
-                        <% }) %>
+                    <% }) %>
                 </div>
-
 
                 <!-- Sold Items Tab (Hidden by Default) -->
                 <div id="sold" class="tab-content hidden">

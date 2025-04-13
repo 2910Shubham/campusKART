@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - campusKART</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': {
+                            400: '#2c5282',
+                            500: '#1e3a8a',
+                            600: '#1e40af',
+                            700: '#1e3a78',
+                            800: '#172554',
+                            900: '#0c1b44'
+                        },
+                        'royal-blue': {
+                            400: '#3b82f6',
+                            500: '#4169e1',
+                            600: '#2563eb'
+                        },
+                        'indigo': {
+                            50: '#eef2ff',
+                            100: '#e0e7ff'
+                        },
+                        'light': {
+                            50: '#ffffff',
+                            100: '#f9fafb',
+                            200: '#f3f4f6',
+                            300: '#e5e7eb',
+                            400: '#d1d5db',
+                            500: '#9ca3af',
+                            600: '#6b7280',
+                            700: '#4b5563',
+                            800: '#1f2937',
+                            900: '#111827'
+                        },
+                        'success': {
+                            500: '#10b981',
+                            600: '#059669'
+                        },
+                        'warning': {
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        },
+                        'danger': {
+                            500: '#ef4444',
+                            600: '#dc2626'
+                        }
+                    },
+                    animation: {
+                        'pulse-border': 'pulseBorder 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                        'fade': 'fade 0.5s ease-in-out',
+                        'theme-toggle': 'themeToggle 0.5s ease forwards'
+                    },
+                    keyframes: {
+                        pulseBorder: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(65, 105, 225, 0.6)' },
+                            '50%': { boxShadow: '0 0 0 5px rgba(65, 105, 225, 0.4)' }
+                        },
+                        gradient: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' }
+                        },
+                        fade: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        themeToggle: {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '100%': { transform: 'scale(1)' }
+                        }
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+        :root {
+            --transition-speed: 0.3s;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+
+        body.dark-mode {
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 30%);
+            background-color: #0c1b44;
+            color: #ffffff;
+        }
+
+        body.light-mode {
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.03) 0%, transparent 30%);
+            background-color: #ffffff;
+            color: #1f2937;
+        }
+
+        /* Light Mode Specific Styles */
+        .light-mode .header {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-color: #e5e7eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .light-mode .header a {
+            color: #4b5563;
+        }
+
+        .light-mode .header a:hover {
+            color: #1e40af;
+        }
+
+        /* Text colors */
+        .light-mode .text-white {
+            color: #1f2937;
+        }
+
+        .light-mode .text-indigo-100,
+        .light-mode .text-indigo-100\/70 {
+            color: #4b5563;
+        }
+
+        .light-mode svg.text-indigo-100,
+        .light-mode svg.text-white {
+            color: #4b5563;
+        }
+
+        /* Fix promotional text and headings */
+        .light-mode h1.text-white,
+        .light-mode h2.text-white,
+        .light-mode h3.text-white,
+        .light-mode h4.text-white,
+        .light-mode p.text-white {
+            color: #1f2937;
+        }
+
+        /* Background colors */
+        .light-mode .bg-navy-800,
+        .light-mode .bg-navy-800\/80,
+        .light-mode .bg-navy-800\/60,
+        .light-mode .bg-navy-900\/90 {
+            background-color: #ffffff;
+        }
+
+        .light-mode .border-navy-600,
+        .light-mode .border-navy-700 {
+            border-color: #e5e7eb;
+        }
+
+        .light-mode .bg-navy-600\/50 {
+            background-color: #f3f4f6;
+        }
+
+        .light-mode .bg-navy-700 {
+            background-color: #f3f4f6;
+        }
+
+        /* Fix for blue background sections in light mode */
+        .light-mode .mb-10.relative.overflow-hidden.rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
+        .light-mode .mb-12.p-6.rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
+        .light-mode .rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
+        .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 {
+            background: linear-gradient(to bottom right, #f0f7ff, #e0eafc);
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Keep the logo text gradient unchanged */
+        .light-mode .logo-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Ensure buttons have white text in light mode */
+        .light-mode .btn-primary,
+        .light-mode .whatsapp-button,
+        .light-mode .floating-action-button,
+        .light-mode a.bg-gradient-to-r,
+        .light-mode a.bg-royal-blue-500,
+        .light-mode a.bg-royal-blue-600,
+        .light-mode button.bg-royal-blue-500,
+        .light-mode button.bg-royal-blue-600,
+        .light-mode .action-button,
+        .light-mode .cta-button {
+            color: white !important;
+        }
+
+        /* Theme Toggle Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #2563eb;
+            transform: translateX(100%);
+        }
+
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: #3b82f6;
+        }
+
+        /* Theme transition class */
+        .theme-transition * {
+            transition: background-color var(--transition-speed) ease,
+                border-color var(--transition-speed) ease,
+                color var(--transition-speed) ease,
+                fill var(--transition-speed) ease,
+                stroke var(--transition-speed) ease,
+                box-shadow var(--transition-speed) ease;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+        }
+
+        .theme-toggle:active svg {
+            animation: theme-toggle 0.5s ease forwards;
+        }
+
+        .logo-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 8s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+        }
+
+        .product-slider {
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .product-slide {
+            scroll-snap-align: start;
+        }
+
+        .product-thumb {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .product-thumb.active {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .product-thumb:hover {
+            transform: translateY(-2px);
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+
+        .badge-available {
+            background-color: rgba(16, 185, 129, 0.9);
+            color: white;
+        }
+
+        .badge-sold {
+            background-color: rgba(239, 68, 68, 0.9);
+            color: white;
+        }
+
+        .badge-featured {
+            background-color: rgba(245, 158, 11, 0.9);
+            color: white;
+        }
+
+        .image-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #d1d5db;
+            transition: all 0.3s ease;
+        }
+
+        .image-indicator.active {
+            width: 24px;
+            border-radius: 9999px;
+            background-color: #3b82f6;
+        }
+
+        .whatsapp-button {
+            background-color: #25D366;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+        }
+
+        .wishlist-button {
+            transition: all 0.3s ease;
+        }
+
+        .wishlist-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .wishlist-button.active svg {
+            fill: #ef4444;
+            color: #ef4444;
+        }
+
+        .similar-product-card {
+            transition: all 0.3s ease;
+        }
+
+        .similar-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .similar-product-card img {
+            transition: all 0.5s ease;
+        }
+
+        .similar-product-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .rating-stars .fa-star {
+            color: #9ca3af;
+        }
+
+        .rating-stars .fa-star.filled {
+            color: #f59e0b;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.5);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(59, 130, 246, 0.7);
+        }
+
+        /* Animation for slide content */
+        .slide-animate {
+            animation: fade 0.5s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="text-white min-h-screen flex flex-col dark-mode">
+    <!-- Header Section -->
+    <header class="sticky top-0 z-50 bg-navy-900/90 backdrop-blur-md border-b border-navy-700 shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <a href="/home" class="flex items-center space-x-2">
+                        <div
+                            class="w-8 h-8 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <h1 class="text-2xl font-bold font-montserrat logo-text">
+                            campusKART
+                        </h1>
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="flex items-center space-x-6">
+                    <a href="/home"
+                        class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="fas fa-home mr-1"></i> Home
+                    </a>
+                    <a href="/categories"
+                        class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="fas fa-th-large mr-1"></i> Categories
+                    </a>
+                    <a href="/wishlist"
+                        class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="fas fa-heart mr-1"></i> Wishlist
+                    </a>
+                    <a href="/profile"
+                        class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
+                        <i class="fas fa-user mr-1"></i> Profile
+                    </a>
+
+                    <!-- Theme Toggle -->
+                    <div class="theme-toggle flex items-center">
+                        <span class="mr-2 dark:text-white light:text-gray-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-sun h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </span>
+                        <div class="relative inline-block w-10 mr-2 align-middle transition duration-200 ease-in">
+                            <input type="checkbox" name="toggle" id="theme-toggle"
+                                class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none transition-transform duration-200 ease-in-out"
+                                style="top: 0; left: 0; transition: transform 0.2s ease-in-out;">
+                            <label for="theme-toggle"
+                                class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
+                        </div>
+                        <span class="dark:text-white light:text-gray-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-moon h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                        </span>
+                    </div>
+
+                    <!-- User Profile -->
+                    <div class="relative">
+                        <a href="/profile" class="flex items-center space-x-2 focus:outline-none">
+                            <div
+                                class="w-9 h-9 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow">
+                                <span class="text-sm font-medium">RS</span>
+                            </div>
+                            <span class="hidden md:inline-block text-indigo-100">Rahul Singh</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="bg-navy-800 py-3 border-b border-navy-700">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center text-sm">
+                <a href="/home" class="text-indigo-100 hover:text-white transition-colors">Home</a>
+                <span class="mx-2 text-indigo-100">
+                    <i class="fas fa-chevron-right text-xs"></i>
+                </span>
+                <a href="/categories/electronics"
+                    class="text-indigo-100 hover:text-white transition-colors">Electronics</a>
+                <span class="mx-2 text-indigo-100">
+                    <i class="fas fa-chevron-right text-xs"></i>
+                </span>
+                <a href="/categories/electronics/laptops"
+                    class="text-indigo-100 hover:text-white transition-colors">Laptops</a>
+                <span class="mx-2 text-indigo-100">
+                    <i class="fas fa-chevron-right text-xs"></i>
+                </span>
+                <span class="text-white font-medium truncate">HP Pavilion Gaming Laptop</span>
+            </div>
+        </div>
+    </div>
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- Product Detail Section - Restructured -->
+        <div class="flex flex-col">
+            <!-- Full Width Image Slider at the Top -->
+            <div class="w-full mb-8">
+                <div class="bg-navy-800 rounded-2xl shadow-lg border border-navy-700 overflow-hidden">
+                    <!-- Main Product Image -->
+                    <div class="relative h-80 md:h-96 overflow-hidden">
+                        <div class="badge badge-available">Available</div>
+                        <div
+                            class="product-slider w-full h-full flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden">
+                            <div class="product-slide min-w-full h-full flex-shrink-0 snap-center">
+                                <img id="main-image-1" src="/api/placeholder/800/600"
+                                    alt="HP Pavilion Gaming Laptop - Front View"
+                                    class="w-full h-full object-contain p-4">
+                            </div>
+                            <div class="product-slide min-w-full h-full flex-shrink-0 snap-center">
+                                <img id="main-image-2" src="/api/placeholder/800/600"
+                                    alt="HP Pavilion Gaming Laptop - Side View"
+                                    class="w-full h-full object-contain p-4">
+                            </div>
+                            <div class="product-slide min-w-full h-full flex-shrink-0 snap-center">
+                                <img id="main-image-3" src="/api/placeholder/800/600"
+                                    alt="HP Pavilion Gaming Laptop - Back View"
+                                    class="w-full h-full object-contain p-4">
+                            </div>
+                            <div class="product-slide min-w-full h-full flex-shrink-0 snap-center">
+                                <img id="main-image-4" src="/api/placeholder/800/600"
+                                    alt="HP Pavilion Gaming Laptop - Keyboard View"
+                                    class="w-full h-full object-contain p-4">
+                            </div>
+                            <div class="product-slide min-w-full h-full flex-shrink-0 snap-center">
+                                <img id="main-image-5" src="/api/placeholder/800/600"
+                                    alt="HP Pavilion Gaming Laptop - Box Contents"
+                                    class="w-full h-full object-contain p-4">
+                            </div>
+                        </div>
+
+                        <!-- Image Navigation Arrows -->
+                        <button id="prev-button"
+                            class="absolute left-2 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors focus:outline-none">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button id="next-button"
+                            class="absolute right-2 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors focus:outline-none">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Image Thumbnails -->
+                    <div class="p-4 border-t border-navy-700">
+                        <div class="flex space-x-3 overflow-x-auto py-2">
+                            <div
+                                class="product-thumb active w-20 h-20 flex-shrink-0 rounded-lg border-2 border-royal-blue-500 overflow-hidden">
+                                <img src="/api/placeholder/150/150" alt="Thumbnail 1" class="w-full h-full object-cover"
+                                    data-index="0">
+                            </div>
+                            <div
+                                class="product-thumb w-20 h-20 flex-shrink-0 rounded-lg border-2 border-navy-600 overflow-hidden">
+                                <img src="/api/placeholder/150/150" alt="Thumbnail 2" class="w-full h-full object-cover"
+                                    data-index="1">
+                            </div>
+                            <div
+                                class="product-thumb w-20 h-20 flex-shrink-0 rounded-lg border-2 border-navy-600 overflow-hidden">
+                                <img src="/api/placeholder/150/150" alt="Thumbnail 3" class="w-full h-full object-cover"
+                                    data-index="2">
+                            </div>
+                            <div
+                                class="product-thumb w-20 h-20 flex-shrink-0 rounded-lg border-2 border-navy-600 overflow-hidden">
+                                <img src="/api/placeholder/150/150" alt="Thumbnail 4" class="w-full h-full object-cover"
+                                    data-index="3">
+                            </div>
+                            <div
+                                class="product-thumb w-20 h-20 flex-shrink-0 rounded-lg border-2 border-navy-600 overflow-hidden">
+                                <img src="/api/placeholder/150/150" alt="Thumbnail 5" class="w-full h-full object-cover"
+                                    data-index="4">
+                            </div>
+                        </div>
+
+                        <!-- Image Indicators -->
+                        <div class="flex justify-center space-x-2 mt-4">
+                            <div class="image-indicator active" data-index="0"></div>
+                            <div class="image-indicator" data-index="1"></div>
+                            <div class="image-indicator" data-index="2"></div>
+                            <div class="image-indicator" data-index="3"></div>
+                            <div class="image-indicator" data-index="4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Information Below Slider -->
+            <div class="w-full">
+                <div class="bg-navy-800 rounded-2xl shadow-lg border border-navy-700 p-6">
+                    <!-- Product Title and Brief Info -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h1 class="text-2xl md:text-3xl font-bold">HP Pavilion Gaming Laptop</h1>
+                            <div class="flex items-center space-x-1 rating-stars">
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star-half-alt filled"></i>
+                                <span class="ml-1 text-sm text-indigo-100">(27 reviews)</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-center space-x-3 text-sm text-indigo-100 mb-4">
+                            <span class="inline-flex items-center">
+                                <i class="fas fa-tag mr-1 text-royal-blue-400"></i> Electronics
+                            </span>
+                            <span class="inline-flex items-center">
+                                <i class="fas fa-eye mr-1 text-royal-blue-400"></i> 438 views
+                            </span>
+                            <span class="inline-flex items-center">
+                                <i class="fas fa-calendar-alt mr-1 text-royal-blue-400"></i> Posted 2 days ago
+                            </span>
+                        </div>
+
+                        <!-- Price Information -->
+                        <div class="mb-6">
+                            <div class="flex items-center flex-wrap">
+                                <span class="text-3xl font-bold">₹48,990</span>
+                                <span class="ml-2 line-through text-indigo-100 text-lg">₹62,990</span>
+                                <span class="ml-2 bg-success-500 text-white py-1 px-2 rounded text-sm font-medium">22%
+                                    OFF</span>
+                                <span
+                                    class="ml-auto text-sm bg-royal-blue-400/20 text-royal-blue-400 py-1 px-3 rounded-full">
+                                    <i class="fas fa-exchange-alt mr-1"></i> Negotiable
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Quick Information -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-10 h-10 rounded-full bg-navy-600/50 flex items-center justify-center">
+                                    <i class="fas fa-tag text-royal-blue-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-indigo-100">Category</p>
+                                    <p class="font-medium">Electronics - Laptops</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-10 h-10 rounded-full bg-navy-600/50 flex items-center justify-center">
+                                    <i class="fas fa-star text-royal-blue-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-indigo-100">Condition</p>
+                                    <p class="font-medium">Like New</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-10 h-10 rounded-full bg-navy-600/50 flex items-center justify-center">
+                                    <i class="fas fa-clock text-royal-blue-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-indigo-100">Age</p>
+                                    <p class="font-medium">1.5 Years</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-10 h-10 rounded-full bg-navy-600/50 flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-royal-blue-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-indigo-100">Campus</p>
+                                    <p class="font-medium">North Campus</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Description -->
+                    <div class="mb-6">
+                        <h2 class="text-xl font-semibold mb-3">Description</h2>
+                        <div class="bg-navy-700 rounded-xl p-4 text-indigo-100">
+                            <p class="mb-3">
+                                HP Pavilion Gaming Laptop with high-performance specs perfect for both gaming and
+                                academic needs. Almost new condition, rarely used as I prefer my desktop for gaming.
+                            </p>
+                            <p class="mb-3">
+                                <span class="font-medium text-white">Specifications:</span>
+                            <ul class="list-disc pl-5 mt-2 space-y-1">
+                                <li>Intel Core i7-11800H (8 cores, up to 4.6GHz)</li>
+                                <li>NVIDIA GeForce RTX 3050Ti (4GB GDDR6)</li>
+                                <li>16GB DDR4 RAM (Dual Channel)</li>
+                                <li>512GB NVMe SSD + 1TB HDD</li>
+                                <li>15.6" FHD IPS Display (144Hz, Anti-glare)</li>
+                                <li>Backlit Keyboard with RGB lighting</li>
+                                <li>Windows 11 Home</li>
+                            </ul>
+                            </p>
+                            <p>
+                                Comes with original box, charger, and gaming mouse. Battery health is excellent (still
+                                holds 95% of original capacity). No scratches or dents, has been kept in a protective
+                                case since purchase.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Keywords/Tags -->
+                    <div class="mb-6">
+                        <h2 class="text-xl font-semibold mb-3">Keywords</h2>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-navy-600/50 text-indigo-100 py-1 px-3 rounded-full text-sm">
+                                Gaming Laptop
+                            </span>
+                            <span class="bg-navy-600/50 text-indigo-100 py-1 px-3 rounded-full text-sm">
+                                HP Pavilion
+                            </span>
+                            <span class="bg-navy-600/50 text-indigo-100 py-1 px-3 rounded-full text-sm">
+                                RTX 3050Ti
+                            </span>
+                            <span class="bg-navy-600/50 text-indigo-100 py-1 px-3 rounded-full text-sm">
+                                16GB RAM
+                            </span>
+                            <span class="bg-navy-600/50 text-indigo-100 py-1 px-3 rounded-full text-sm">
+                                144Hz Display
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Seller Information -->
+                    <div class="mb-6">
+                        <h2 class="text-xl font-semibold mb-3">Seller Information</h2>
+                        <div class="bg-navy-700 rounded-xl p-4">
+                            <div class="flex items-center space-x-4">
+                                <div
+                                    class="w-16 h-16 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow text-xl font-bold">
+                                    AM
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold">Ankit Mishra</h3>
+                                    <p class="text-indigo-100 text-sm">Computer Science, Year 3</p>
+                                    <div class="flex items-center mt-1">
+                                        <div class="flex items-center space-x-1 text-xs rating-stars">
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star-half-alt filled"></i>
+                                            <span class="ml-1 text-indigo-100">(19 sales)</span>
+                                        </div>
+                                        <span class="mx-2 text-indigo-100">•</span>
+                                        <span class="text-success-500 text-xs">
+                                            <i class="fas fa-check-circle mr-1"></i> Verified Student
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="ml-auto">
+                                    <!-- <button
+                                        class="whatsapp-button flex items-center justify-center py-2 px-4 rounded-xl text-white font-medium text-sm md:text-base">
+                                        <i class="fab fa-whatsapp mr-2"></i> Contact Seller
+                                    </button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap gap-4">
+                        <button
+                            class="whatsapp-button flex items-center justify-center py-2 px-4 rounded-xl text-white font-medium text-sm md:text-base">
+                            <i class="fab fa-whatsapp mr-2"></i> Contact Seller
+                        </button>
+                        <button
+                            class="btn-secondary bg-navy-700 hover:bg-navy-600 py-3 px-6 rounded-xl text-white font-medium transition-colors">
+                            <i class="fas fa-share-alt mr-2"></i> Share
+                        </button>
+                        <button
+                            class="wishlist-button flex items-center justify-center py-3 px-6 rounded-xl bg-navy-700 hover:bg-navy-600 text-white font-medium transition-colors">
+                            <i class="far fa-heart mr-2"></i> Add to Wishlist
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Similar Product Suggestion -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold mb-6">Similar Product</h2>
+            <div class="similar-product-card bg-navy-800 rounded-2xl shadow-lg border border-navy-700 overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3">
+                    <div class="overflow-hidden">
+                        <img src="/api/placeholder/400/300" alt="Dell G15 Gaming Laptop"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:col-span-2 p-6">
+                        <div class="flex justify-between mb-2">
+                            <h3 class="text-xl font-bold">Dell G15 Gaming Laptop</h3>
+                            <div class="flex items-center space-x-1 rating-stars">
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="ml-1 text-sm text-indigo-100">(14 reviews)</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-2xl font-bold">₹52,499</span>
+                            <span class="ml-2 line-through text-indigo-100">₹67,990</span>
+                            <span class="ml-2 bg-success-500 text-white py-1 px-2 rounded text-xs font-medium">23%
+                                OFF</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-sm text-indigo-100 mb-4">
+                            <span class="inline-flex items-center">
+                                <i class="fas fa-tag mr-1 text-royal-blue-400"></i> Electronics
+                            </span>
+                            <span class="inline-flex items-center">
+                                <i class="fas fa-star mr-1 text-royal-blue-400"></i> Good Condition
+                            </span>
+                            <span class="inline-flex items-center">
+                                <i class="fas fa-clock mr-1 text-royal-blue-400"></i> 1 Year Old
+                            </span>
+                        </div>
+                        <p class="text-indigo-100 mb-5 line-clamp-2">
+                            Dell G15 Gaming Laptop with RTX 3060, Intel i7-12700H, 16GB RAM, 1TB SSD, and 15.6" 165Hz
+                            display. Perfect for gaming and academic work with excellent thermal performance.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="/product/dell-g15-gaming-laptop"
+                                class="btn-primary py-2 px-4 rounded-xl text-white font-medium inline-block">
+                                View Details
+                            </a>
+                            <button
+                                class="btn-secondary bg-navy-700 hover:bg-navy-600 py-2 px-4 rounded-xl text-white font-medium transition-colors">
+                                <i class="far fa-heart"></i> Add to Wishlist
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <footer class="bg-navy-800 border-t border-navy-700">
+        <div class="container mx-auto px-4 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div
+                            class="w-8 h-8 bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <h1 class="text-xl font-bold font-montserrat logo-text">
+                            campusKART
+                        </h1>
+                    </div>
+                    <p class="text-indigo-100 text-sm mb-4">The campus marketplace for students to buy and sell academic
+                        resources, electronics, and more.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-indigo-100 hover:text-white transition-colors"><i
+                                class="fab fa-instagram text-lg"></i></a>
+                        <a href="#" class="text-indigo-100 hover:text-white transition-colors"><i
+                                class="fab fa-twitter text-lg"></i></a>
+                        <a href="#" class="text-indigo-100 hover:text-white transition-colors"><i
+                                class="fab fa-facebook text-lg"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Home</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Browse
+                                Items</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Sell Item</a>
+                        </li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Buy
+                                Requests</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">My
+                                Account</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-white mb-4">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Textbooks</a>
+                        </li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Notes & Study
+                                Material</a></li>
+                        <li><a href="#"
+                                class="text-indigo-100 hover:text-white transition-colors text-sm">Electronics</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Lab
+                                Equipment</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Other
+                                Resources</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-white mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Help
+                                Center</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Safety
+                                Tips</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Report an
+                                Issue</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Privacy
+                                Policy</a></li>
+                        <li><a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Terms of
+                                Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-navy-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-indigo-100 text-sm mb-4 md:mb-0">&copy; <%= new Date().getFullYear() %> campusKART. All
+                        rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Privacy Policy</a>
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Terms of Service</a>
+                    <a href="#" class="text-indigo-100 hover:text-white transition-colors text-sm">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Check for saved theme preference or use default dark mode
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+            themeToggle.checked = false; // Changed from true to false
+        }
+
+        themeToggle.addEventListener('change', function () {
+            if (!this.checked) { // Changed from this.checked to !this.checked
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+            } else { // Changed from else to match the reversed logic
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        // Product Image Slider Functionality
+        const productSlider = document.querySelector('.product-slider');
+        const productThumbs = document.querySelectorAll('.product-thumb');
+        const indicators = document.querySelectorAll('.image-indicator');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        let currentSlide = 0;
+        const slideCount = document.querySelectorAll('.product-slide').length;
+
+        function showSlide(index) {
+            // Update slider position
+            productSlider.scrollTo({
+                left: productSlider.clientWidth * index,
+                behavior: 'smooth'
+            });
+
+            // Update thumbnails
+            productThumbs.forEach(thumb => {
+                thumb.classList.remove('active');
+                thumb.classList.add('border-navy-600');
+                thumb.classList.remove('border-royal-blue-500');
+            });
+            productThumbs[index].classList.add('active');
+            productThumbs[index].classList.remove('border-navy-600');
+            productThumbs[index].classList.add('border-royal-blue-500');
+
+            // Update indicators
+            indicators.forEach(indicator => {
+                indicator.classList.remove('active');
+            });
+            indicators[index].classList.add('active');
+
+            currentSlide = index;
+        }
+
+        // Thumbnail click event
+        productThumbs.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                const index = parseInt(thumb.querySelector('img').dataset.index);
+                showSlide(index);
+            });
+        });
+
+        // Indicator click event
+        indicators.forEach(indicator => {
+            indicator.addEventListener('click', () => {
+                const index = parseInt(indicator.dataset.index);
+                showSlide(index);
+            });
+        });
+
+        // Next/Previous buttons
+        prevButton.addEventListener('click', () => {
+            let index = currentSlide - 1;
+            if (index < 0) index = slideCount - 1;
+            showSlide(index);
+        });
+
+        nextButton.addEventListener('click', () => {
+            let index = currentSlide + 1;
+            if (index >= slideCount) index = 0;
+            showSlide(index);
+        });
+
+        // Wishlist toggle
+        const wishlistButton = document.querySelector('.wishlist-button');
+        wishlistButton.addEventListener('click', function () {
+            this.classList.toggle('active');
+            const icon = this.querySelector('i');
+            if (this.classList.contains('active')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                icon.classList.add('text-danger-500');
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                icon.classList.remove('text-danger-500');
+            }
+        });
+    </script>
+</body>
+
+</html>
