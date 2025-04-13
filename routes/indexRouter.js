@@ -19,6 +19,48 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get('/search', isLoggedin, async (req, res) => {
+  try {
+    const keyword = req.query.keyword || '';  // Get the keyword from the query string
+    const selectedCategory = req.query.category || 'All'; // Default to 'All' if no category is selected
+
+    let products;
+
+    // Search functionality
+    if (keyword) {
+      products = await Product.find({
+        $or: [
+          { title: { $regex: keyword, $options: 'i' } },
+          { description: { $regex: keyword, $options: 'i' } },
+        ],
+        ...(selectedCategory && selectedCategory !== 'All' ? { category: selectedCategory } : {}),
+      }).populate('seller.id', 'fullname profile_pic whatsapp_number').lean();
+    } else if (selectedCategory && selectedCategory !== 'All') {
+      // If no search keyword, but a category is selected
+      products = await Product.find({ category: selectedCategory }).populate('seller.id', 'fullname profile_pic whatsapp_number').lean();
+    } else {
+      // If no search keyword and no category, show all products
+      products = await Product.find({}).populate('seller.id', 'fullname profile_pic whatsapp_number').lean();
+    }
+
+    // Ensure to include `user` in the render method
+    const user = {
+      fullname: req.user.fullname,
+      bio: req.user.bio,
+      image: req.user.profile_pic || '/images/profile.png',
+      department: req.user.department || '',
+      semester: req.user.semester || '',
+      coverImage: req.user.cover_pic || '/images/cover.png',
+      contact: req.user.whatsapp_number || '',
+    };
+
+    // Render the search page with the search results and other details
+    res.render('home', { products, user, selectedCategory, keyword });
+  } catch (err) {
+    console.error("Error occurred while fetching products:", err);
+    res.status(500).send("Server Error: " + err.message);
+  }
+});
 
 // Product Profile Route
 router.get("/product/:id", isLoggedin, async function (req, res) {
@@ -63,7 +105,8 @@ router.get("/product/:id", isLoggedin, async function (req, res) {
       coverImage: '/images/cover.png',
       contact: '',
     };
-
+       
+    
     res.render('product', { product, user: userData, suggestedProducts });
   } catch (err) {
     console.error("Error fetching product details:", err);
@@ -97,22 +140,37 @@ router.get('/list', isLoggedin, function (req, res) {
 
 
 // Home Route
-
 router.get('/home', isLoggedin, async (req, res) => {
   try {
     const selectedCategory = req.query.category || 'All'; // Default to 'All' if no category is selected
+    const keyword = req.query.keyword || '';  // Get the keyword from the query string
 
     let products;
 
-    if (selectedCategory && selectedCategory !== 'All') {
+    // Search functionality
+    if (keyword) {
+      products = await Product.find({
+        $or: [
+          { title: { $regex: keyword, $options: 'i' } },
+          { description: { $regex: keyword, $options: 'i' } },
+        ],
+        ...(selectedCategory && selectedCategory !== 'All' ? { category: selectedCategory } : {}),
+      }).populate('seller.id', 'fullname profile_pic whatsapp_number').lean();
+    } else if (selectedCategory && selectedCategory !== 'All') {
+      // If no search keyword, but a category is selected
       products = await Product.find({ category: selectedCategory }).populate('seller.id', 'fullname profile_pic whatsapp_number').lean();
     } else {
+      // If no search keyword and no category, show all products
       products = await Product.find({}).populate('seller.id', 'fullname profile_pic whatsapp_number').lean();
     }
 
     let otherProducts = [];
     if (selectedCategory && selectedCategory !== 'All' && products.length === 0) {
-      otherProducts = await Product.find({ category: { $ne: selectedCategory }, isSold: false }).limit(4).populate('seller.id', 'fullname profile_pic whatsapp_number').lean();
+      // If no products found in the selected category, show some from other categories
+      otherProducts = await Product.find({ category: { $ne: selectedCategory }, isSold: false })
+        .limit(4)
+        .populate('seller.id', 'fullname profile_pic whatsapp_number')
+        .lean();
     }
 
     // Reuse the same format as in the profile route
@@ -126,7 +184,8 @@ router.get('/home', isLoggedin, async (req, res) => {
       contact: req.user.whatsapp_number || '',
     };
 
-    res.render('home', { products, user, selectedCategory, otherProducts });
+    // Render the home page with the search results, products, and selected category
+    res.render('home', { products, user, selectedCategory, otherProducts, keyword });
   } catch (err) {
     console.error("Error occurred while fetching products:", err);
     res.status(500).send("Server Error: " + err.message);

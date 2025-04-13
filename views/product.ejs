@@ -517,16 +517,15 @@
                     <i class="fas fa-chevron-right text-xs"></i>
                 </span>
                 <a href="/categories/electronics"
-                    class="text-indigo-100 hover:text-white transition-colors">Electronics</a>
+                    class="text-indigo-100 hover:text-white transition-colors"><%= product.category %></a>
                 <span class="mx-2 text-indigo-100">
                     <i class="fas fa-chevron-right text-xs"></i>
                 </span>
-                <a href="/categories/electronics/laptops"
-                    class="text-indigo-100 hover:text-white transition-colors">Laptops</a>
+                
                 <span class="mx-2 text-indigo-100">
                     <i class="fas fa-chevron-right text-xs"></i>
                 </span>
-                <span class="text-white font-medium truncate">HP Pavilion Gaming Laptop</span>
+                <span class="text-white font-medium truncate"><%= product.title %></span>
             </div>
         </div>
     </div>
@@ -664,7 +663,7 @@
         </div>
         <div>
             <p class="text-sm text-indigo-100">Age</p>
-            <p class="font-medium">1.5 Years</p>
+            <p class="font-medium"> <%= product.ageInYears %></p>
         </div>
     </div>
     <div class="flex items-center space-x-2">
