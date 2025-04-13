@@ -437,18 +437,18 @@
                         class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
                         <i class="fas fa-home mr-1"></i> Home
                     </a>
-                    <a href="/categories"
+                    <!-- <a href="/categories"
                         class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
                         <i class="fas fa-th-large mr-1"></i> Categories
-                    </a>
+                    </a> -->
                     <a href="/wishlist"
                         class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
                         <i class="fas fa-heart mr-1"></i> Wishlist
                     </a>
-                    <a href="/profile"
+                    <!-- <a href="/profile"
                         class="hidden md:inline-block text-indigo-100 hover:text-white transition-colors duration-200">
                         <i class="fas fa-user mr-1"></i> Profile
-                    </a>
+                    </a> -->
 
                     <!-- Theme Toggle -->
                     <div class="theme-toggle flex items-center">
@@ -477,12 +477,30 @@
 
                     <!-- User Profile -->
                     <div class="relative">
-                        <a href="/profile" class="flex items-center space-x-2 focus:outline-none">
-                            <div
-                                class="w-9 h-9 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow">
-                                <span class="text-sm font-medium">RS</span>
+                        <a href="/user/profile" class="flex items-center space-x-2 focus:outline-none">
+                            <div class="w-9 h-9 rounded-full overflow-hidden shadow border-2 border-white">
+                                <% if (user && user.image) { %>
+                                    <img src="<%= user.image %>" alt="Profile" class="w-full h-full object-cover">
+                                    <% } else { %>
+                                        <div class="text-sm font-medium">U</div>
+                                        <% } %>
+
                             </div>
-                            <span class="hidden md:inline-block text-indigo-100">Rahul Singh</span>
+                            <span
+                                class="hidden md:inline-block text-indigo-100 dark:text-indigo-100 light:text-gray-700 font-medium">
+                                <% if (user && user.fullname) { %>
+                                    <span
+                                        class="hidden md:inline-block text-indigo-100 dark:text-indigo-100 light:text-gray-700 font-medium">
+                                        <%= user.fullname %>
+                                    </span>
+                                    <% } else { %>
+                                        <span
+                                            class="hidden md:inline-block text-indigo-100 dark:text-indigo-100 light:text-gray-700 font-medium">
+                                            Guest
+                                        </span>
+                                        <% } %>
+
+                            </span>
                         </a>
                     </div>
                 </div>
@@ -512,345 +530,312 @@
             </div>
         </div>
     </div>
-    <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 py-8">
-        <!-- Product Detail Section - Restructured -->
-        <div class="flex flex-col">
-            <!-- Full Width Image Slider at the Top -->
-            <div class="w-full mb-8">
-                <div class="bg-navy-800 rounded-2xl shadow-lg border border-navy-700 overflow-hidden">
-                    <!-- Main Product Image -->
-                    <div class="relative h-80 md:h-96 overflow-hidden">
-                        <div class="badge badge-available">Available</div>
-                        <div
-                            class="product-slider w-full h-full flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden">
-                            <div class="product-slide min-w-full h-full flex-shrink-0 snap-center">
-                                <img id="main-image-1" src="/api/placeholder/800/600"
-                                    alt="HP Pavilion Gaming Laptop - Front View"
-                                    class="w-full h-full object-contain p-4">
-                            </div>
-                            <div class="product-slide min-w-full h-full flex-shrink-0 snap-center">
-                                <img id="main-image-2" src="/api/placeholder/800/600"
-                                    alt="HP Pavilion Gaming Laptop - Side View"
-                                    class="w-full h-full object-contain p-4">
-                            </div>
-                            <div class="product-slide min-w-full h-full flex-shrink-0 snap-center">
-                                <img id="main-image-3" src="/api/placeholder/800/600"
-                                    alt="HP Pavilion Gaming Laptop - Back View"
-                                    class="w-full h-full object-contain p-4">
-                            </div>
-                            <div class="product-slide min-w-full h-full flex-shrink-0 snap-center">
-                                <img id="main-image-4" src="/api/placeholder/800/600"
-                                    alt="HP Pavilion Gaming Laptop - Keyboard View"
-                                    class="w-full h-full object-contain p-4">
-                            </div>
-                            <div class="product-slide min-w-full h-full flex-shrink-0 snap-center">
-                                <img id="main-image-5" src="/api/placeholder/800/600"
-                                    alt="HP Pavilion Gaming Laptop - Box Contents"
-                                    class="w-full h-full object-contain p-4">
-                            </div>
-                        </div>
 
-                        <!-- Image Navigation Arrows -->
-                        <button id="prev-button"
-                            class="absolute left-2 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors focus:outline-none">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button id="next-button"
-                            class="absolute right-2 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors focus:outline-none">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
+
+    <!-- Main Content -->
+<main class="flex-grow container mx-auto px-4 py-8">
+    <!-- Product Detail Section - Restructured -->
+    <div class="flex flex-col">
+        <!-- Full Width Image Slider at the Top -->
+        <div class="w-full mb-8">
+            <div class="bg-navy-800 rounded-2xl shadow-lg border border-navy-700 overflow-hidden">
+                <!-- Main Product Image -->
+                <div class="relative h-80 md:h-96 overflow-hidden">
+                    <div class="badge badge-<%= product.isSold ? 'sold' : 'available' %>">
+                        <%= product.isSold ? 'Sold Out' : 'Available' %>
+                    </div>
+                    <div class="product-slider w-full h-full flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden">
+                        <% product.images.forEach((image, index) => { %>
+                            <div class="product-slide min-w-full h-full flex-shrink-0 snap-center">
+                                <img src="<%= image %>" alt="Product Image <%= index + 1 %>"
+                                    class="w-full h-full object-contain p-4">
+                            </div>
+                        <% }); %>
                     </div>
 
-                    <!-- Image Thumbnails -->
-                    <div class="p-4 border-t border-navy-700">
-                        <div class="flex space-x-3 overflow-x-auto py-2">
-                            <div
-                                class="product-thumb active w-20 h-20 flex-shrink-0 rounded-lg border-2 border-royal-blue-500 overflow-hidden">
-                                <img src="/api/placeholder/150/150" alt="Thumbnail 1" class="w-full h-full object-cover"
-                                    data-index="0">
-                            </div>
-                            <div
-                                class="product-thumb w-20 h-20 flex-shrink-0 rounded-lg border-2 border-navy-600 overflow-hidden">
-                                <img src="/api/placeholder/150/150" alt="Thumbnail 2" class="w-full h-full object-cover"
-                                    data-index="1">
-                            </div>
-                            <div
-                                class="product-thumb w-20 h-20 flex-shrink-0 rounded-lg border-2 border-navy-600 overflow-hidden">
-                                <img src="/api/placeholder/150/150" alt="Thumbnail 3" class="w-full h-full object-cover"
-                                    data-index="2">
-                            </div>
-                            <div
-                                class="product-thumb w-20 h-20 flex-shrink-0 rounded-lg border-2 border-navy-600 overflow-hidden">
-                                <img src="/api/placeholder/150/150" alt="Thumbnail 4" class="w-full h-full object-cover"
-                                    data-index="3">
-                            </div>
-                            <div
-                                class="product-thumb w-20 h-20 flex-shrink-0 rounded-lg border-2 border-navy-600 overflow-hidden">
-                                <img src="/api/placeholder/150/150" alt="Thumbnail 5" class="w-full h-full object-cover"
-                                    data-index="4">
-                            </div>
-                        </div>
+                    <!-- Image Navigation Arrows -->
+                    <button id="prev-button"
+                        class="absolute left-2 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button id="next-button"
+                        class="absolute right-2 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
 
-                        <!-- Image Indicators -->
-                        <div class="flex justify-center space-x-2 mt-4">
-                            <div class="image-indicator active" data-index="0"></div>
-                            <div class="image-indicator" data-index="1"></div>
-                            <div class="image-indicator" data-index="2"></div>
-                            <div class="image-indicator" data-index="3"></div>
-                            <div class="image-indicator" data-index="4"></div>
-                        </div>
+                <!-- Image Thumbnails -->
+                <div class="p-4 border-t border-navy-700">
+                    <div class="flex space-x-3 overflow-x-auto py-2">
+                        <% product.images.forEach((image, index) => { %>
+                            <div class="product-thumb <%= index === 0 ? 'active' : '' %> w-20 h-20 flex-shrink-0 rounded-lg border-2 border-royal-blue-500 overflow-hidden">
+                                <img src="<%= image %>" alt="Thumbnail <%= index + 1 %>" class="w-full h-full object-cover" data-index="<%= index %>">
+                            </div>
+                        <% }); %>
+                    </div>
+
+                    <!-- Image Indicators -->
+                    <div class="flex justify-center space-x-2 mt-4">
+                        <% product.images.forEach((_, index) => { %>
+                            <div class="image-indicator <%= index === 0 ? 'active' : '' %>" data-index="<%= index %>"></div>
+                        <% }); %>
                     </div>
                 </div>
             </div>
+        </div>
+
+       
 
             <!-- Product Information Below Slider -->
-            <div class="w-full">
-                <div class="bg-navy-800 rounded-2xl shadow-lg border border-navy-700 p-6">
-                    <!-- Product Title and Brief Info -->
-                    <div class="mb-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h1 class="text-2xl md:text-3xl font-bold">HP Pavilion Gaming Laptop</h1>
-                            <div class="flex items-center space-x-1 rating-stars">
-                                <i class="fas fa-star filled"></i>
-                                <i class="fas fa-star filled"></i>
-                                <i class="fas fa-star filled"></i>
-                                <i class="fas fa-star filled"></i>
-                                <i class="fas fa-star-half-alt filled"></i>
-                                <span class="ml-1 text-sm text-indigo-100">(27 reviews)</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap items-center space-x-3 text-sm text-indigo-100 mb-4">
-                            <span class="inline-flex items-center">
-                                <i class="fas fa-tag mr-1 text-royal-blue-400"></i> Electronics
-                            </span>
-                            <span class="inline-flex items-center">
-                                <i class="fas fa-eye mr-1 text-royal-blue-400"></i> 438 views
-                            </span>
-                            <span class="inline-flex items-center">
-                                <i class="fas fa-calendar-alt mr-1 text-royal-blue-400"></i> Posted 2 days ago
-                            </span>
-                        </div>
+           <!-- Product Information Below Slider -->
+<div class="w-full">
+    <div class="bg-navy-800 rounded-2xl shadow-lg border border-navy-700 p-6">
+        <!-- Product Title and Brief Info -->
+        <div class="mb-6">
+            <div class="flex justify-between items-start mb-2">
+                <h1 class="text-2xl md:text-3xl font-bold"><%= product.title %></h1>
+                <div class="flex items-center space-x-1 rating-stars">
+                    <% for (let i = 0; i < 5; i++) { %>
+                        <i class="fas fa-star <%= i < Math.floor(product.rating) ? 'filled' : '' %>"></i>
+                    <% } %>
+                    <% if (product.rating % 1 !== 0) { %>
+                        <i class="fas fa-star-half-alt filled"></i>
+                    <% } %>
+                    <span class="ml-1 text-sm text-indigo-100">(<%= product.reviewsCount %> reviews)</span>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center space-x-3 text-sm text-indigo-100 mb-4">
+                <span class="inline-flex items-center">
+                    <i class="fas fa-tag mr-1 text-royal-blue-400"></i> <%= product.category %>
+                </span>
+                <span class="inline-flex items-center">
+                    <i class="fas fa-eye mr-1 text-royal-blue-400"></i> <%= product.views %> views
+                </span>
+                <span class="inline-flex items-center">
+                    <i class="fas fa-calendar-alt mr-1 text-royal-blue-400"></i> Posted <%= product.timeSincePosted %> ago
+                </span>
+            </div>
 
-                        <!-- Price Information -->
-                        <div class="mb-6">
-                            <div class="flex items-center flex-wrap">
-                                <span class="text-3xl font-bold">₹48,990</span>
-                                <span class="ml-2 line-through text-indigo-100 text-lg">₹62,990</span>
-                                <span class="ml-2 bg-success-500 text-white py-1 px-2 rounded text-sm font-medium">22%
-                                    OFF</span>
-                                <span
-                                    class="ml-auto text-sm bg-royal-blue-400/20 text-royal-blue-400 py-1 px-3 rounded-full">
-                                    <i class="fas fa-exchange-alt mr-1"></i> Negotiable
+            <!-- Price Information -->
+            <div class="mb-6">
+                <div class="flex items-center flex-wrap">
+                    <span class="text-3xl font-bold">₹<%= product.price %></span>
+                    <% if (product.originalPrice) { %>
+                        <span class="ml-2 line-through text-indigo-100 text-lg">₹<%= product.originalPrice %></span>
+                    <% } %>
+                    <% if (product.discountPercentage) { %>
+                        <span class="ml-2 bg-success-500 text-white py-1 px-2 rounded text-sm font-medium"><%= product.discountPercentage %>% OFF</span>
+                    <% } %>
+                    <% if (product.isNegotiable) { %>
+                        <span class="ml-auto text-sm bg-royal-blue-400/20 text-royal-blue-400 py-1 px-3 rounded-full">
+                            <i class="fas fa-exchange-alt mr-1"></i> Negotiable
+                        </span>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                   <!-- Quick Information -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="flex items-center space-x-2">
+        <div class="w-10 h-10 rounded-full bg-navy-600/50 flex items-center justify-center">
+            <i class="fas fa-tag text-royal-blue-400"></i>
+        </div>
+        <div>
+            <p class="text-sm text-indigo-100">Category</p>
+            <p class="font-medium"><%= product.category %></p>
+        </div>
+    </div>
+    <div class="flex items-center space-x-2">
+        <div class="w-10 h-10 rounded-full bg-navy-600/50 flex items-center justify-center">
+            <i class="fas fa-star text-royal-blue-400"></i>
+        </div>
+        <div>
+            <p class="text-sm text-indigo-100">Condition</p>
+            <p class="font-medium"><%= product.condition %></p>
+        </div>
+    </div>
+    <div class="flex items-center space-x-2">
+        <div class="w-10 h-10 rounded-full bg-navy-600/50 flex items-center justify-center">
+            <i class="fas fa-clock text-royal-blue-400"></i>
+        </div>
+        <div>
+            <p class="text-sm text-indigo-100">Age</p>
+            <p class="font-medium">1.5 Years</p>
+        </div>
+    </div>
+    <div class="flex items-center space-x-2">
+        <div class="w-10 h-10 rounded-full bg-navy-600/50 flex items-center justify-center">
+            <i class="fas fa-map-marker-alt text-royal-blue-400"></i>
+        </div>
+        <div>
+            <p class="text-sm text-indigo-100">Campus</p>
+            <p class="font-medium">North Campus</p>
+        </div>
+    </div>
+</div>
+
+<!-- Product Description -->
+<div class="mb-6">
+    <h2 class="text-xl font-semibold mb-3">Description</h2>
+    <div class="bg-navy-700 rounded-xl p-4 text-indigo-100">
+        <p class="mb-3">
+            <%= product.description %>
+        </p>
+    </div>
+</div>
+
+<!-- Keywords/Tags -->
+<div class="mb-6">
+    <h2 class="text-xl font-semibold mb-3">Keywords</h2>
+    <div class="flex flex-wrap gap-2">
+        <% product.keywords.forEach(function(keyword) { %>
+            <span class="bg-navy-600/50 text-indigo-100 py-1 px-3 rounded-full text-sm">
+                <%= keyword %>
+            </span>
+        <% }); %>
+    </div>
+</div>
+
+
+ <!-- Seller Information -->
+<!-- Seller Information -->
+<div class="mb-6">
+    <h2 class="text-xl font-semibold mb-3">Seller Information</h2>
+    <div class="bg-navy-700 rounded-xl p-4">
+        <div class="flex items-center space-x-4">
+            <% if (product.seller.id.profile_pic && product.seller.id.profile_pic.trim()) { %>
+                <!-- Profile Image -->
+                <img src="<%= product.seller.id.profile_pic %>" alt="Seller Image"
+                     class="w-16 h-16 rounded-full object-cover shadow">
+            <% } else { %>
+                <!-- Fallback initials if no profile picture -->
+                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow text-xl font-bold text-white">
+                    <%= product.seller.id.fullname ? product.seller.id.fullname.split(' ')[0][0] : '' %>
+                    <%= product.seller.id.fullname ? product.seller.id.fullname.split(' ')[1][0] : '' %>
+                </div>
+            <% } %>
+
+            <div>
+                <h3 class="text-lg font-semibold"><%= product.seller.id.fullname %></h3>
+                <p class="text-indigo-100 text-sm">
+                    <%= product.seller.id.department || 'Unknown Branch' %>, 
+                    Sem <%= product.seller.id.semester || 'N/A' %>
+                </p>
+
+                <div class="flex items-center mt-1">
+                    <div class="flex items-center space-x-1 text-xs rating-stars">
+                        <i class="fas fa-star filled"></i>
+                        <i class="fas fa-star filled"></i>
+                        <i class="fas fa-star filled"></i>
+                        <i class="fas fa-star filled"></i>
+                        <i class="fas fa-star-half-alt filled"></i>
+                        <span class="ml-1 text-indigo-100">
+                            (<%= (product.seller.id.soldProduct && product.seller.id.soldProduct.length) || 0 %> sales)
+                        </span>
+                    </div>
+
+                    <span class="mx-2 text-indigo-100">•</span>
+                    <span class="text-success-500 text-xs">
+                        <i class="fas fa-check-circle mr-1"></i> Verified Seller
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="mt-4">
+            <% if (product.isSold) { %>
+                <button disabled
+                    class="disabled-button w-full py-2 px-4 rounded-lg text-gray-400 font-medium bg-navy-600/50 cursor-not-allowed flex items-center justify-center space-x-2">
+                    <i class="fas fa-ban text-lg"></i>
+                    <span>Product Sold</span>
+                </button>
+            <% } else { %>
+                <a href="https://wa.me/<%= product.seller.id.whatsapp_number %>?text=Hi, I'm interested in your product: <%= product.title %>"
+                    target="_blank"
+                    class="whatsapp-button w-full py-2 px-4 rounded-lg text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2">
+                    <i class="fab fa-whatsapp text-lg"></i>
+                    <span>Contact Seller</span>
+                </a>
+            <% } %>
+        </div>
+    </div>
+</div>
+<!-- end card -->
+</div>
+
+
+
+
+<!-- Similar Product Suggestions -->
+<div class="mt-12">
+    <h2 class="text-2xl font-bold mb-6">Similar Products</h2>
+
+    <% if (suggestedProducts.length === 0) { %>
+        <p class="text-indigo-100">No similar products found.</p>
+    <% } else { %>
+        <div class="grid gap-6">
+            <% suggestedProducts.forEach(similar => { %>
+                <div class="similar-product-card bg-navy-800 rounded-2xl shadow-lg border border-navy-700 overflow-hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-3">
+                        <div class="overflow-hidden">
+                            <img src="<%= similar.images?.[0] || '/images/placeholder.jpg' %>" alt="<%= similar.title %>" class="w-full h-full object-cover">
+                        </div>
+                        <div class="md:col-span-2 p-6">
+                            <div class="flex justify-between mb-2">
+                                <h3 class="text-xl font-bold"><%= similar.title %></h3>
+                                <div class="flex items-center space-x-1 rating-stars">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="ml-1 text-sm text-indigo-100">(4.5)</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <span class="text-2xl font-bold">₹<%= similar.price %></span>
+                                <% if (similar.original_price) { %>
+                                    <span class="ml-2 line-through text-indigo-100">₹<%= similar.original_price %></span>
+                                    <span class="ml-2 bg-success-500 text-white py-1 px-2 rounded text-xs font-medium">
+                                        <%= Math.round(((similar.original_price - similar.price) / similar.original_price) * 100) %>% OFF
+                                    </span>
+                                <% } %>
+                            </div>
+                            <div class="flex items-center space-x-3 text-sm text-indigo-100 mb-4">
+                                <span class="inline-flex items-center">
+                                    <i class="fas fa-tag mr-1 text-royal-blue-400"></i> <%= similar.category %>
+                                </span>
+                                <span class="inline-flex items-center">
+                                    <i class="fas fa-star mr-1 text-royal-blue-400"></i> <%= similar.condition %>
+                                </span>
+                                <span class="inline-flex items-center">
+                                    <i class="fas fa-clock mr-1 text-royal-blue-400"></i> <%= similar.age %>
                                 </span>
                             </div>
-                        </div>
-
-                        <!-- Quick Information -->
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                            <div class="flex items-center space-x-2">
-                                <div class="w-10 h-10 rounded-full bg-navy-600/50 flex items-center justify-center">
-                                    <i class="fas fa-tag text-royal-blue-400"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-indigo-100">Category</p>
-                                    <p class="font-medium">Electronics - Laptops</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <div class="w-10 h-10 rounded-full bg-navy-600/50 flex items-center justify-center">
-                                    <i class="fas fa-star text-royal-blue-400"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-indigo-100">Condition</p>
-                                    <p class="font-medium">Like New</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <div class="w-10 h-10 rounded-full bg-navy-600/50 flex items-center justify-center">
-                                    <i class="fas fa-clock text-royal-blue-400"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-indigo-100">Age</p>
-                                    <p class="font-medium">1.5 Years</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <div class="w-10 h-10 rounded-full bg-navy-600/50 flex items-center justify-center">
-                                    <i class="fas fa-map-marker-alt text-royal-blue-400"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-indigo-100">Campus</p>
-                                    <p class="font-medium">North Campus</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Description -->
-                    <div class="mb-6">
-                        <h2 class="text-xl font-semibold mb-3">Description</h2>
-                        <div class="bg-navy-700 rounded-xl p-4 text-indigo-100">
-                            <p class="mb-3">
-                                HP Pavilion Gaming Laptop with high-performance specs perfect for both gaming and
-                                academic needs. Almost new condition, rarely used as I prefer my desktop for gaming.
+                            <p class="text-indigo-100 mb-5 line-clamp-2">
+                                <%= similar.description.slice(0, 150) %>...
                             </p>
-                            <p class="mb-3">
-                                <span class="font-medium text-white">Specifications:</span>
-                            <ul class="list-disc pl-5 mt-2 space-y-1">
-                                <li>Intel Core i7-11800H (8 cores, up to 4.6GHz)</li>
-                                <li>NVIDIA GeForce RTX 3050Ti (4GB GDDR6)</li>
-                                <li>16GB DDR4 RAM (Dual Channel)</li>
-                                <li>512GB NVMe SSD + 1TB HDD</li>
-                                <li>15.6" FHD IPS Display (144Hz, Anti-glare)</li>
-                                <li>Backlit Keyboard with RGB lighting</li>
-                                <li>Windows 11 Home</li>
-                            </ul>
-                            </p>
-                            <p>
-                                Comes with original box, charger, and gaming mouse. Battery health is excellent (still
-                                holds 95% of original capacity). No scratches or dents, has been kept in a protective
-                                case since purchase.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Keywords/Tags -->
-                    <div class="mb-6">
-                        <h2 class="text-xl font-semibold mb-3">Keywords</h2>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-navy-600/50 text-indigo-100 py-1 px-3 rounded-full text-sm">
-                                Gaming Laptop
-                            </span>
-                            <span class="bg-navy-600/50 text-indigo-100 py-1 px-3 rounded-full text-sm">
-                                HP Pavilion
-                            </span>
-                            <span class="bg-navy-600/50 text-indigo-100 py-1 px-3 rounded-full text-sm">
-                                RTX 3050Ti
-                            </span>
-                            <span class="bg-navy-600/50 text-indigo-100 py-1 px-3 rounded-full text-sm">
-                                16GB RAM
-                            </span>
-                            <span class="bg-navy-600/50 text-indigo-100 py-1 px-3 rounded-full text-sm">
-                                144Hz Display
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Seller Information -->
-                    <div class="mb-6">
-                        <h2 class="text-xl font-semibold mb-3">Seller Information</h2>
-                        <div class="bg-navy-700 rounded-xl p-4">
-                            <div class="flex items-center space-x-4">
-                                <div
-                                    class="w-16 h-16 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow text-xl font-bold">
-                                    AM
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-semibold">Ankit Mishra</h3>
-                                    <p class="text-indigo-100 text-sm">Computer Science, Year 3</p>
-                                    <div class="flex items-center mt-1">
-                                        <div class="flex items-center space-x-1 text-xs rating-stars">
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star-half-alt filled"></i>
-                                            <span class="ml-1 text-indigo-100">(19 sales)</span>
-                                        </div>
-                                        <span class="mx-2 text-indigo-100">•</span>
-                                        <span class="text-success-500 text-xs">
-                                            <i class="fas fa-check-circle mr-1"></i> Verified Student
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="ml-auto">
-                                    <!-- <button
-                                        class="whatsapp-button flex items-center justify-center py-2 px-4 rounded-xl text-white font-medium text-sm md:text-base">
-                                        <i class="fab fa-whatsapp mr-2"></i> Contact Seller
-                                    </button> -->
-                                </div>
+                            <div class="flex space-x-3">
+                                <a href="/product/<%= similar._id %>" class="btn-primary py-2 px-4 rounded-xl text-white font-medium inline-block">
+                                    View Details
+                                </a>
+                                <button class="btn-secondary bg-navy-700 hover:bg-navy-600 py-2 px-4 rounded-xl text-white font-medium transition-colors">
+                                    <i class="far fa-heart"></i> Add to Wishlist
+                                </button>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="flex flex-wrap gap-4">
-                        <button
-                            class="whatsapp-button flex items-center justify-center py-2 px-4 rounded-xl text-white font-medium text-sm md:text-base">
-                            <i class="fab fa-whatsapp mr-2"></i> Contact Seller
-                        </button>
-                        <button
-                            class="btn-secondary bg-navy-700 hover:bg-navy-600 py-3 px-6 rounded-xl text-white font-medium transition-colors">
-                            <i class="fas fa-share-alt mr-2"></i> Share
-                        </button>
-                        <button
-                            class="wishlist-button flex items-center justify-center py-3 px-6 rounded-xl bg-navy-700 hover:bg-navy-600 text-white font-medium transition-colors">
-                            <i class="far fa-heart mr-2"></i> Add to Wishlist
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Similar Product Suggestion -->
-        <div class="mt-12">
-            <h2 class="text-2xl font-bold mb-6">Similar Product</h2>
-            <div class="similar-product-card bg-navy-800 rounded-2xl shadow-lg border border-navy-700 overflow-hidden">
-                <div class="grid grid-cols-1 md:grid-cols-3">
-                    <div class="overflow-hidden">
-                        <img src="/api/placeholder/400/300" alt="Dell G15 Gaming Laptop"
-                            class="w-full h-full object-cover">
-                    </div>
-                    <div class="md:col-span-2 p-6">
-                        <div class="flex justify-between mb-2">
-                            <h3 class="text-xl font-bold">Dell G15 Gaming Laptop</h3>
-                            <div class="flex items-center space-x-1 rating-stars">
-                                <i class="fas fa-star filled"></i>
-                                <i class="fas fa-star filled"></i>
-                                <i class="fas fa-star filled"></i>
-                                <i class="fas fa-star filled"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="ml-1 text-sm text-indigo-100">(14 reviews)</span>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <span class="text-2xl font-bold">₹52,499</span>
-                            <span class="ml-2 line-through text-indigo-100">₹67,990</span>
-                            <span class="ml-2 bg-success-500 text-white py-1 px-2 rounded text-xs font-medium">23%
-                                OFF</span>
-                        </div>
-                        <div class="flex items-center space-x-3 text-sm text-indigo-100 mb-4">
-                            <span class="inline-flex items-center">
-                                <i class="fas fa-tag mr-1 text-royal-blue-400"></i> Electronics
-                            </span>
-                            <span class="inline-flex items-center">
-                                <i class="fas fa-star mr-1 text-royal-blue-400"></i> Good Condition
-                            </span>
-                            <span class="inline-flex items-center">
-                                <i class="fas fa-clock mr-1 text-royal-blue-400"></i> 1 Year Old
-                            </span>
-                        </div>
-                        <p class="text-indigo-100 mb-5 line-clamp-2">
-                            Dell G15 Gaming Laptop with RTX 3060, Intel i7-12700H, 16GB RAM, 1TB SSD, and 15.6" 165Hz
-                            display. Perfect for gaming and academic work with excellent thermal performance.
-                        </p>
-                        <div class="flex space-x-3">
-                            <a href="/product/dell-g15-gaming-laptop"
-                                class="btn-primary py-2 px-4 rounded-xl text-white font-medium inline-block">
-                                View Details
-                            </a>
-                            <button
-                                class="btn-secondary bg-navy-700 hover:bg-navy-600 py-2 px-4 rounded-xl text-white font-medium transition-colors">
-                                <i class="far fa-heart"></i> Add to Wishlist
-                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
+            <% }) %>
         </div>
-    </main>
+    <% } %>
+</div>
+
 
     <!-- Footer -->
     <!-- Footer -->

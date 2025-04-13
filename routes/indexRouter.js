@@ -21,42 +21,56 @@ router.get("/", (req, res) => {
 
 
 // Product Profile Route
-
-router.get("/product/:id", async function (req, res) {
-
+router.get("/product/:id", isLoggedin, async function (req, res) {
   try {
     const productId = req.params.id;
-    
-    // Fetch the product details using the product ID
-    const product = await Product.findById(productId);
+
+    // Find the specific product by ID and populate the seller info
+    const product = await Product.findById(productId)
+      .populate('seller.id', 'fullname profile_pic whatsapp_number soldProduct department semester')
+      .lean();
 
     if (!product) {
       return res.status(404).send('Product not found');
     }
 
-    // Fetch other products from the same category for suggestions
+    // Suggested products (exclude current one)
     const suggestedProducts = await Product.find({
       category: product.category,
-      _id: { $ne: productId } // Exclude the current product
-    }).limit(4); // Limit to 4 suggestions, you can adjust as needed
+      _id: { $ne: productId }
+    }).limit(4).lean();
 
-    const user = {
-      fullname: req.user.fullname,
-      bio: req.user.bio,
-      image: req.user.profile_pic || '/images/profile.png',
-      department: req.user.department || '',
-      semester: req.user.semester || '',
-      coverImage: req.user.cover_pic || '/images/cover.png',
-      contact: req.user.whatsapp_number || '',
+    // Handle user session if logged in
+    let user = null;
+    if (req.user) {
+      user = await User.findById(req.user._id);
+    }
+
+    const userData = user ? {
+      fullname: user.fullname,
+      bio: user.bio,
+      image: user.profile_pic || '/images/profile.png',
+      department: user.department || '',
+      semester: user.semester || '',
+      coverImage: user.cover_pic || '/images/cover.png',
+      contact: user.whatsapp_number || '',
+    } : {
+      fullname: 'Guest User',
+      bio: 'Welcome to our platform!',
+      image: '/images/profile.png',
+      department: '',
+      semester: '',
+      coverImage: '/images/cover.png',
+      contact: '',
     };
 
-    res.render('product-profile', { product, user, suggestedProducts });
-
+    res.render('product', { product, user: userData, suggestedProducts });
   } catch (err) {
-    console.error("Error occurred while fetching product details:", err);
+    console.error("Error fetching product details:", err);
     res.status(500).send("Server Error: " + err.message);
   }
 });
+
 
 
 // Product Listing Route
