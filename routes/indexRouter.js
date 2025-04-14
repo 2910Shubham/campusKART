@@ -19,6 +19,15 @@ router.get("/", (req, res) => {
   });
 });
 
+
+//Logout route
+
+router.get('/logout', (req, res) => {
+  res.clearCookie('token'); 
+  // res.send('success', 'You have been logged out.');
+  res.redirect('/');
+});
+
 // Search Route
 router.get('/search', isLoggedin, async (req, res) => {
   try {
