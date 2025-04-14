@@ -2,7 +2,7 @@ import Product from '../models/productModel.js';
 import cloudinary from '../config/cloudinary.js';
 import User from '../models/userModel.js';
 
-// Create product controller
+
 const createProduct = async (req, res) => {
   try {
     const { 
@@ -11,7 +11,7 @@ const createProduct = async (req, res) => {
       keywords, 
     } = req.body;
 
-    const imageFiles = req.files; // multer handles multiple files in memory
+    const imageFiles = req.files; 
    
     
     if (!imageFiles || imageFiles.length === 0) {
@@ -23,7 +23,7 @@ const createProduct = async (req, res) => {
        
 
 
-    // Upload images from buffer to Cloudinary
+    
     const uploadedImages = await Promise.all(
       imageFiles.map(file => {
         return new Promise((resolve, reject) => {
@@ -47,7 +47,7 @@ const createProduct = async (req, res) => {
       email: user.email,
     };
 
-    // Create and save product
+   
     const newProduct = new Product({
       title,
       category,
@@ -67,17 +67,17 @@ const createProduct = async (req, res) => {
   
       const savedProduct =  await newProduct.save();
       if (user) {
-        user.listed_product.push(savedProduct._id);  // Add the product's ID to the user's listed products
-        await user.save();  // Save the updated user document
+        user.listed_product.push(savedProduct._id);  
+        await user.save();  
       }
     req.flash('Product_success', 'Product created successfully!');
     
-    // Redirect to appropriate page after success (e.g., product listings or dashboard)
+   
     return res.redirect('/list');
  
   } catch (err) {
     req.flash('Product_error', 'Failed to create product: ' + err.message);
-    return res.redirect('/list'); // Redirect back to create form on error
+    return res.redirect('/list');
   }
 };
 

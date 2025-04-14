@@ -544,9 +544,9 @@
                     <div class="relative">
                         <button class="flex items-center space-x-2 focus:outline-none">
                             <div
-                                class="w-9 h-9 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex items-center justify-center shadow">
-                                <span class="text-sm font-medium">
-                                    <img src="<%= user.image  %>" alt="Profile Picture"
+                                class="w-9 h-9 rounded-full bg-gradient-to-br from-royal-blue-400 to-royal-blue-600 flex overflow-hidden items-center justify-center shadow">
+                                <span class="text-sm font-medium rounded-full overflow-hidden ">
+                                    <img class="rounded-full" src="<%= user.image  %>" alt="Profile Picture"
                                         class="w-full h-full object-cover">
                                 </span>
                             </div>
@@ -586,7 +586,7 @@
                                 class="w-24 h-24 md:w-32 md:h-32 mb-4 md:mb-0 md:mr-6 rounded-full overflow-hidden border-4 border-navy-900 shadow-xl transform -translate-y-1/2 md:transform-none">
                                 <div class="avatar-border rounded-full overflow-hidden">
                                     <% if (user.image) { %>
-                                        <img src="<%= user.image  %>" alt="Profile Picture"
+                                        <img class="rounded-full" src="<%= user.image  %>" alt="Profile Picture"
                                             class="w-full h-full object-cover">
                                         <% } else { %>
                                             <div
@@ -672,9 +672,7 @@
                 <button class="tab tab-active px-4 py-3 font-medium text-sm rounded-t-lg" onclick="openTab('listings')">
                     My Listings
                 </button>
-                <button class="tab px-4 py-3 font-medium text-sm text-indigo-100" onclick="openTab('sold')">
-                    Sold Items
-                </button>
+                
                 <button class="tab px-4 py-3 font-medium text-sm text-indigo-100" onclick="openTab('wishlist')">
                     Wishlist
                 </button>
@@ -686,7 +684,7 @@
             <!-- Product Management Section -->
             <div id="listings" class="tab-content">
                 <div class="flex justify-between items-center my-6">
-                    <h2 class="text-xl font-bold">Active Listings (4)</h2>
+                    <h2 class="text-xl font-bold">Active Listings (<%= user.totalListedItems - user.soldProduct %>)</h2>
                     <a href="/list" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium shadow-md">
                         <i class="fas fa-plus mr-1"></i> Add New Listing
                     </a>
@@ -1244,6 +1242,30 @@
 
     <script>
         // Function to handle tab switching
+        
+    function openTab(event, tabId) {
+        // Hide all tab contents
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.add('hidden');
+        });
+
+        // Remove active class from all tab buttons
+        document.querySelectorAll('.tab').forEach(btn => {
+            btn.classList.remove('bg-navy-700', 'text-white');
+        });
+
+        // Show the selected tab
+        const target = document.getElementById(tabId);
+        if (target) {
+            target.classList.remove('hidden');
+        }
+
+        // Add active class to clicked tab button
+        event.currentTarget.classList.add('bg-navy-700', 'text-white');
+    }
+
+
+
         function openTab(tabName) {
             // Hide all tab contents
             document.querySelectorAll('.tab-content').forEach(content => {

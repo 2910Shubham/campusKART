@@ -2,23 +2,23 @@ import userModel from '../models/userModel.js';
 import cloudinary from '../config/cloudinary.js';
 import multer from 'multer';
 
-// Configure multer for memory storage (needed for Cloudinary)
+
 const storage = multer.memoryStorage();
 const upload = multer({ 
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+  limits: { fileSize: 5 * 1024 * 1024 } 
 });
 
-// Middleware for profile image and cover image uploads
+
 export const uploadProfileImages = upload.fields([
   { name: 'profilePicture', maxCount: 1 },
   { name: 'coverImage', maxCount: 1 }
 ]);
 
-// Get profile update page
+
 export const getProfileUpdatePage = async (req, res) => {
   try {
-    // Get user profile data
+    
     const userId = req.user._id;
     const user = await userModel.findById(userId);
     
@@ -27,19 +27,19 @@ export const getProfileUpdatePage = async (req, res) => {
       return res.redirect('/user/profile');
     }
     
-    // Prepare user data for frontend - map semester to year for consistency
+
     const userData = {
       fullname: user.fullname,
       email: user.email,
       department: user.department || '',
-      year: user.semester || '', // Map semester to year for frontend
+      year: user.semester || '', 
       bio: user.bio || '',
       image: user.profile_pic || '/images/profile.png',
       coverImage: user.cover_pic || '/images/cover.png',
       contact: user.whatsapp_number || '',
     };
     
-    // Render the profile update page with user data
+   
     return res.render('profile-update', {
       user: userData,
       success: req.flash('success'),
@@ -52,24 +52,23 @@ export const getProfileUpdatePage = async (req, res) => {
   }
 };
 
-// Handle profile update form submission
+
 export const updateProfile = async (req, res) => {
   try {
     const userId = req.user._id;
     const { bio, department, semester, contact } = req.body;
     
-    // Prepare update data - keep field names consistent with database schema
+    
     const updateData = {
       bio,
       department,
-      semester: semester, // Store frontend 'year' value in database 'semester' field
-      whatsapp_number: contact // Store frontend 'contact' value in database 'whatsapp_number' field
+      semester: semester, 
+      whatsapp_number: contact 
     };
     
-    // Handle file uploads if any
     const files = req.files;
     
-    // Upload profile picture if provided
+   
     if (files && files.profilePicture && files.profilePicture.length > 0) {
       try {
         const profilePicture = files.profilePicture[0];
@@ -81,7 +80,7 @@ export const updateProfile = async (req, res) => {
       }
     }
     
-    // Upload cover image if provided
+    
     if (files && files.coverImage && files.coverImage.length > 0) {
       try {
         const coverImage = files.coverImage[0];
@@ -93,7 +92,7 @@ export const updateProfile = async (req, res) => {
       }
     }
     
-    // Update user in database
+   
     await userModel.findByIdAndUpdate(userId, updateData, { new: true });
     
     req.flash('success', 'Profile updated successfully');
@@ -105,7 +104,7 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-// Helper function to upload files to Cloudinary
+
 const uploadToCloudinary = (file, folder) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(

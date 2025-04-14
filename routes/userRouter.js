@@ -10,14 +10,14 @@ router.get('/profile', isLoggedin, async (req, res) => {
     try {
 
       const user = await User.findById(req.user.id)
-      .populate('listed_product soldProduct')  // Populate the listed products
+      .populate('listed_product soldProduct')  
       .exec();
       
       const totalListedItems = user.listed_product.length;
       const soldProduct = user.soldProduct.length;
 
       const totalEarnings = user.soldProduct.reduce((total, product) => {
-        return total + (product.price || 0); // Adding null check for price
+        return total + (product.price || 0); 
       }, 0);
 
       const userData = {
@@ -31,6 +31,7 @@ router.get('/profile', isLoggedin, async (req, res) => {
         totalListedItems: totalListedItems,
         soldProduct: soldProduct,
         totalEarnings: totalEarnings,
+        totalSold: user.soldProduct || [],
       };
   
       res.render('profile', { user: userData });
@@ -44,7 +45,7 @@ router.get('/profile', isLoggedin, async (req, res) => {
 
 router.get('/profile/update', isLoggedin, getProfileUpdatePage);
 
-// ✅ Handle update form submission (with image uploads)
+
 router.post('/profile/update', isLoggedin, uploadProfileImages, updateProfile);
 
 
