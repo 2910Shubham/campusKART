@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb+srv://shubhamaditya81:2SMSukcl8z5wTTZC@campukart.jjj3ens.mongodb.net/campuskart?retryWrites=true&w=majority&appName=campukart
+
+      - JWT_KEY=kjvbasjhddddduhkjaiohryy;
+      - CLOUDINARY_CLOUD_NAME=ddekhrty4
+      - CLOUDINARY_API_KEY=366496961918757
+      - CLOUDINARY_API_SECRET=jqqvPip5OOaLL-Xa7HoVaqCkqCYcac
+    volumes:
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+    networks:
+      - campuskart-network
+
+networks:
+  campuskart-network:
+    driver: bridge 

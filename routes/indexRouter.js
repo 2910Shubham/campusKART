@@ -8,7 +8,7 @@ import multer from "multer";
 
 // Login and Register Routes
 
-router.get("/", (req, res) => {
+router.get("/register", (req, res) => {
   res.render("index", {
     messages: {
       error: req.flash("error"),
@@ -19,6 +19,12 @@ router.get("/", (req, res) => {
   });
 });
 
+//product Edit route
+
+router.get("/productEdit", function(req, res){
+
+  res.render("productEdit", );
+});
 
 //Logout route
 
@@ -149,14 +155,13 @@ router.get('/list', isLoggedin, function (req, res) {
 
 
 // Home Route
-router.get('/home', isLoggedin, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const selectedCategory = req.query.category || 'All'; 
     const keyword = req.query.keyword || '';  
 
     let products;
 
-    
     if (keyword) {
       products = await Product.find({
         $or: [
@@ -166,34 +171,29 @@ router.get('/home', isLoggedin, async (req, res) => {
         ...(selectedCategory && selectedCategory !== 'All' ? { category: selectedCategory } : {}),
       }).populate('seller.id', 'fullname profile_pic whatsapp_number').lean();
     } else if (selectedCategory && selectedCategory !== 'All') {
-      
       products = await Product.find({ category: selectedCategory }).populate('seller.id', 'fullname profile_pic whatsapp_number').lean();
     } else {
-      
       products = await Product.find({}).populate('seller.id', 'fullname profile_pic whatsapp_number').lean();
     }
 
     let otherProducts = [];
     if (selectedCategory && selectedCategory !== 'All' && products.length === 0) {
-     
       otherProducts = await Product.find({ category: { $ne: selectedCategory }, isSold: false })
         .limit(4)
         .populate('seller.id', 'fullname profile_pic whatsapp_number')
         .lean();
     }
 
-   
     const user = {
-      fullname: req.user.fullname,
-      bio: req.user.bio,
-      image: req.user.profile_pic || '/images/profile.png',
-      department: req.user.department || '',
-      semester: req.user.semester || '',
-      coverImage: req.user.cover_pic || '/images/cover.png',
-      contact: req.user.whatsapp_number || '',
+      fullname: req.user?.fullname,
+      bio: req.user?.bio,
+      image: req.user?.profile_pic || '/images/profile.png',
+      department: req.user?.department || '',
+      semester: req.user?.semester || '',
+      coverImage: req.user?.cover_pic || '/images/cover.png',
+      contact: req.user?.whatsapp_number || '',
     };
 
-    
     res.render('home', { products, user, selectedCategory, otherProducts, keyword });
   } catch (err) {
     console.error("Error occurred while fetching products:", err);

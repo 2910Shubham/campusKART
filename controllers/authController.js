@@ -10,7 +10,7 @@ const registerUser = async function (req, res) {
     const existingUser = await userModel.findOne({ email });
     if (existingUser) {
       req.flash("error", "User already exists");
-      return res.redirect("/"); 
+      return res.redirect("/register"); 
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -26,7 +26,7 @@ const registerUser = async function (req, res) {
     });
 
     req.flash("R_success", "Registration successful. Please login.");
-    return res.redirect("/");
+    return res.redirect("/register");
 
 
   } catch (error) {
@@ -34,7 +34,7 @@ const registerUser = async function (req, res) {
     console.error("Error in registerUser:", error);
 
    req.flash("R_error", "Something went wrong. Please try again.");
-    return res.redirect("/");
+    return res.redirect("/register");
   }
 };
 
@@ -49,7 +49,7 @@ const loginUser = async function (req,res) {
   if(!user) {
 
     req.flash('error', 'No user found with this email');
-    return res.redirect('/');
+    return res.redirect('/register');
   } 
 
   bcrypt.compare(password,user.password, function(err, result){
@@ -60,13 +60,13 @@ const loginUser = async function (req,res) {
 
           res.cookie("token", token);
           
-          res.redirect('/home')
+          res.redirect('/')
 
       
       
     } else {
       req.flash('error', 'Incorrect password');
-      return res.redirect('/');
+      return res.redirect('/register');
     }
   });
 

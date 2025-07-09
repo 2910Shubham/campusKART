@@ -8,7 +8,7 @@ const isLoggedin = async function(req, res, next) {
 
     if (!token) {
         req.flash("logError", "You need to login first");
-        return res.redirect("/");
+        return res.redirect("/register");
     }
 
     try {
@@ -19,7 +19,7 @@ const isLoggedin = async function(req, res, next) {
 
         if (!user) {
             req.flash("logError", "User not found");
-            return res.redirect("/");
+            return res.redirect("/register");
         }
 
         req.user = user;
@@ -27,7 +27,7 @@ const isLoggedin = async function(req, res, next) {
     } catch (err) {
         console.error("JWT verification failed:", err);
         req.flash("error", "Something went wrong here");
-        res.redirect("/");
+        res.redirect("/register");
     }
 };
 

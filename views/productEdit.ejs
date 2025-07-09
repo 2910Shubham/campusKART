@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product - campusKART</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': {
+                            400: '#2c5282',
+                            500: '#1e3a8a',
+                            600: '#1e40af',
+                            700: '#1e3a78',
+                            800: '#172554',
+                            900: '#0c1b44'
+                        },
+                        'royal-blue': {
+                            400: '#3b82f6',
+                            500: '#4169e1',
+                            600: '#2563eb'
+                        },
+                        'indigo': {
+                            50: '#eef2ff',
+                            100: '#e0e7ff'
+                        }
+                    },
+                    animation: {
+                        'pulse-border': 'pulseBorder 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                        'bounce-slow': 'bounce 3s infinite'
+                    },
+                    keyframes: {
+                        pulseBorder: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(65, 105, 225, 0.6)' },
+                            '50%': { boxShadow: '0 0 0 5px rgba(65, 105, 225, 0.4)' }
+                        },
+                        gradient: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' }
+                        }
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --transition-speed: 0.3s;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+        
+        body.dark-mode {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 30%);
+            background-color: #0c1b44;
+            color: #ffffff;
+        }
+        
+        body.light-mode {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.03) 0%, transparent 30%);
+            background-color: #ffffff;
+            color: #1f2937;
+        }
+        
+        .logo-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 8s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .image-upload-container {
+            border: 2px dashed rgba(59, 130, 246, 0.5);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .image-upload-container.dragging,
+        .image-upload-container:hover {
+            border-color: #3b82f6;
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+        
+        .tag-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 0.75rem;
+            border: 1px solid #1e3a78;
+            padding: 0.25rem;
+            min-height: 3rem;
+            background-color: rgba(23, 37, 84, 0.5);
+        }
+        
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            margin: 0.25rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            max-width: 100%;
+        }
+        
+        .tag-close {
+            display: inline-block;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .tag-input {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            flex-grow: 1;
+            min-width: 50px;
+        }
+        
+        .tag-input:focus {
+            outline: none;
+        }
+        
+        /* Light Mode Specific Styles */
+        .light-mode .header {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-color: #e5e7eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .light-mode .header a {
+            color: #4b5563;
+        }
+        
+        .light-mode .header a:hover {
+            color: #1e40af;
+        }
+        
+        /* Text colors */
+        .light-mode .text-white {
+            color: #1f2937;
+        }
+        
+        .light-mode .text-indigo-100,
+        .light-mode .text-indigo-100\/70 {
+            color: #4b5563;
+        }
+        
+        .light-mode svg.text-indigo-100,
+        .light-mode svg.text-white {
+            color: #4b5563;
+        }
+        
+        /* Fix promotional text and headings */
+        .light-mode h1.text-white,
+        .light-mode h2.text-white,
+        .light-mode h3.text-white,
+        .light-mode h4.text-white,
+        .light-mode p.text-white {
+            color: #1f2937;
+        }
+        
+        /* Background colors */
+        .light-mode .bg-navy-800,
+        .light-mode .bg-navy-800\/80,
+        .light-mode .bg-navy-800\/60,
+        .light-mode .bg-navy-900\/90 {
+            background-color: #ffffff;
+        }
+        
+        .light-mode .border-navy-600,
+        .light-mode .border-navy-700 {
+            border-color: #e5e7eb;
+        }
+        
+        .light-mode .bg-navy-600\/50 {
+            background-color: #f3f4f6;
+        }
+        
+        .light-mode .bg-navy-700 {
+            background-color: #f3f4f6;
+        }
+        
+        /* Fix for blue background sections in light mode */
+        .light-mode .mb-10.relative.overflow-hidden.rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
+        .light-mode .mb-12.p-6.rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
+        .light-mode .rounded-2xl.bg-gradient-to-br.from-navy-600.to-navy-800,
+        .light-mode .bg-gradient-to-br.from-navy-600.to-navy-800 {
+            background: linear-gradient(to bottom right, #f0f7ff, #e0eafc);
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Keep the logo text gradient unchanged */
+        .light-mode .logo-text {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Ensure buttons have white text in light mode */
+        .light-mode .btn-primary,
+        .light-mode .whatsapp-button,
+        .light-mode .floating-action-button,
+        .light-mode a.bg-gradient-to-r,
+        .light-mode a.bg-royal-blue-500, 
+        .light-mode a.bg-royal-blue-600,
+        .light-mode button.bg-royal-blue-500,
+        .light-mode button.bg-royal-blue-600,
+        .light-mode .action-button,
+        .light-mode .cta-button {
+            color: white !important;
+        }
+        
+        /* Theme Toggle Styles */
+        .toggle-checkbox {
+            transform: translateX(0);
+        }
+        
+        .toggle-checkbox:checked {
+            transform: translateX(100%);
+            border-color: #3b82f6;
+        }
+        
+        .toggle-checkbox:checked ~ .toggle-label {
+            background-color: #3b82f6;
+        }
+        
+        .toggle-label {
+            background-color: #9ca3af;
+        }
+        
+        .light-mode .icon-sun {
+            color: #f59e0b;
+        }
+        
+        .dark-mode .icon-moon {
+            color: #e0e7ff;
+        }
+        
+        .light-mode .icon-moon,
+        .dark-mode .icon-sun {
+            display: none;
+        }
+        
+        .dark-mode .icon-moon,
+        .light-mode .icon-sun {
+            display: block;
+        }
+        
+        /* Theme transition class */
+        .theme-transition * {
+            transition: background-color var(--transition-speed) ease, 
+                       border-color var(--transition-speed) ease, 
+                       color var(--transition-speed) ease,
+                       fill var(--transition-speed) ease,
+                       stroke var(--transition-speed) ease,
+                       box-shadow var(--transition-speed) ease;
+        }
+        
+        .theme-toggle {
+            cursor: pointer;
+        }
+        
+        .theme-toggle:active svg {
+            animation: theme-toggle 0.5s ease forwards;
+        }
+        
+        /* Form specific light mode styles */
+        .light-mode .form-input,
+        .light-mode .form-select {
+            background-color: #ffffff;
+            border-color: #e5e7eb;
+            color: #4b5563;
+        }
+        
+        .light-mode .form-input:focus,
+        .light-mode .form-select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        
+        .light-mode .form-input::placeholder {
+            color: #9ca3af;
+        }
+        
+        /* Tag input container light mode */
+        .light-mode .tag-input-container {
+            background-color: #ffffff;
+            border-color: #e5e7eb;
+        }
+        
+        .light-mode .tag-input {
+            color: #4b5563;
+        }
+        
+        .light-mode .tag-input::placeholder {
+            color: #9ca3af;
+        }
+        
+        /* Image upload container light mode */
+        .light-mode .image-upload-container {
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        
+        .light-mode .image-upload-container:hover,
+        .light-mode .image-upload-container.dragging {
+            background-color: rgba(59, 130, 246, 0.05);
+            border-color: #3b82f6;
+        }
+        
+        /* Delete modal light mode */
+        .light-mode #deleteModal .bg-navy-800 {
+            background-color: #ffffff;
+            border-color: #e5e7eb;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <%- include('partials/header') %>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <!-- Page Title and Description -->
+            <div class="mb-8 text-center">
+                <h1 class="text-3xl font-bold mb-4">Edit Your Product</h1>
+                <p class="text-indigo-100 max-w-xl mx-auto">Update your product details to keep your listing accurate and attractive to potential buyers.</p>
+            </div>
+
+            <!-- Success/Error Messages -->
+            <% if (locals.success) { %>
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6">
+                    <span class="block sm:inline"><%= success %></span>
+                </div>
+            <% } %>
+            
+            <% if (locals.error) { %>
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
+                    <span class="block sm:inline"><%= error %></span>
+                </div>
+            <% } %>
+            
+            <!-- Product Edit Form -->
+            <form id="product-edit-form" class="bg-navy-800 rounded-2xl shadow-xl border border-navy-700 overflow-hidden" action="/product/edit" method="POST" enctype="multipart/form-data">
+                <div class="p-6 md:p-8">
+                    <!-- Product Title (Read-only) -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2 text-indigo-100">Product Title</label>
+                        <div class="form-input w-full px-4 py-3 bg-navy-700/50 border border-navy-600 rounded-xl text-white shadow-inner">
+                            Sample Product Title
+                        </div>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="mb-6">
+                        <label for="price" class="block text-sm font-medium mb-2 text-indigo-100">Price (₹) <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-rupee-sign text-indigo-100"></i>
+                            </div>
+                            <input 
+                                type="number" 
+                                id="price"
+                                name="price"
+                                min="0"
+                                step="1"
+                                class="form-input w-full pl-10 pr-4 py-3 bg-navy-700/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white shadow-inner"
+                                value="1000"
+                                required
+                            />
+                        </div>
+                        <div class="flex justify-between text-xs text-indigo-100/70 mt-1">
+                            <span>Enter '0' if you're giving it away for free</span>
+                            <div>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" id="isNegotiable" name="isNegotiable" class="form-checkbox h-4 w-4 text-royal-blue-500 rounded border-navy-600 focus:ring-royal-blue-400">
+                                    <span class="ml-2">Price negotiable</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-6">
+                        <label for="description" class="block text-sm font-medium mb-2 text-indigo-100">Description <span class="text-red-500">*</span></label>
+                        <textarea 
+                            id="description"
+                            name="description"
+                            rows="4"
+                            class="form-input w-full px-4 py-3 bg-navy-700/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white shadow-inner"
+                            required
+                        >Sample product description. This is a placeholder text that will be replaced with actual product description.</textarea>
+                        <div class="text-xs text-indigo-100/70 mt-1">Minimum 30 characters</div>
+                    </div>
+
+                    <!-- Age -->
+                    <div class="mb-6">
+                        <label for="ageInYears" class="block text-sm font-medium mb-2 text-indigo-100">Age (Years Old)</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-calendar-alt text-indigo-100"></i>
+                            </div>
+                            <input 
+                                type="number" 
+                                id="ageInYears"
+                                name="ageInYears"
+                                min="0"
+                                step="0.5"
+                                class="form-input w-full pl-10 pr-4 py-3 bg-navy-700/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white shadow-inner"
+                                value="1"
+                                placeholder="How old is this item? (e.g. 1.5)"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="mb-6">
+                        <label for="category" class="block text-sm font-medium mb-2 text-indigo-100">Category <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-tag text-indigo-100"></i>
+                            </div>
+                            <select 
+                                id="category"
+                                name="category"
+                                class="form-select w-full pl-10 pr-4 py-3 bg-navy-700/50 border border-navy-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-royal-blue-400 text-white shadow-inner appearance-none"
+                                required
+                            >
+                                <option value="">Select a category</option>
+                                <option value="books">Books & Study Materials</option>
+                                <option value="electronics">Electronics & Gadgets</option>
+                                <option value="furniture">Furniture</option>
+                                <option value="clothing">Clothing & Accessories</option>
+                                <option value="sports">Sports Equipment</option>
+                                <option value="music">Musical Instruments</option>
+                                <option value="others">Others</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <i class="fas fa-chevron-down text-indigo-100"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Keywords/Tags -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2 text-indigo-100">Keywords (for better search results)</label>
+                        <div class="tag-input-container bg-navy-700/50 border border-navy-600 rounded-xl p-3">
+                            <div id="tags-container" class="flex flex-wrap gap-2">
+                                <div class="tag bg-royal-blue-500 text-white px-3 py-1 rounded-lg flex items-center">
+                                    sample-tag
+                                    <button type="button" class="ml-2 text-white hover:text-red-300">&times;</button>
+                                </div>
+                            </div>
+                            <input 
+                                type="text" 
+                                id="tag-input"
+                                class="mt-2 w-full bg-transparent border-none focus:outline-none text-white placeholder-indigo-100/50"
+                                placeholder="Type and press Enter to add tags"
+                            />
+                        </div>
+                        <input type="hidden" id="keywords" name="keywords" value="sample-tag">
+                        <div class="text-xs text-indigo-100/70 mt-1">Add relevant keywords to make your listing easier to find</div>
+                    </div>
+
+                    <!-- Images -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2 text-indigo-100">Current Images</label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300" alt="Product image" class="w-full h-32 object-cover rounded-lg">
+                                <button type="button" class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 text-xs">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="image-upload-container" class="image-upload-container p-4">
+                            <div class="text-center">
+                                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-navy-700 flex items-center justify-center">
+                                    <i class="fas fa-cloud-upload-alt text-2xl text-royal-blue-400"></i>
+                                </div>
+                                <p class="text-sm mb-4">Drag & drop new images here or click to browse</p>
+                                <label class="btn-primary px-6 py-2 rounded-lg text-white font-medium shadow-md inline-block cursor-pointer">
+                                    <span>Add New Images</span>
+                                    <input 
+                                        type="file"
+                                        id="new-images"
+                                        name="new-images[]"
+                                        class="hidden"
+                                        accept="image/jpeg, image/png, image/webp"
+                                        multiple
+                                    />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="text-xs text-indigo-100/70 mt-2">You can have up to 5 images in total</div>
+                    </div>
+
+                    <!-- Submit and Delete Buttons -->
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-4 mt-8">
+                        <div class="flex items-center gap-4 w-full md:w-auto">
+                            <a href="/profile" class="px-6 py-2 rounded-lg border border-navy-600 text-indigo-100 font-medium hover:bg-navy-700 transition-colors duration-300">
+                                <i class="fas fa-arrow-left mr-2"></i> Back to Profile
+                            </a>
+                            <button 
+                                type="button" 
+                                onclick="confirmDelete()"
+                                class="px-6 py-2 rounded-lg border border-red-500 text-red-500 font-medium hover:bg-red-500 hover:text-white transition-all duration-300"
+                            >
+                                <i class="fas fa-trash-alt mr-2"></i> Delete Product
+                            </button>
+                        </div>
+                        <button type="submit" class="btn-primary px-8 py-3 rounded-lg text-white font-medium shadow-md w-full md:w-auto">
+                            Save Changes <i class="fas fa-check ml-2"></i>
+                        </button>
+                    </div>
+
+                    <!-- Delete Confirmation Modal -->
+                    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+                        <div class="bg-navy-800 rounded-2xl p-6 max-w-md w-full mx-4 border border-navy-700">
+                            <h3 class="text-xl font-bold mb-4">Delete Product</h3>
+                            <p class="text-indigo-100 mb-6">Are you sure you want to delete this product? This action cannot be undone.</p>
+                            <div class="flex justify-end gap-4">
+                                <button 
+                                    type="button"
+                                    onclick="closeDeleteModal()"
+                                    class="px-4 py-2 rounded-lg border border-navy-600 text-indigo-100 hover:bg-navy-700 transition-colors duration-300"
+                                >
+                                    Cancel
+                                </button>
+                                <form action="/product/delete" method="POST" class="inline">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button 
+                                        type="submit"
+                                        class="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors duration-300"
+                                    >
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+
+    <script>
+        // Tags handling
+        const tagInput = document.getElementById('tag-input');
+        const tagsContainer = document.getElementById('tags-container');
+        const keywordsInput = document.getElementById('keywords');
+        let tags = ['sample-tag'];
+
+        function updateTagsDisplay() {
+            tagsContainer.innerHTML = tags.map(tag => `
+                <div class="tag bg-royal-blue-500 text-white px-3 py-1 rounded-lg flex items-center">
+                    ${tag}
+                    <button type="button" onclick="removeTag('${tag}')" class="ml-2 text-white hover:text-red-300">&times;</button>
+                </div>
+            `).join('');
+            keywordsInput.value = tags.join(',');
+        }
+
+        function addTag(tagText) {
+            if (tagText && !tags.includes(tagText) && tags.length < 10) {
+                tags.push(tagText);
+                updateTagsDisplay();
+            }
+        }
+
+        function removeTag(tagText) {
+            const index = tags.indexOf(tagText);
+            if (index !== -1) {
+                tags.splice(index, 1);
+                updateTagsDisplay();
+            }
+        }
+
+        tagInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ',') {
+                e.preventDefault();
+                const tagText = this.value.trim();
+                if (tagText) {
+                    addTag(tagText);
+                    this.value = '';
+                }
+            }
+        });
+
+        // Form validation
+        document.getElementById('product-edit-form').addEventListener('submit', function(e) {
+            const description = document.getElementById('description').value;
+            if (description.length < 30) {
+                e.preventDefault();
+                alert('Description must be at least 30 characters long');
+            }
+        });
+
+        // Delete confirmation modal
+        function confirmDelete() {
+            const modal = document.getElementById('deleteModal');
+            modal.style.display = 'flex';
+        }
+
+        function closeDeleteModal() {
+            const modal = document.getElementById('deleteModal');
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('deleteModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDeleteModal();
+            }
+        });
+
+        // Theme handling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for saved theme preference or use preferred color scheme
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            const savedTheme = localStorage.getItem('theme');
+            
+            const toggleSwitch = document.getElementById('theme-toggle');
+            const body = document.body;
+            
+            // Apply theme class to body
+            function applyTheme(isDark) {
+                if (isDark) {
+                    body.classList.remove('light-mode');
+                    body.classList.add('dark-mode');
+                    if (toggleSwitch) toggleSwitch.checked = true;
+                } else {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('light-mode');
+                    if (toggleSwitch) toggleSwitch.checked = false;
+                }
+            }
+            
+            // Set initial theme
+            if (savedTheme) {
+                applyTheme(savedTheme === 'dark');
+            } else {
+                applyTheme(prefersDarkScheme.matches);
+            }
+            
+            // Add transition class after initial load to prevent transition on page load
+            setTimeout(() => {
+                document.documentElement.classList.add('theme-transition');
+            }, 100);
+            
+            // Toggle theme when switch is clicked
+            if (toggleSwitch) {
+                toggleSwitch.addEventListener('change', function() {
+                    const isDarkMode = this.checked;
+                    applyTheme(isDarkMode);
+                    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                    
+                    // Animate the icon based on current theme
+                    const sunIcon = document.querySelector('.icon-sun');
+                    const moonIcon = document.querySelector('.icon-moon');
+                    
+                    if (isDarkMode) {
+                        moonIcon.classList.add('animate-theme-toggle');
+                        setTimeout(() => moonIcon.classList.remove('animate-theme-toggle'), 500);
+                    } else {
+                        sunIcon.classList.add('animate-theme-toggle');
+                        setTimeout(() => sunIcon.classList.remove('animate-theme-toggle'), 500);
+                    }
+                });
+            }
+            
+            // Listen for system theme changes
+            prefersDarkScheme.addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

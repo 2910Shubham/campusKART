@@ -81,4 +81,5 @@ const createProduct = async (req, res) => {
   }
 };
 
+
 export default createProduct;

@@ -787,10 +787,10 @@
                                     <div class="font-bold text-lg text-white">₹<%= product.price %>
                                     </div>
                                     <div class="flex space-x-2">
-                                        <button
+                                        <a href="/product/edit/<%= product._id %>"
                                             class="edit-button flex items-center py-1.5 px-3 rounded-lg text-white text-sm">
                                             <i class="fas fa-edit"></i>
-                                        </button>
+                                    </a>
                                         <button
                                             class="product-action-button flex items-center py-1.5 px-3 rounded-lg bg-navy-700 hover:bg-navy-600 text-white text-sm transition-colors duration-300"
                                             data-product-id="<%= product._id %>">

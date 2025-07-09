@@ -5,10 +5,11 @@ import createProduct  from '../controllers/productController.js';
 import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
 
+
+
 const router = express.Router();
 
 router.post('/create',isLoggedin ,upload.array('images[]', 5), createProduct);
-
 
 
 router.post('/mark-sold', isLoggedin, async (req, res) => {
