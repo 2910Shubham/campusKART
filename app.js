@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(cookieParser());
 
 
-console.log('Session secret:', process.env.JWT_KEY || 'default_secret_key');
+
 app.use(
     expressSession({
         resave: false,
